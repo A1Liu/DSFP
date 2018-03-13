@@ -14,8 +14,10 @@ import java.util.Date;
 public class User extends NewAccount {
 	
 	
-	private ArrayList<RatedAccount> RatedAccounts;
-	private ArrayList<RatedAccount> RatingsList;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	public User() {
 		this(null, null, null, null);
