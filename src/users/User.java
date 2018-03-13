@@ -2,6 +2,14 @@ package users;
 
 import java.util.ArrayList;
 
+//This class handles all the actions the user can use the application to do.
+/*
+ * input information and change information
+ * rate other users
+ * request a list of relevant users from the server
+ * check personal information
+ */
+
 public class User extends Account {
 	
 	
@@ -17,8 +25,6 @@ public class User extends Account {
 		this.setFirst(first);
 		this.setLast(last);
 		this.setBirthday(birthday);
-		this.setRating(0);
-		this.setWeight(0);
 	}
 
 	public void giveRating(User u, int r) {

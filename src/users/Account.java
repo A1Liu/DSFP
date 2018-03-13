@@ -1,28 +1,14 @@
 package users;
 
+//handles all the actions done behind the scenes by the application
+
 public abstract class Account {
 
 	private String username;
 	private String first;
 	private String last;
-	private double identity;
 	private int birthday;
-	private float rating;
 	
-	
-	
-	/**
-	 * @return the rating
-	 */
-	public float getRating() {
-		return rating;
-	}
-	/**
-	 * @param rating the rating to set
-	 */
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
 	/**
 	 * @return the weight
 	 */
@@ -74,18 +60,6 @@ public abstract class Account {
 	 */
 	public void setName(String name) {
 		this.username = name;
-	}
-	/**
-	 * @return the ID
-	 */
-	public double getID() {
-		return identity;
-	}
-	/**
-	 * @param iD the ID to set
-	 */
-	public void setID(double iD) {
-		identity = iD;
 	}
 	/**
 	 * @return the birthday
