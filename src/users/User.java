@@ -1,6 +1,7 @@
 package users;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 //This class handles all the actions the user can use the application to do.
 /*
@@ -10,29 +11,21 @@ import java.util.ArrayList;
  * check personal information
  */
 
-public class User extends Account {
+public class User extends NewAccount {
 	
 	
 	private ArrayList<RatedAccount> RatedAccounts;
 	private ArrayList<RatedAccount> RatingsList;
 	
 	public User() {
-		this(null, null, null, -1);
+		this(null, null, null, null);
 	}
 	
-	public User(String username, String first, String last, int birthday) {
-		this.setName(username);
+	public User(String username, String first, String last, Date birthday) {
+		this.setUsername(username);
 		this.setFirst(first);
 		this.setLast(last);
 		this.setBirthday(birthday);
-	}
-
-	public void giveRating(User u, int r) {
-		
-	}
-	
-	public void receiveRating(User u, int r) {
-		
 	}
 	
 }
