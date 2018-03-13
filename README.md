@@ -2,7 +2,7 @@
 
 Project to make a real life version of MeowMeowBeenz.
 
-###MySQL Info
+### MySQL Info
 
 IP: 192.168.1.5
 
@@ -16,7 +16,7 @@ Java Java Java Java Java Java
 
 Windows Service Name: MYSQL57
 
-###References
+### Reference Links
 
 [I didn't use this but I might in the future](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)
 
