@@ -8,9 +8,9 @@ public class Server {
 
 	public static void main(String[] args) {
 		
-		String url = "jdbc:mysql://192.168.1.5:3306/javabase";
-		String username = "java";
-		String password = "java";
+		String url = Config.getUrlpreset();
+		String username = Config.getUsernamepreset();
+		String password = Config.getPasswordpreset();
 
 		System.out.println("Connecting database...");
 		
