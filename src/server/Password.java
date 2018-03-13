@@ -10,8 +10,4 @@ public class Password {
 	public String getPassword() {
 		return this.password;
 	}
-	
-	public static String getPreset() {
-		return "java";
-	}
 }
