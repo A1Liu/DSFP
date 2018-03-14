@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Config {
 	
-	private static final String urlPreset = "jdbc:mysql://192.168.1.5:3306/javabase";
+	private static final String urlPreset = "jdbc:mysql://192.168.1.5:3306/javabase";//canyouseeme.org
 	private static final String usernamePreset = "java";
 	private static final String passwordPreset = "java";
 	
