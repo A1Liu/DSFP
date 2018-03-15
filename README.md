@@ -25,6 +25,14 @@ Table of Users
 Table of edges  
 Server requests info from SQL database, sends edits back to database
 
+### TODO
+Add config file support for server package  
+Add user file support for user class  
+Add admins with extra priveledges  
+Add datastructure for ratings system  
+Add modular ID confirmation/security features  
+Add tons of other stuff
+
 ### Reference Links
 [I didn't use this but I might in the future](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
 [Establishing a connection to the database](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
