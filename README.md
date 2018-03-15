@@ -8,7 +8,7 @@ Project to make a real life version of MeowMeowBeenz.
   * [DatabaseObjectHandler](https://github.com/A1Liu/DSFP/blob/master/README.md#database-object-handler-package)
   * [MySQL](https://github.com/A1Liu/DSFP/blob/master/README.md#mysql-package)
   * [Network](https://github.com/A1Liu/DSFP/blob/master/README.md#network-package)
-  * [Server](https://github.com/A1Liu/DSFP/blob/master/README.md#myserver-package)
+  * [Server](https://github.com/A1Liu/DSFP/blob/master/README.md#server-package)
   * [Users](https://github.com/A1Liu/DSFP/blob/master/README.md#user-package)
 * [Reference Links](https://github.com/A1Liu/DSFP/blob/master/README.md#reference-links)
 
