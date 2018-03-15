@@ -1,26 +1,77 @@
 package network;
 
-public class Network {
+import java.util.ArrayList;
 
+public class Network<E extends Vertex> {
+
+	ArrayList<E> vertices = new ArrayList<E>();//maybe vertex class doesn't need id field
+	
 	public Network() {
 		
+	}
+	
+	/**
+	 * adds another vertex
+	 * @return whether successful
+	 */
+	public void addVertex() {
+		
+	}
+	
+	public void rmVertex(int v) {
+		
+	}
+	
+	/**
+	 * 
+	 * @param v1 vertex sending edge
+	 * @param v2 vertex receiving edge
+	 * @param l length of edge
+	 * @return whether successful
+	 */
+	public boolean addEdge(int v1, int v2, int l) {
+		return true;
+	}
+	
+	public boolean rmEdge(int v1, int v2) {
+		return true;
+	}
+	
+	public int countVertices() {
+		return vertices.size();
+	}
+	
+	public int countEdges() {
+		return 0;
+	}
+	
+	public String getVertices() {
+		return null;
+	}
+	
+	public String getEdges() {
+		return null;
+	}
+	
+	public String toString() {
+		return null;
 	}
 	
 }
 
 class Vertex implements Comparable<Vertex> {
 
-	private int id;
+	private final int id;
 	private EdgeList edges;
 	private Vertex next;
 	
 	Vertex() {
-		edges = new EdgeList();
+		this(0);
 	}
 	
 	Vertex(int i) {
-		this();
 		id = i;
+		edges = new EdgeList();
 	}
 	
 	@Override
@@ -71,7 +122,14 @@ class Vertex implements Comparable<Vertex> {
 	}
 	
 	public String toString() {
-		return getLabel() + ": " + edges.toString();
+		
+		try {
+			int label = Integer.parseInt(getLabel());
+			return "V" + label + ": " + edges.toString();
+		} catch (NumberFormatException e) {
+			String label = "'" + getLabel() + "'";
+			return "V" + label + ": " + edges.toString();
+		}
 	}
 }
 
