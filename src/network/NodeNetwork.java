@@ -1,15 +1,15 @@
 package network;
 
-public class Node<E> extends Vertex {
+public class NodeNetwork<E> extends Vertex {
 	
 	private String name;
 	private E data;
 	
-	Node() {
+	NodeNetwork() {
 
 	}
 	
-	Node(String n, E e) {
+	NodeNetwork(String n, E e) {
 		super();
 		name = n;
 		data = e;

@@ -4,8 +4,8 @@ public class TestRunner {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Vertex albert = new Node();
-		Vertex andrew = new Node();
+		Vertex albert = new NodeNetwork();
+		Vertex andrew = new NodeNetwork();
 		Vertex bobby = new Vertex(3);
 		Vertex del = new Vertex();
 		albert.addEdge(andrew, 1);
