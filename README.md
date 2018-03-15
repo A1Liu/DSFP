@@ -25,7 +25,7 @@ Project to make a real life version of MeowMeowBeenz.
 * Add modular ID confirmation/security features  
 * Add tons of other stuff
 
-### MySQL Info
+## MySQL Info
 IP: 192.168.1.5  
 Port Number: 3306  
 Java Java Java Java Java Java  
