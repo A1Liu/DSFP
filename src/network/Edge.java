@@ -44,7 +44,7 @@ class Edge implements Comparable<Edge> {
 	}
 	
 	public String toString() {
-		return "(V" + destination.getKey() + ", " + length + ")";
+		return "(V" + destination.getLabel() + ", " + length + ")";
 	}
 	
 }

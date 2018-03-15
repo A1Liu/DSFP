@@ -2,21 +2,29 @@ package network;
 
 class Vertex implements Comparable<Vertex> {
 
-	private final int key;
+	private int id;
 	private EdgeList edges;
 	private Vertex next;
 	
-	Vertex(int k) {
-		key = k;
+	Vertex() {
 		edges = new EdgeList();
+	}
+	
+	Vertex(int i) {
+		this();
+		id = i;
 	}
 	
 	@Override
 	public int compareTo(Vertex v) {
 		return countEdges()-v.countEdges();
 	}
+
+	public EdgeList getEdges() {
+		return edges;
+	}
 	
-	int countEdges() {
+	public int countEdges() {
 		return edges.countElements();
 	}
 	
@@ -42,10 +50,6 @@ class Vertex implements Comparable<Vertex> {
 		return edges.remElement(e);
 	}
 	
-	public int getKey() {
-		return key;
-	}
-	
 	void setNext(Vertex v) {
 		next = v;
 	}
@@ -54,7 +58,11 @@ class Vertex implements Comparable<Vertex> {
 		return next;
 	}
 	
+	public String getLabel() {
+		return null;
+	}
+	
 	public String toString() {
-		return "V " + key + ": " + edges.toString();
+		return getLabel() + ": " + edges.toString();
 	}
 }
