@@ -7,7 +7,7 @@ Port Number: 3306
 Java Java Java Java Java Java  
 Windows Service Name: MYSQL58
 
-### MySQL Info
+### MySQL Package
 Start with creating database of users  
 * User objects
 * Classes to create and execute specific SQL Statement objects
@@ -15,10 +15,15 @@ Start with creating database of users
 * Classes to connect to server/user
 * Classes to create users, send packets of information, etc.
 
-### Plan
+### Network Package
+This package will eventually become the format of the working memory of the server.  
+The eventual goal is to create an "incomplete" network that stores only the nodes that need to be remembered.  
+Everything else will be retrieved and edited in the SQL database as necessary
+
+### SQL DB Plan
 Table of Users  
 Table of edges  
-Server requests info from SQL database, sends packets to user
+Server requests info from SQL database, sends edits back to database
 
 ### Reference Links
 [I didn't use this but I might in the future](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
