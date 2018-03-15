@@ -16,9 +16,13 @@ public class Server {
 		
 		try (Connection connection = DriverManager.getConnection(url, username, password)) {
 		    System.out.println("Database connected!");
+		    Thread.sleep(1000000);
 			connection.close();
 		} catch (SQLException e) {
 		    throw new IllegalStateException("Cannot connect the database!", e);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

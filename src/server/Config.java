@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Config {
 	//Local:192.168.1.5
 	//IPv4: 71.112.186.101
-	private static final String urlPreset = "jdbc:mysql://localhost:3306/javabase";//canyouseeme.org
+	private static final String urlPreset = "jdbc:mysql://172.27.23.143:3306/javabase";//canyouseeme.org
 	private static final String usernamePreset = "java";
 	private static final String passwordPreset = "java";
 	
