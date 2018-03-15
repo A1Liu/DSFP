@@ -92,7 +92,13 @@ class Edge implements Comparable<Edge> {
 	}
 	
 	public String toString() {
-		return "(V" + destination.getLabel() + ", " + length + ")";
+		try {
+			int label = Integer.parseInt(destination.getLabel());
+			return "(V" + label + ", " + length + ")";
+		} catch (NumberFormatException e) {
+			String label = "'" + destination.getLabel() + "'";
+			return "(V" + label + ", " + length + ")";
+		}
 	}
 	
 }
