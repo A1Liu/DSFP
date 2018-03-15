@@ -1,9 +1,27 @@
 package network;
 
+import java.util.ArrayList;
+
 public class EdgeList extends LinkedList<Edge> {
 	
-	public EdgeList(Edge e) {
+	EdgeList(Edge e) {
 		setFront(new ListNode<Edge>(e));
+	}
+	
+	EdgeList() {
+		setFront(null);
+	}
+	
+	EdgeList(ArrayList<Edge> a) {
+		for(int x = 0; x < a.size(); x++) {
+			addElement(a.get(x));
+		}
+	}
+	
+	EdgeList(Edge[] a) {
+		for(int x = 0; x < a.length; x++) {
+			addElement(a[x]);
+		}
 	}
 	
 	/**
@@ -14,33 +32,18 @@ public class EdgeList extends LinkedList<Edge> {
 	@Override
 	public boolean addElement(Edge e) {
 		
-		if(findElement(e) != null)
-			return false;
-		
 		ListNode<Edge> insert = new ListNode<Edge>(e);
 		
-		try {
-			insert.setNext(getFront().getNext());
+		if(getFront() == null) {
 			setFront(insert);
-		} catch (NullPointerException n) {
-			setFront(insert);
+			return true;
 		}
-		return true;
 		
+		if(findPrevious(e).getNext() != null || getFront().getData().equals(e))
+			return false;
+		
+		insert.setNext(getFront());
+		setFront(insert);
+		return true;
 	}
-	
-	/**
-	 * finds the node in the list that contains e
-	 * @param e element that we're looking for
-	 * @return the reference to the node that contains e
-	 */
-	@Override
-	public ListNode<Edge> findElement(Edge e) {
-		ListNode<Edge> current = getFront();
-		while(current.getNext() != null && current.getNext().compareTo(e)!=0 && current.getNext().getData() != e) {
-			current = current.getNext();
-		}
-		return current.getNext();
-	}
-	
 }

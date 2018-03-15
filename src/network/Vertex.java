@@ -1,54 +1,52 @@
 package network;
 
-public class Vertex implements Comparable<Vertex> {
+class Vertex implements Comparable<Vertex> {
 
 	private final int key;
-	private double rating;
 	private EdgeList edges;
 	private Vertex next;
 	
-	public Vertex(int k) {
+	Vertex(int k) {
 		key = k;
-		rating = 0;
-		edges = new EdgeList(null);
-	}
-	
-	public Vertex(int k, double r) {
-		key = k;
-		rating = r;
-		edges = new EdgeList(null);
+		edges = new EdgeList();
 	}
 	
 	@Override
 	public int compareTo(Vertex v) {
-		if(key==v.getKey())
-			return 0;
-		
-		return (int) (rating-v.getRating()*100);
+		return countEdges()-v.countEdges();
 	}
 	
-	public boolean addEdge(Vertex v, int l) {
+	int countEdges() {
+		return edges.countElements();
+	}
+	
+	boolean addEdge(Vertex v, int l) {
 		Edge newEdge = new Edge(v,l);
 		return edges.addElement(newEdge);
 	}
 	
-	public boolean addEdge(Edge newEdge) {
+	boolean addEdge(Edge newEdge) {
 		return edges.addElement(newEdge);
+	}
+	
+	boolean rmAllEdges() {
+		edges.setFront(null);
+		return true;
+	}
+	
+	boolean setEdge(Edge e1, Edge e2) {
+		return edges.remElement(e1) && edges.addElement(e2);
+	}
+	
+	boolean rmEdge(Edge e) {
+		return edges.remElement(e);
 	}
 	
 	public int getKey() {
 		return key;
 	}
 	
-	public void setRating(double r) {
-		rating = r;
-	}
-	
-	public double getRating() {
-		return rating;
-	}
-	
-	public void setNext(Vertex v) {
+	void setNext(Vertex v) {
 		next = v;
 	}
 	
@@ -57,6 +55,6 @@ public class Vertex implements Comparable<Vertex> {
 	}
 	
 	public String toString() {
-		return key + ", " + "rating";
+		return "V " + key + ": " + edges.toString();
 	}
 }

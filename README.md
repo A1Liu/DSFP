@@ -17,7 +17,7 @@ Start with creating database of users
 
 ### Plan
 Table of Users  
-Table of edges
+Table of edges  
 Server requests info from SQL database, sends packets to user
 
 ### Reference Links

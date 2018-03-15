@@ -5,8 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Config {
-	
-	private static final String urlPreset = "jdbc:mysql://192.168.1.5:3306/javabase";//canyouseeme.org
+	//Local:192.168.1.5
+	//IPv4: 71.112.186.101
+	private static final String urlPreset = "jdbc:mysql://localhost:3306/javabase";//canyouseeme.org
 	private static final String usernamePreset = "java";
 	private static final String passwordPreset = "java";
 	

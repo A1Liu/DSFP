@@ -1,11 +1,11 @@
 package network;
 
-public class Edge implements Comparable<Edge> {
+class Edge implements Comparable<Edge> {
 
 	private Vertex destination;
 	private int length;
 	
-	public Edge(Vertex v, int l) {
+	Edge(Vertex v, int l) {
 		destination = v;
 		length = l;
 	}
@@ -21,9 +21,6 @@ public class Edge implements Comparable<Edge> {
 		if(!(o instanceof Edge))
 			return false;
 		
-		if(this==o)
-			return true;
-		
 		if(this.destination == ((Edge) o).getDestination())
 			return true;
 		
@@ -34,7 +31,7 @@ public class Edge implements Comparable<Edge> {
 		return length;
 	}
 	
-	public void setLength(int l) {
+	void setLength(int l) {
 		length = l;
 	}
 	
@@ -42,12 +39,12 @@ public class Edge implements Comparable<Edge> {
 		return destination;
 	}
 	
-	public void setDestination(Vertex d) {
+	void setDestination(Vertex d) {
 		destination = d;
 	}
 	
 	public String toString() {
-		return destination.toString() + ", " + length;
+		return "(V" + destination.getKey() + ", " + length + ")";
 	}
 	
 }

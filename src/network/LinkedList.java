@@ -90,8 +90,8 @@ public class LinkedList<E extends Comparable<E>> {
 			if (e.equals(front.getData())) {
 				front = front.getNext();
 			} else {
-				ListNode<E> previous = insertTo(e);
-				if(previous.getNext().getData().equals(e))
+				ListNode<E> previous = findPrevious(e);
+				if(previous.getNext() != null)
 					previous.setNext(previous.getNext().getNext());
 				else return false;
 			}
@@ -100,7 +100,34 @@ public class LinkedList<E extends Comparable<E>> {
 		}
 			return true;
 	}
-
+	
+	/**
+	 * finds the node in the list that points to the element e
+	 * @param e element that we're looking for
+	 * @return the reference to the node that points to the node containing e
+	 */
+	public ListNode<E> findPrevious(E e) {
+		ListNode<E> current = front;
+		while(current.getNext() != null && !current.getNext().getData().equals(e)) {
+			current = current.getNext();
+		}
+		return current;
+	}
+	
+	/**
+	 * finds the amount of nodes in the list
+	 * @return amount of nodes in the list
+	 */
+	public int countElements() {
+		ListNode<E> current = front;
+		int counter = 0;
+		while(current != null) {
+			current = current.getNext();
+			counter++;
+		}
+		return counter;
+	}
+	
 	/**
 	 * returns the contents of the list in string form
 	 */
@@ -117,31 +144,5 @@ public class LinkedList<E extends Comparable<E>> {
 			output = output + "Empty List";
 		}
 		return output + "]";
-	}
-	
-	/**
-	 * finds the node in the list that points to the element e
-	 * @param e element that we're looking for
-	 * @return the reference to the node that points to the node containing e
-	 */
-	public ListNode<E> findPrevious(E e) {
-		ListNode<E> current = front;
-		while(current.getNext() != null && current.getNext().getData().compareTo(e)!=0) {
-			current = current.getNext();
-		}
-		return current;
-	}
-	
-	/**
-	 * finds the node in the list that contains e
-	 * @param e element that we're looking for
-	 * @return the reference to the node that contains e
-	 */
-	public ListNode<E> findElement(E e) {
-		ListNode<E> current = front;
-		while(current.getNext() != null && current.getNext().getData().compareTo(e)!=0) {
-			current = current.getNext();
-		}
-		return current.getNext();
 	}
 }
