@@ -2,13 +2,13 @@ package users;
 
 public class RatedAccount {
 	
-	private int rating;
+	private double rating;
 
 	
 	/**
 	 * @return the rating for the account
 	 */
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 	/**
