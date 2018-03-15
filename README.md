@@ -13,12 +13,17 @@ Project to make a real life version of MeowMeowBeenz.
 * [Reference Links](https://github.com/A1Liu/DSFP/blob/master/README.md#reference-links)
 
 ## TODO
-Add config file support for server package  
-Add user file support for user class  
-Add admins with extra priveledges  
-Add datastructure for ratings system  
-Add modular ID confirmation/security features  
-Add tons of other stuff
+* Finish general network class
+  * finish node network and node class
+  * add traversal method
+  * start testing network methods
+* Start learning SQL
+* Add config file support for server package  
+* Add user file support for user class  
+* Add admins with extra priveledges  
+* Add datastructure for ratings system  
+* Add modular ID confirmation/security features  
+* Add tons of other stuff
 
 ### MySQL Info
 IP: 192.168.1.5  
@@ -63,4 +68,4 @@ These are links that I found that helped me make this app. Well some of them wer
 * [I didn't use this but I might in the future](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
 * [Establishing a connection to the database](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
 * [Building the database](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html)
-* [Establishing a connection to server/client] (http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
+* [Establishing a connection to server/client](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
