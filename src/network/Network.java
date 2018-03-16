@@ -1,105 +1,113 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
-public class Network<E extends Vertex> {
+public abstract class Network<T extends Object,E extends Vertex> {
 
-	ArrayList<Vertex> vertices;//maybe vertex class doesn't need id field
-	int maxID;
-	
-	public Network(int size) {
-		vertices = new ArrayList<Vertex>();
-		maxID = 0;
-	}
+	private Enumeration<String> keys;
+	private Hashtable<T, Vertex> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
 	public Network() {
-		this(10);
+		vertices = new Hashtable<T, Vertex>();
 	}
 	
 	/**
 	 * adds another vertex
 	 */
-	public void addVertex() {
-		addVertex(null);
-	}
+	public void addVertex() {}
 	
 	/**
-	 * adds another vertex
+	 * default way to add a vertex
+	 * @param e vertex to add
 	 */
-	public void addVertex(int id) {
-		addVertex(null);
+	public void addVertex(T t, E e) {
+		vertices.put(t,e);
 	}
 	
 	/**
-	 * adds another vertex
+	 * removes a vertex with id i
+	 * @param id identifier integer of vertex
+	 * @return whether successful
 	 */
-	public void addVertex(String key) {}
-	
-	public void rmVertex(int v) {
-		
-	}
-	
-	public void rmVertex(String key) {
-		
+	public boolean rmVertex(T id) {
+		return vertices.remove(id)!=null;
 	}
 	
 	/**
-	 * 
+	 * returns the vertex of a certain id
+	 * @param id identifier integer of the vertex
+	 * @return vertex matching id
+	 */
+	public Vertex getVertex(T id) {
+		return vertices.get(id);
+	}
+	
+	/**
+	 * adds edge from a vertex to another vertex
 	 * @param v1 vertex sending edge
 	 * @param v2 vertex receiving edge
 	 * @param l length of edge
 	 * @return whether successful
 	 */
-	public boolean addEdge(int v1, int v2, int l) {
-		return true;
+	public boolean addEdge(T v1, T v2, int l) {
+		return vertices.get(v1).addEdge(vertices.get(v2), l);
 	}
 	
-	public boolean rmEdge(int v1, int v2) {
-		return true;
+	/**
+	 * removes an edge from vertex v1 to vertex v2
+	 * @param v1 vertex edge is coming from
+	 * @param v2 vertex edge is going to
+	 * @return whether successfully removed
+	 */
+	public boolean rmEdge(T v1, T v2) {
+		return vertices.get(v1).rmEdge(vertices.get(v2));
 	}
 	
+	/**
+	 * finds amount of vertices
+	 * @return count of vertices
+	 */
 	public int countVertices() {
 		return vertices.size();
 	}
 	
+	/**
+	 * finds amount of edges in the network
+	 * @return returns amount of edges
+	 */
 	public int countEdges() {
 		return 0;
 	}
 	
-	public ArrayList<Vertex> getVertices() {
+	/**
+	 * toString for all edges in network
+	 * @return a cytoscape-formatted csv string
+	 */
+	public String listEdges() {
 		return null;
 	}
 	
-	public String getEdges() {
-		return null;
-	}
-	
-	public String vertexToString() {
+	/**
+	 * toString for all the names of all the vertices
+	 * @return a String of all vertex names (keys)
+	 */
+	public String listVertices() {
 		return null;
 	}
 	
 	public String toString() {
 		return null;
 	}
-	
-	public int getMaxID() {
-		return maxID;
-	}
-	
 }
+
 
 class Vertex implements Comparable<Vertex> {
 
-	private final int id;
 	private EdgeList edges;
-	private Vertex next;
 	
 	Vertex() {
-		this(0);
-	}
-	
-	Vertex(int i) {
-		id = i;
 		edges = new EdgeList();
 	}
 	
@@ -108,17 +116,31 @@ class Vertex implements Comparable<Vertex> {
 		return countEdges()-v.countEdges();
 	}
 
+	/**
+	 * gets a list of the edges
+	 * @return EdgeList of edges
+	 */
 	public EdgeList getEdges() {
 		return edges;
 	}
 	
+	/**
+	 * counts edges
+	 * @return amount of edges coming from vertex
+	 */
 	public int countEdges() {
 		return edges.countElements();
 	}
 	
+	/**
+	 * adds an edge
+	 * @param v vertex to point edge to
+	 * @param l length of edge
+	 * @return whether edge was successfully added
+	 */
 	boolean addEdge(Vertex v, int l) {
 		Edge newEdge = new Edge(v,l);
-		return edges.addElement(newEdge);
+		return addEdge(newEdge);
 	}
 	
 	/**
@@ -150,6 +172,16 @@ class Vertex implements Comparable<Vertex> {
 	}
 	
 	/**
+	 * This method returns the closest possible match to the given vertex
+	 * @param v destination of edge to find
+	 * @return the edge with destination v, or null if there is none.
+	 */
+	Edge findEdge(Vertex v) {
+		Edge e = new Edge(v,0);
+		return findEdge(e);
+	}
+	
+	/**
 	 * removes all edges from the vertex
 	 */
 	void rmAllEdges() {
@@ -176,19 +208,13 @@ class Vertex implements Comparable<Vertex> {
 	}
 	
 	/**
-	 * sets the next vertex in the map bin
-	 * @param v the next vertex
+	 * removes the edge with destination of input edge
+	 * @param v destination of edge to remove
+	 * @return whether the edge was present in the vertex to begin with
 	 */
-	void setNext(Vertex v) {
-		next = v;
-	}
-	
-	/**
-	 * getter for next vertex in map bin
-	 * @return next vertex
-	 */
-	public Vertex getNext() {
-		return next;
+	boolean rmEdge(Vertex v) {
+		Edge e = new Edge(v,0);
+		return rmEdge(e);
 	}
 	
 	/**
@@ -196,7 +222,7 @@ class Vertex implements Comparable<Vertex> {
 	 * @return string form of label
 	 */
 	public String getLabel() {
-		return "" + id;
+		return "V";
 	}
 	
 	/**

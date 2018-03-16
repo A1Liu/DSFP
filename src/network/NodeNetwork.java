@@ -1,7 +1,15 @@
 package network;
 
-public class NodeNetwork<E> extends Network<Node<E>> {
+public class NodeNetwork<E> extends Network<String,Node<E>> {
 	
+	/**
+	 * adds another vertex
+	 */
+	public boolean addVertex(String key) {}
+	
+	public boolean rmVertex(String key) {}
+	
+	public Vertex findVertex(String key) {}
 }
 
 class Node<E> extends Vertex {
