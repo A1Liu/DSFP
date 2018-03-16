@@ -32,6 +32,9 @@ public class EdgeList extends LinkedList<Edge> {
 	@Override
 	public boolean addElement(Edge e) {
 		
+		if (e.getDestination() == null)
+			return false;
+		
 		ListNode<Edge> insert = new ListNode<Edge>(e);
 		
 		if(getFront() == null) {
