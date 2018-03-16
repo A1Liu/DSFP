@@ -6,7 +6,7 @@ import java.util.Hashtable;
 
 public abstract class Network<T extends Object,E extends Vertex> {
 
-	private Enumeration<String> keys;
+	private Enumeration<T> keys;
 	private Hashtable<T, Vertex> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
 	public Network() {
@@ -14,12 +14,12 @@ public abstract class Network<T extends Object,E extends Vertex> {
 	}
 	
 	/**
-	 * adds another vertex
+	 * default way to add a vertex
 	 */
-	public void addVertex() {}
+	public abstract void addVertex();
 	
 	/**
-	 * default way to add a vertex
+	 * specified way to add a vertex
 	 * @param e vertex to add
 	 */
 	public void addVertex(T t, E e) {
@@ -27,7 +27,7 @@ public abstract class Network<T extends Object,E extends Vertex> {
 	}
 	
 	/**
-	 * removes a vertex with id i
+	 * removes a vertex with identifier id
 	 * @param id identifier integer of vertex
 	 * @return whether successful
 	 */
@@ -89,6 +89,10 @@ public abstract class Network<T extends Object,E extends Vertex> {
 		return null;
 	}
 	
+	public Enumeration<T> enumVertices() {
+		return keys;
+	}
+	
 	/**
 	 * toString for all the names of all the vertices
 	 * @return a String of all vertex names (keys)
@@ -101,6 +105,14 @@ public abstract class Network<T extends Object,E extends Vertex> {
 		return null;
 	}
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ */
 
 
 class Vertex implements Comparable<Vertex> {
