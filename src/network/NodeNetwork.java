@@ -16,17 +16,17 @@ public class NodeNetwork<E> extends Network<String,Node<E>> {
  * --------------------------------------------------------------------------------------------------------------------------------------------------
  */
 
-class Node<E> extends Vertex {
+class Node<E> extends Vertex<String> {
 	
 	private E data;
 	
-	Node(E e) {
+	Node(String label, E e) {
+		super(label);
 		data = e;
 	}
 	
-	@Override
-	public String getLabel() {
-		return "Node";
+	Node(E e) {
+		this(null,e);
 	}
 	
 	public E getData() {

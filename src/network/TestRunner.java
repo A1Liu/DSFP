@@ -7,10 +7,10 @@ public class TestRunner {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Vertex albert = new Node<Integer>(1);
-		Vertex andrew = new Node<Integer>(1);
-		Vertex bobby = new Vertex();
-		Vertex del = new Vertex();
+		Vertex<String> albert = new Vertex<String>("1");
+		Vertex<Integer> andrew = new Vertex<Integer>(2);
+		Vertex<Integer> bobby = new Vertex<Integer>(3);
+		Vertex<Integer> del = new Vertex<Integer>(4);
 		albert.addEdge(andrew, 1);
 		System.out.println(albert.addEdge(bobby, 2));
 		albert.addEdge(del, 3);

@@ -1,16 +1,15 @@
 package network;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public abstract class Network<T extends Object,E extends Vertex> {
+public abstract class Network<T,E extends Vertex<T>> {
 
 	private Enumeration<T> keys;
-	private Hashtable<T, Vertex> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
+	private Hashtable<T, Vertex<T>> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
 	public Network() {
-		vertices = new Hashtable<T, Vertex>();
+		vertices = new Hashtable<T, Vertex<T>>();
 	}
 	
 	/**
@@ -40,7 +39,7 @@ public abstract class Network<T extends Object,E extends Vertex> {
 	 * @param id identifier integer of the vertex
 	 * @return vertex matching id
 	 */
-	public Vertex getVertex(T id) {
+	public Vertex<T> getVertex(T id) {
 		return vertices.get(id);
 	}
 	
@@ -115,17 +114,58 @@ public abstract class Network<T extends Object,E extends Vertex> {
  */
 
 
-class Vertex implements Comparable<Vertex> {
+class Vertex<T extends Object> extends Point {
 
+	private final T label;
+	
+	Vertex(T t) {
+		super();
+		label = t;
+	}
+	
+	@Override
+	public String getLabel() {
+		
+		if(label==null)
+			return null;
+		
+		return label.toString();
+	}
+	
+	/**
+	 * toString for vertices
+	 * @return identifier for vertex and all edges of vertex
+	 */
+	public String toString() {
+		
+		try {
+			int label = Integer.parseInt(getLabel());
+			return "V" + label + ": " + getEdges().toString();
+		} catch (NumberFormatException e) {
+			String label = "'" + getLabel() + "'";
+			return "V" + label + ": " + getEdges().toString();
+		}
+	}
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+class Point implements Comparable<Point> {
 	private EdgeList edges;
 	
-	Vertex() {
+	Point() {
 		edges = new EdgeList();
 	}
 	
 	@Override
-	public int compareTo(Vertex v) {
-		return countEdges()-v.countEdges();
+	public int compareTo(Point p) {
+		return countEdges()-p.countEdges();
 	}
 
 	/**
@@ -150,8 +190,8 @@ class Vertex implements Comparable<Vertex> {
 	 * @param l length of edge
 	 * @return whether edge was successfully added
 	 */
-	boolean addEdge(Vertex v, int l) {
-		Edge newEdge = new Edge(v,l);
+	boolean addEdge(Point p, int l) {
+		Edge newEdge = new Edge(p,l);
 		return addEdge(newEdge);
 	}
 	
@@ -188,7 +228,7 @@ class Vertex implements Comparable<Vertex> {
 	 * @param v destination of edge to find
 	 * @return the edge with destination v, or null if there is none.
 	 */
-	Edge findEdge(Vertex v) {
+	Edge findEdge(Point v) {
 		Edge e = new Edge(v,0);
 		return findEdge(e);
 	}
@@ -224,17 +264,13 @@ class Vertex implements Comparable<Vertex> {
 	 * @param v destination of edge to remove
 	 * @return whether the edge was present in the vertex to begin with
 	 */
-	boolean rmEdge(Vertex v) {
+	boolean rmEdge(Point v) {
 		Edge e = new Edge(v,0);
 		return rmEdge(e);
 	}
 	
-	/**
-	 * getter for user/auto generated label
-	 * @return string form of label
-	 */
 	public String getLabel() {
-		return "V";
+		return "Point";
 	}
 	
 	/**
@@ -243,13 +279,7 @@ class Vertex implements Comparable<Vertex> {
 	 */
 	public String toString() {
 		
-		try {
-			int label = Integer.parseInt(getLabel());
-			return "V" + label + ": " + edges.toString();
-		} catch (NumberFormatException e) {
-			String label = "'" + getLabel() + "'";
-			return "V" + label + ": " + edges.toString();
-		}
+		return "Point with " + countEdges() + " Edges.";
 	}
 }
 

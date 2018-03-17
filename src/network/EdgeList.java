@@ -2,7 +2,7 @@ package network;
 
 import java.util.ArrayList;
 
-public class EdgeList extends LinkedList<Edge> {
+class EdgeList extends LinkedList<Edge> {
 	
 	EdgeList(Edge e) {
 		setFront(new ListNode<Edge>(e));
@@ -61,10 +61,10 @@ public class EdgeList extends LinkedList<Edge> {
 
 class Edge implements Comparable<Edge> {
 
-	private Vertex destination;
+	private Point destination;
 	private int length;
 	
-	Edge(Vertex v, int l) {
+	Edge(Point v, int l) {
 		destination = v;
 		length = l;
 	}
@@ -94,14 +94,15 @@ class Edge implements Comparable<Edge> {
 		length = l;
 	}
 	
-	public Vertex getDestination() {
+	public Point getDestination() {
 		return destination;
 	}
 	
-	void setDestination(Vertex d) {
+	void setDestination(Point d) {
 		destination = d;
 	}
 	
+	@Override
 	public String toString() {
 		try {
 			int label = Integer.parseInt(destination.getLabel());
