@@ -66,7 +66,7 @@ class Edge implements Comparable<Edge> {
 	
 	Edge(Point v, int l) {
 		destination = v;
-		length = l;
+		length = Math.abs(l);
 	}
 	
 	@Override
@@ -91,7 +91,7 @@ class Edge implements Comparable<Edge> {
 	}
 	
 	void setLength(int l) {
-		length = l;
+		length = Math.abs(l);
 	}
 	
 	public Point getDestination() {

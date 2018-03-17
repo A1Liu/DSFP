@@ -7,23 +7,35 @@ public class TestRunner {
 		// TODO Auto-generated method stub
 		TestRunner a = new TestRunner();
 		
-		NodeNetwork<Integer> albert = new NodeNetwork<Integer>();
-		albert.addVertex("hello");
-		albert.addVertex("hi");
-		albert.addVertex("boi");
-		albert.addVertex("spoopy");
-		albert.addVertex("poop");
-		albert.addEdge("hello", "hi");
-		albert.addEdge("hello", "boi");
+		UndirectedGraph albert = new UndirectedGraph();
+		albert.addVertex(101);
+		albert.addVertex(102);
+		albert.addVertex(103);
+		albert.addVertex(104);
+		albert.addVertex(105);
+		albert.addEdge(101, 102);
+		albert.addEdge(101, 103);
+		albert.addEdge(101, 104);
+		albert.addEdge(103, 104);
+		albert.rmVertex(101);
+		System.out.println(albert.rmEdge(101));
+		System.out.println(albert.getVertex(102));
+		System.out.println(albert.getVertex(103));
+		System.out.println(albert.getVertex(104));
+		
 		
 		
 		String x;
-		x = albert.listVertices().toString();
-		x = albert.toList().toString();
-		x = "" + albert.getVertex("hello").countEdges();
-		x = albert.cytoScape();
-		System.out.println(x);
+		//x = albert.listVertices().toString();
+		//x = albert.toList().toString();
+		//x = albert.cytoScape();
+		x = albert.countEdges() + "";
 		
+		//boolean c = albert.rmEdge(2, 1);
+		//boolean b = albert.rmEdge(1, 2);
+		
+		
+		System.out.println(x);
 		
 		
 		a.test(1);

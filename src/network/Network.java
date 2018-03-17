@@ -6,9 +6,11 @@ import java.util.Hashtable;
 
 public abstract class Network<T,E extends Vertex<T>> {
 
+	private int defaultID;
 	private Hashtable<T,Vertex<T>> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
 	public Network() {
+		defaultID = 0;
 		vertices = new Hashtable<T, Vertex<T>>();
 	}
 	
@@ -28,13 +30,29 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * specified way to add a vertex
 	 * @param e vertex to add
 	 */
-	public boolean addVertex(T t, E e) {
+	boolean addVertex(T t, E e) {
 		if (vertices.containsKey(t))
 			return false;
 		else {
 			vertices.put(t, e);
+			incrementID();
 			return true;
 		}
+	}
+	
+	/**
+	 * getter for the integer version of the default key to give to new users
+	 * @return defaultID
+	 */
+	public int getDefaultID() {
+		return defaultID;
+	}
+	
+	/**
+	 * increases defaultID by one to indicate that a new user has been added to the database
+	 */
+	void incrementID() {
+		defaultID++;
 	}
 	
 	/**
@@ -56,16 +74,24 @@ public abstract class Network<T,E extends Vertex<T>> {
 	}
 	
 	/**
-	 * adds edge from a vertex to another vertex
+	 * adds edge of specified length from a vertex to another vertex
 	 * @param v1 vertex sending edge
 	 * @param v2 vertex receiving edge
 	 * @param l length of edge
 	 * @return whether successful
 	 */
 	public boolean addEdge(T v1, T v2, int l) {
+		if (vertices.get(v1)==null)
+			return false;
 		return vertices.get(v1).addEdge(vertices.get(v2), l);
 	}
 	
+	/**
+	 * adds edge of length 1 from a vertex to another vertex
+	 * @param v1 vertex sending edge
+	 * @param v2 vertex receiving edge
+	 * @return whether successful
+	 */
 	public boolean addEdge(T v1, T v2) {return addEdge(v1,v2,1);}
 	
 	/**
@@ -75,7 +101,33 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * @return whether successfully removed
 	 */
 	public boolean rmEdge(T v1, T v2) {
+		if (vertices.get(v1)==null)
+			return false;
 		return vertices.get(v1).rmEdge(vertices.get(v2));
+	}
+	
+	/**
+	 * removes all edges from vertex v1
+	 * @param v1 vertex to clear
+	 */
+	public boolean rmEdge(T v) {
+		if (vertices.get(v)==null)
+			return false;
+		vertices.get(v).rmAllEdges();
+		return true;
+	}
+	
+	/**
+	 * finds length of edge from node v1 to node v2. Returns -1 if the edge doesn't exist
+	 * @param v1 source node of edge
+	 * @param v2 destination node of edge
+	 * @return length of edge
+	 */
+	public int edgeLength(T v1, T v2) {
+		if(vertices.get(v1) == null || vertices.get(v2) == null)
+			return -1;
+		else if (vertices.get(v1).findEdge(vertices.get(v2)) == null) return -1;
+		return vertices.get(v1).findEdge(vertices.get(v2)).getLength();
 	}
 	
 	/**
@@ -100,8 +152,8 @@ public abstract class Network<T,E extends Vertex<T>> {
 	}
 	
 	/**
-	 * TUrns network into arrayList
-	 * @return ArrayList of edgepair objects
+	 * Turns network into arrayList
+	 * @return ArrayList of EdgePair objects
 	 */
 	public ArrayList<EdgePair> toList() {
 		Vertex<T> current;

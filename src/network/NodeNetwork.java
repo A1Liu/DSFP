@@ -2,9 +2,14 @@ package network;
 
 public class NodeNetwork<E> extends Network<String,Node<E>> {
 	
+	
+	public NodeNetwork() {
+		
+	}
+	
 	@Override
 	public void addVertex() {
-		
+		addVertex("N"+getDefaultID());
 	}
 
 	@Override
