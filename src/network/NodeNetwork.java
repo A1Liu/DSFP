@@ -2,10 +2,20 @@ package network;
 
 public class NodeNetwork<E> extends Network<String,Node<E>> {
 	
+	@Override
 	public void addVertex() {
 		
 	}
+
+	@Override
+	public boolean addVertex(String key) {
+		return this.addNode(key, null);
+	}
 	
+	public boolean addNode(String key, E e) {
+		Node<E> newNode = new Node<E>(key,e);
+		return addVertex(key, newNode);
+	}
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------------------------

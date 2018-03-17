@@ -1,5 +1,7 @@
 package network;
 
+import java.util.ArrayList;
+
 public class LinkedList<E extends Comparable<E>> {
 
 	private ListNode<E> front;
@@ -122,10 +124,20 @@ public class LinkedList<E extends Comparable<E>> {
 		ListNode<E> current = front;
 		int counter = 0;
 		while(current != null) {
-			current = current.getNext();
 			counter++;
+			current = current.getNext();
 		}
 		return counter;
+	}
+	
+	public ArrayList<E> toArrayList() {
+		ListNode<E> current = front;
+		ArrayList<E> container = new ArrayList<E>();
+		while(current != null) {
+			container.add(current.getData());
+			current = current.getNext();
+		}
+		return container;
 	}
 	
 	/**
@@ -133,7 +145,7 @@ public class LinkedList<E extends Comparable<E>> {
 	 */
 	public String toString() {
 		ListNode<E> current = front;
-		String output = "[";
+		String output = "";
 		if(current != null) {
 		while(current.getNext() != null) {
 			output = output + current.toString() + "; ";
@@ -143,7 +155,7 @@ public class LinkedList<E extends Comparable<E>> {
 		} else {
 			output = output + "Empty List";
 		}
-		return output + "]";
+		return output;
 	}
 }
 

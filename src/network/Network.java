@@ -1,12 +1,12 @@
 package network;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 public abstract class Network<T,E extends Vertex<T>> {
 
-	private Enumeration<T> keys;
-	private Hashtable<T, Vertex<T>> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
+	private Hashtable<T,Vertex<T>> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
 	public Network() {
 		vertices = new Hashtable<T, Vertex<T>>();
@@ -18,11 +18,23 @@ public abstract class Network<T,E extends Vertex<T>> {
 	public abstract void addVertex();
 	
 	/**
+	 * add a vertex of specific index
+	 * @param t the key of the vertex
+	 * @return whether operation was successful
+	 */
+	public abstract boolean addVertex(T t);
+	
+	/**
 	 * specified way to add a vertex
 	 * @param e vertex to add
 	 */
-	public void addVertex(T t, E e) {
-		vertices.put(t,e);
+	public boolean addVertex(T t, E e) {
+		if (vertices.containsKey(t))
+			return false;
+		else {
+			vertices.put(t, e);
+			return true;
+		}
 	}
 	
 	/**
@@ -54,6 +66,8 @@ public abstract class Network<T,E extends Vertex<T>> {
 		return vertices.get(v1).addEdge(vertices.get(v2), l);
 	}
 	
+	public boolean addEdge(T v1, T v2) {return addEdge(v1,v2,1);}
+	
 	/**
 	 * removes an edge from vertex v1 to vertex v2
 	 * @param v1 vertex edge is coming from
@@ -68,7 +82,7 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * finds amount of vertices
 	 * @return count of vertices
 	 */
-	public int countVertices() {
+	public int size() {
 		return vertices.size();
 	}
 	
@@ -77,27 +91,82 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * @return returns amount of edges
 	 */
 	public int countEdges() {
-		return 0;
+		int count = 0;
+		ArrayList<Vertex<T>> vertexList = listVertices();
+		for (int x = 0;x<size();x++) {
+			count+=vertexList.get(x).countEdges();
+		}
+		return count;
+	}
+	
+	/**
+	 * TUrns network into arrayList
+	 * @return ArrayList of edgepair objects
+	 */
+	public ArrayList<EdgePair> toList() {
+		Vertex<T> current;
+		ListNode<Edge> currentEdge;
+		ArrayList<Vertex<T>> vertexList = listVertices();
+		LinkedList<Edge> currentEdges;
+		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
+		for (int x = 0;x<size();x++) {
+			current = vertexList.get(x);
+			currentEdges = current.getEdges();
+			currentEdge = currentEdges.getFront();
+			while (currentEdge != null) {
+				EdgePair e = new EdgePair(current,currentEdge.getData());
+				edgeList.add(e);
+				currentEdge=currentEdge.getNext();
+			}
+		}
+		return edgeList;
 	}
 	
 	/**
 	 * toString for all edges in network
 	 * @return a cytoscape-formatted csv string
 	 */
-	public String listEdges() {
-		return null;
-	}
-	
-	public Enumeration<T> enumVertices() {
-		return keys;
+	public String cytoScape() {
+		Vertex<T> current;
+		ListNode<Edge> currentEdge;
+		ArrayList<Vertex<T>> vertexList = listVertices();
+		LinkedList<Edge> currentEdges;
+		String csv = "";
+		for (int x = 0;x<size();x++) {
+			current = vertexList.get(x);
+			currentEdges = current.getEdges();
+			currentEdge = currentEdges.getFront();
+			while(currentEdge != null) {
+				EdgePair e = new EdgePair(current,currentEdge.getData());
+				csv+=e.toString();
+				currentEdge=currentEdge.getNext();
+			}
+		}
+		return csv;
 	}
 	
 	/**
-	 * toString for all the names of all the vertices
-	 * @return a String of all vertex names (keys)
+	 * returns an enumeration of vertices
+	 * @return enumeration with all the vertices
 	 */
-	public String listVertices() {
-		return null;
+	public Enumeration<T> enumVertices() {
+		return vertices.keys();
+	}
+	
+	/**
+	 * Turns the network into an arrayList of vertices
+	 * @return an arrayList of vertices
+	 */
+	public ArrayList<Vertex<T>> listVertices() {
+		
+		ArrayList<Vertex<T>> vertexList = new ArrayList<Vertex<T>>(size());
+		Enumeration<T> keys = enumVertices();
+		
+		while(keys.hasMoreElements()) {
+			vertexList.add(vertices.get(keys.nextElement()));
+		}
+		
+		return vertexList;
 	}
 	
 	public String toString() {
@@ -114,7 +183,7 @@ public abstract class Network<T,E extends Vertex<T>> {
  */
 
 
-class Vertex<T extends Object> extends Point {
+class Vertex<T> extends Point {
 
 	private final T label;
 	
@@ -136,15 +205,50 @@ class Vertex<T extends Object> extends Point {
 	 * toString for vertices
 	 * @return identifier for vertex and all edges of vertex
 	 */
+	@Override
 	public String toString() {
 		
 		try {
 			int label = Integer.parseInt(getLabel());
-			return "V" + label + ": " + getEdges().toString();
+			return "\nV" + label + ": [" + getEdges().toString() + "]";
 		} catch (NumberFormatException e) {
 			String label = "'" + getLabel() + "'";
-			return "V" + label + ": " + getEdges().toString();
+			return "\nV" + label + ": [" + getEdges().toString() + "]";
 		}
+	}
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+class EdgePair extends Edge {
+	
+	Point source;
+	
+	public EdgePair(Point p1, Point p2, int l) {
+		super(p2,l);
+		source = p1;
+	}
+	
+	public EdgePair(Point p, Edge e) {
+		this(p,e.getDestination(),e.getLength());
+	}
+	
+	void setSource(Point p) {
+		source = p;
+	}
+	
+	public Point getSource() {
+		return source;
+	}
+	
+	public String toString() {
+		return source.getLabel() + "," + getDestination().getLabel() + "," + getLength() + "\n";
 	}
 }
 
@@ -279,7 +383,7 @@ class Point implements Comparable<Point> {
 	 */
 	public String toString() {
 		
-		return "Point with " + countEdges() + " Edges.";
+		return "{Point with " + countEdges() + " Edges.}";
 	}
 }
 
