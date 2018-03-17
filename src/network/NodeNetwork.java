@@ -39,7 +39,19 @@ class Node<E> extends Vertex<String> {
 		this(null,e);
 	}
 	
+	/**
+	 * getter for data
+	 * @return data
+	 */
 	public E getData() {
 		return data;
+	}
+	
+	/**
+	 * checks if the node is empty
+	 * @return whether the node is empty
+	 */
+	public boolean isEmpty() {
+		return data==null;
 	}
 }

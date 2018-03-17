@@ -169,6 +169,9 @@ public abstract class Network<T,E extends Vertex<T>> {
 		return vertexList;
 	}
 	
+	/**
+	 * toString
+	 */
 	public String toString() {
 		return null;
 	}
@@ -228,7 +231,7 @@ class Vertex<T> extends Point {
 
 class EdgePair extends Edge {
 	
-	Point source;
+	private final Point source;
 	
 	public EdgePair(Point p1, Point p2, int l) {
 		super(p2,l);
@@ -239,14 +242,17 @@ class EdgePair extends Edge {
 		this(p,e.getDestination(),e.getLength());
 	}
 	
-	void setSource(Point p) {
-		source = p;
-	}
-	
+	/**
+	 * getter for source point
+	 * @return source
+	 */
 	public Point getSource() {
 		return source;
 	}
 	
+	/**
+	 * toString, also a line in the csv
+	 */
 	public String toString() {
 		return source.getLabel() + "," + getDestination().getLabel() + "," + getLength() + "\n";
 	}
@@ -261,6 +267,7 @@ class EdgePair extends Edge {
  */
 
 class Point implements Comparable<Point> {
+	
 	private EdgeList edges;
 	
 	Point() {
@@ -290,7 +297,7 @@ class Point implements Comparable<Point> {
 	
 	/**
 	 * adds an edge
-	 * @param v vertex to point edge to
+	 * @param p vertex to point edge to
 	 * @param l length of edge
 	 * @return whether edge was successfully added
 	 */
@@ -329,16 +336,16 @@ class Point implements Comparable<Point> {
 	
 	/**
 	 * This method returns the closest possible match to the given vertex
-	 * @param v destination of edge to find
+	 * @param p destination of edge to find
 	 * @return the edge with destination v, or null if there is none.
 	 */
-	Edge findEdge(Point v) {
-		Edge e = new Edge(v,0);
+	Edge findEdge(Point p) {
+		Edge e = new Edge(p,0);
 		return findEdge(e);
 	}
 	
 	/**
-	 * removes all edges from the vertex
+	 * removes all edges from the point
 	 */
 	void rmAllEdges() {
 		edges.setFront(null);
@@ -368,11 +375,15 @@ class Point implements Comparable<Point> {
 	 * @param v destination of edge to remove
 	 * @return whether the edge was present in the vertex to begin with
 	 */
-	boolean rmEdge(Point v) {
-		Edge e = new Edge(v,0);
+	boolean rmEdge(Point p) {
+		Edge e = new Edge(p,0);
 		return rmEdge(e);
 	}
 	
+	/**
+	 * getter for label
+	 * @return label
+	 */
 	public String getLabel() {
 		return "Point";
 	}
@@ -381,6 +392,7 @@ class Point implements Comparable<Point> {
 	 * toString for vertices
 	 * @return identifier for vertex and all edges of vertex
 	 */
+	@Override
 	public String toString() {
 		
 		return "{Point with " + countEdges() + " Edges.}";

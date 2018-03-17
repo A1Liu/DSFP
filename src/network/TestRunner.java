@@ -16,6 +16,7 @@ public class TestRunner {
 		albert.addEdge("hello", "hi");
 		albert.addEdge("hello", "boi");
 		
+		
 		String x;
 		x = albert.listVertices().toString();
 		x = albert.toList().toString();
