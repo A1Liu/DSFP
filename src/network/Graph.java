@@ -1,42 +1,34 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 public class Graph extends Network<Character,Vertex<Character>>{
 
-	private String type = "Graph";
-	
+	/**
+	 * Graphs have a maximum size of 95 vertices. Each vertex is labeled with a character and contains its own label and the edges coming from it.
+	 */
 	public Graph() {
-		
-	}
-	
-	public static Graph createGraph(String type) {
-		
-		switch(type.toLowerCase()) {
-		case "directedgraph":
-			return new DirectedGraph();
-		case "undirectedgraph":
-			return new UndirectedGraph();
-		case "Web":
-			return new Web();
-		default:
-			return new Graph();
-		
-		}
-		
-	}
-	
-	public void setType(String t) {
-		type = t;
-	}
-	
-	public String getType() {
-		return type;
+		super(" ".charAt(0));
 	}
 	
 	@Override
-	public void addVertex() {
-		addVertex((char) getDefaultID());
+	public boolean addVertex() {
+		if (getDefaultID() > 127) {
+			return false;
+		}
+		
+		
+		if (addVertex((char) getDefaultID())) {
+			return true;
+		}
+		
+		int x = 32;
+		while (!addVertex(x) && x<=127) {
+			x++;
+		}
+		return true;
 	}
 
 	@Override
@@ -122,12 +114,16 @@ public class Graph extends Network<Character,Vertex<Character>>{
 		Character c1 = (char) v;
 		return rmEdge(c1);
 	}
+
+	@Override
+	protected void incrementID() {
+		setDefaultID((char) (getDefaultID().toString().charAt(0)+1));
+	}
 }
 
 class DirectedGraph extends Graph {
 	
 	public DirectedGraph() {
-		setType("Directed Graph");
 	}
 	
 }
@@ -135,7 +131,6 @@ class DirectedGraph extends Graph {
 class Web extends UndirectedGraph {
 	
 	public Web() {
-		setType("Web");
 	}
 	
 	@Override
@@ -152,7 +147,6 @@ class Web extends UndirectedGraph {
 class UndirectedGraph extends Graph {
 	
 	public UndirectedGraph() {
-		setType("Undirected Graph");
 	}
 	
 	@Override
@@ -205,42 +199,42 @@ class UndirectedGraph extends Graph {
 	 * Uses a Breadth-First Iterator instead of a standard list of edges
 	 */
 	@Override
-	public ArrayList<EdgePair> toList() {
-		
-		ArrayList<EdgePair> prevGen = new ArrayList<EdgePair>();
-		ArrayList<EdgePair> generation = new ArrayList<EdgePair>();
-		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
-		ArrayList<Vertex<Character>> banVerts = new ArrayList<Vertex<Character>>();
-		
-		int genSize;
-		int prevGenSize;
-		EdgePair start = new EdgePair(null,listVertices().get(0));
-		generation.add(start);
-		
-		while (generation.size() != 0) {
-			
-			genSize = generation.size();
-			prevGenSize = prevGen.size();
-			for(int x=0;x<generation.size();x++) {
-				
-				
-				
-				for(int y=0;y<generation.get(x).getSource().countEdges();y++) {
-					EdgePair e = new EdgePair(generation.get(x).getSource(),generation.get(x).getSource().getEdges().toArrayList().get(y));
-					if 
-				}
-				
-			}
-		}
-		
-		return edgeList;
-		//Need to use breadth-first iterator
-	}
+	public ArrayList<EdgePair> listEdges() {
 
-	
-	@Override
-	public String cytoScape() {
-		return "";
+		if (size() == 0)
+			return null;
+		
+		//creating necessary containers
+		Hashtable<Character, Character> reached = new Hashtable<Character,Character>();
+		ArrayList<Character> queue = new ArrayList<Character>();
+		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
+		Enumeration<Character> vertexList = enumVertices();
+		ArrayList<Edge> currentEdges;
+		Character currentNeighbor;
+		Character start = getVertex(vertexList.nextElement()).getLabel();
+		
+		while (reached.size()<size()) {
+			//start at a vertex
+			if (!reached.contains(start)) {
+				queue.add(start);
+				while (queue.size() > 0) {
+					currentEdges = getVertex(queue.get(0)).getEdges().toArrayList();//list of edges
+					for (int x = 0; x<currentEdges.size();x++) {
+						currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
+						if (!reached.contains(currentNeighbor)) {
+							edgeList.add(new EdgePair(getVertex(queue.get(0)),currentEdges.get(x)));//if the neighbor hasn't been reached, add the edge
+							if (!queue.contains(currentNeighbor))
+								queue.add(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
+						}	
+					}
+					reached.put(queue.get(0), queue.get(0));
+					queue.remove(0);
+				}
+			}
+			if (vertexList.hasMoreElements())
+				start = vertexList.nextElement();
+		}
+		return edgeList;
 	}
 
 }

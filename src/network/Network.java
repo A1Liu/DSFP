@@ -6,18 +6,18 @@ import java.util.Hashtable;
 
 public abstract class Network<T,E extends Vertex<T>> {
 
-	private int defaultID;
+	private T defaultID;
 	private Hashtable<T,Vertex<T>> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
-	public Network() {
-		defaultID = 0;
+	protected Network(T initialID) {
 		vertices = new Hashtable<T, Vertex<T>>();
+		defaultID = initialID;
 	}
 	
 	/**
 	 * default way to add a vertex
 	 */
-	public abstract void addVertex();
+	public abstract boolean addVertex();
 	
 	/**
 	 * add a vertex of specific index
@@ -30,7 +30,7 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * specified way to add a vertex
 	 * @param e vertex to add
 	 */
-	boolean addVertex(T t, E e) {
+	protected boolean addVertex(T t, E e) {
 		if (vertices.containsKey(t))
 			return false;
 		else {
@@ -44,16 +44,21 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * getter for the integer version of the default key to give to new users
 	 * @return defaultID
 	 */
-	public int getDefaultID() {
+	public T getDefaultID() {
 		return defaultID;
+	}
+	
+	/**
+	 * setter for defaultID
+	 */
+	protected void setDefaultID(T id) {
+		defaultID = id;
 	}
 	
 	/**
 	 * increases defaultID by one to indicate that a new user has been added to the database
 	 */
-	void incrementID() {
-		defaultID++;
-	}
+	protected abstract void incrementID();
 	
 	/**
 	 * removes a vertex with identifier id
@@ -62,6 +67,14 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 */
 	public boolean rmVertex(T id) {
 		return vertices.remove(id)!=null;
+	}
+	
+	/**
+	 * gets the first vertex in the network
+	 * @return the first value of the network
+	 */
+	public Vertex<T> getVertex() {
+		return vertices.get(vertices.keys().nextElement());
 	}
 	
 	/**
@@ -155,7 +168,7 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 * Turns network into arrayList
 	 * @return ArrayList of EdgePair objects
 	 */
-	public ArrayList<EdgePair> toList() {
+	public ArrayList<EdgePair> listEdges() {
 		Vertex<T> current;
 		ListNode<Edge> currentEdge;
 		ArrayList<Vertex<T>> vertexList = listVertices();
@@ -175,26 +188,46 @@ public abstract class Network<T,E extends Vertex<T>> {
 	}
 	
 	/**
+	 * lists all edges of all vertices connected to start vertex
+	 * @param start vertex
+	 * @return list of edges
+	 */
+	public ArrayList<EdgePair> listEdges(T start) {
+		
+		//creating necessary containers
+		Hashtable<T,T> reached = new Hashtable<T,T>();
+		ArrayList<T> queue = new ArrayList<T>();
+		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
+		ArrayList<Edge> currentEdges;
+		T currentNeighbor;
+		
+		//start at a vertex
+		if (size() > 0)
+			queue.add(vertices.get(start).getLabel());
+		
+		while (queue.size() > 0) {
+			currentEdges = vertices.get(queue.get(0)).getEdges().toArrayList();//list of edges
+			for (int x = 0; x<currentEdges.size();x++) {
+				currentNeighbor = (T) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
+				if (!reached.contains(currentNeighbor)) {
+					edgeList.add(new EdgePair(vertices.get(queue.get(0)),currentEdges.get(x)));//if the neighbor hasn't been reached, add the edge
+					if (!queue.contains(currentNeighbor))
+						queue.add(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
+				}	
+			}
+			reached.put(queue.get(0),queue.get(0));
+			queue.remove(0);
+		}
+		return edgeList;
+	}
+	
+	/**
 	 * toString for all edges in network
 	 * @return a cytoscape-formatted csv string
 	 */
 	public String cytoScape() {
-		Vertex<T> current;
-		ListNode<Edge> currentEdge;
-		ArrayList<Vertex<T>> vertexList = listVertices();
-		LinkedList<Edge> currentEdges;
-		String csv = "";
-		for (int x = 0;x<size();x++) {
-			current = vertexList.get(x);
-			currentEdges = current.getEdges();
-			currentEdge = currentEdges.getFront();
-			while(currentEdge != null) {
-				EdgePair e = new EdgePair(current,currentEdge.getData());
-				csv+=e.toString();
-				currentEdge=currentEdge.getNext();
-			}
-		}
-		return csv;
+		String cyto = listEdges().toString();
+		return cyto.substring(1, cyto.length()-1);
 	}
 	
 	/**
@@ -211,7 +244,7 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 */
 	public ArrayList<Vertex<T>> listVertices() {
 		
-		ArrayList<Vertex<T>> vertexList = new ArrayList<Vertex<T>>(size());
+		ArrayList<Vertex<T>> vertexList = new ArrayList<Vertex<T>>();
 		Enumeration<T> keys = enumVertices();
 		
 		while(keys.hasMoreElements()) {
@@ -248,12 +281,8 @@ class Vertex<T> extends Point {
 	}
 	
 	@Override
-	public String getLabel() {
-		
-		if(label==null)
-			return null;
-		
-		return label.toString();
+	public T getLabel() {
+		return label;
 	}
 	
 	/**
@@ -264,7 +293,7 @@ class Vertex<T> extends Point {
 	public String toString() {
 		
 		try {
-			int label = Integer.parseInt(getLabel());
+			int label = Integer.parseInt(getLabel().toString());
 			return "\nV" + label + ": [" + getEdges().toString() + "]";
 		} catch (NumberFormatException e) {
 			String label = "'" + getLabel() + "'";
@@ -322,7 +351,7 @@ class EdgePair extends Edge {
 	 * toString, also a line in the csv
 	 */
 	public String toString() {
-		return source.getLabel() + "," + getDestination().getLabel() + "," + getLength() + "\n";
+		return source.getLabel().toString() + "," + getDestination().getLabel().toString() + "," + getLength() + "\n";
 	}
 }
 
@@ -452,7 +481,7 @@ class Point implements Comparable<Point> {
 	 * getter for label
 	 * @return label
 	 */
-	public String getLabel() {
+	public Object getLabel() {
 		return "Point";
 	}
 	

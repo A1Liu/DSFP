@@ -4,22 +4,20 @@ package network;
 public class TestRunner {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		TestRunner a = new TestRunner();
 		
 		UndirectedGraph albert = new UndirectedGraph();
-		albert.addVertex(101);
-		albert.addVertex(102);
-		albert.addVertex(103);
-		albert.addVertex(104);
-		albert.addVertex(105);
-		albert.addEdge(101, 102);
-		albert.addEdge(101, 103);
-		albert.addEdge(101, 104);
-		albert.addEdge(103, 104);
-		albert.rmVertex(101);
-		System.out.println(albert.rmEdge(101));
-		System.out.println(albert.getVertex(102));
+		albert.addVertex(' ');
+		albert.addVertex('b');
+		albert.addVertex('c');
+		albert.addVertex('a');
+		albert.addVertex('#');
+		albert.addEdge(' ', ' ');
+		albert.addEdge(' ', '#');
+		albert.addEdge(' ', 'a');
+		albert.addEdge('b', 'c');
+		System.out.println(albert.cytoScape());
+		System.out.println();
+		System.out.println();
 		System.out.println(albert.getVertex(103));
 		System.out.println(albert.getVertex(104));
 		
@@ -36,16 +34,6 @@ public class TestRunner {
 		
 		
 		System.out.println(x);
-		
-		
-		a.test(1);
-	}
-	
-	public TestRunner() {
-		
-	}
-	
-	public void test(Integer i) {
 		
 	}
 

@@ -4,12 +4,12 @@ public class NodeNetwork<E> extends Network<String,Node<E>> {
 	
 	
 	public NodeNetwork() {
-		
+		super("0");
 	}
 	
 	@Override
-	public void addVertex() {
-		addVertex("N"+getDefaultID());
+	public boolean addVertex() {
+		return addVertex("N"+getDefaultID());
 	}
 
 	@Override
@@ -20,6 +20,12 @@ public class NodeNetwork<E> extends Network<String,Node<E>> {
 	public boolean addNode(String key, E e) {
 		Node<E> newNode = new Node<E>(key,e);
 		return addVertex(key, newNode);
+	}
+
+	@Override
+	protected void incrementID() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

@@ -105,7 +105,7 @@ class Edge implements Comparable<Edge> {
 	@Override
 	public String toString() {
 		try {
-			int label = Integer.parseInt(destination.getLabel());
+			int label = Integer.parseInt(destination.getLabel().toString());
 			return "(V" + label + ", " + length + ")";
 		} catch (NumberFormatException e) {
 			String label = "'" + destination.getLabel() + "'";
