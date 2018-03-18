@@ -192,11 +192,6 @@ class UndirectedGraph extends Graph {
 	}
 	
 	@Override
-	public ArrayList<EdgePair> toList() {
-		//Need to use breadth-first iterator
-	}
-	
-	@Override
 	public int countEdges() {
 		int count = 0;
 		ArrayList<Vertex<Character>> vertexList = listVertices();
@@ -205,4 +200,47 @@ class UndirectedGraph extends Graph {
 		}
 		return count/2;
 	}
+	
+	/**
+	 * Uses a Breadth-First Iterator instead of a standard list of edges
+	 */
+	@Override
+	public ArrayList<EdgePair> toList() {
+		
+		ArrayList<EdgePair> prevGen = new ArrayList<EdgePair>();
+		ArrayList<EdgePair> generation = new ArrayList<EdgePair>();
+		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
+		ArrayList<Vertex<Character>> banVerts = new ArrayList<Vertex<Character>>();
+		
+		int genSize;
+		int prevGenSize;
+		EdgePair start = new EdgePair(null,listVertices().get(0));
+		generation.add(start);
+		
+		while (generation.size() != 0) {
+			
+			genSize = generation.size();
+			prevGenSize = prevGen.size();
+			for(int x=0;x<generation.size();x++) {
+				
+				
+				
+				for(int y=0;y<generation.get(x).getSource().countEdges();y++) {
+					EdgePair e = new EdgePair(generation.get(x).getSource(),generation.get(x).getSource().getEdges().toArrayList().get(y));
+					if 
+				}
+				
+			}
+		}
+		
+		return edgeList;
+		//Need to use breadth-first iterator
+	}
+
+	
+	@Override
+	public String cytoScape() {
+		return "";
+	}
+
 }

@@ -285,6 +285,10 @@ class EdgePair extends Edge {
 	
 	private final Point source;
 	
+	public EdgePair(Point p1, Point p2) {
+		this(p1,p2,1);
+	}
+	
 	public EdgePair(Point p1, Point p2, int l) {
 		super(p2,l);
 		source = p1;
@@ -300,6 +304,18 @@ class EdgePair extends Edge {
 	 */
 	public Point getSource() {
 		return source;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof EdgePair))
+			return false;
+	
+		if(((EdgePair) o).getDestination() == getDestination() && ((EdgePair) o).getSource() == getSource())
+			return true;
+		
+		return false;
+	
 	}
 	
 	/**
