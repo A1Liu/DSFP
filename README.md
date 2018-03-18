@@ -3,6 +3,7 @@ Project to make a real life version of MeowMeowBeenz.
 
 ## Contents
 * [To Do](https://github.com/A1Liu/DSFP/blob/master/README.md#todo)
+* [Plan](https://github.com/A1Liu/DSFP/blob/master/README.md#plan)
 * [MySQL Info](https://github.com/A1Liu/DSFP/blob/master/README.md#mysql-info)
 * [Packages](https://github.com/A1Liu/DSFP/blob/master/README.md#packages)  
   * [DatabaseObjectHandler](https://github.com/A1Liu/DSFP/blob/master/README.md#database-object-handler-package)
@@ -24,6 +25,11 @@ Project to make a real life version of MeowMeowBeenz.
 * Add datastructure for ratings system  
 * Add modular ID confirmation/security features  
 * Add tons of other stuff
+
+## Plan
+1. Create Facebook-esque friend/following network
+  a. a
+2. Add a ratings network on top of it
 
 ## MySQL Info
 IP: 192.168.1.5  
