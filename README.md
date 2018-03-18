@@ -27,9 +27,19 @@ Project to make a real life version of MeowMeowBeenz.
 * Add tons of other stuff
 
 ## Plan
-1. Create Facebook-esque friend/following network
-  a. a
-2. Add a ratings network on top of it
+#### Basics
+1. Create User Class with basic fields
+2. Create SQL Handler
+3. Create connection between server and user
+4. Create connection between server and SQL server
+
+#### Friend Network
+1. Add to User package
+2. Add to SQL Handler
+3. Use breadth-first traversal to get list of friends and friends' friends, etc.
+
+#### Ratings Network
+NEED TO PLAN THIS OUT WAY THE FUCK MORE ITS SO RIDICULOUSLY COMPLICATED THIS PROJECT FUCKING SUCKS
 
 ## MySQL Info
 IP: 192.168.1.5  
