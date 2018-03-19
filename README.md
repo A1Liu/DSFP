@@ -14,16 +14,13 @@ Project to make a real life version of MeowMeowBeenz.
 * [Reference Links](https://github.com/A1Liu/DSFP/blob/master/README.md#reference-links)
 
 ## TODO
-* Finish general network class
-  * finish node network and node class
-  * add traversal method
-  * start testing network methods
 * Start learning SQL
 * Add config file support for server package  
 * Add user file support for user class  
 * Add admins with extra priveledges  
 * Add datastructure for ratings system  
-* Add modular ID confirmation/security features  
+* Add modular ID confirmation/security features 
+* Add App specific network classes and methods
 * Add tons of other stuff
 
 ## Plan
