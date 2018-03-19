@@ -1,9 +1,9 @@
 # Roadmap
 
 Security:  
-User sends password hash, server appends hash to salt, and hashes again.  
-Server checks if hash is equal to the hash on file for that user.
-Use Public-Key Encryption to send and receive password hashes.
+User sends username, gets salt back
+User sends hash of (salt, password) back to server
+Server accepts or denies, then changes salt
 
 Connections:  
 Multiple threads
