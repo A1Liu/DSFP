@@ -26,6 +26,17 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 */
 	public abstract boolean addVertex(T t);
 	
+	public boolean addVertex(T[] t) {
+		int index = 0;
+		boolean successful = true;
+		while (index < t.length) {
+			if (!addVertex(t[index]))
+				successful = false;
+			index++;
+		}
+		return successful;
+	}
+	
 	/**
 	 * specified way to add a vertex
 	 * @param e vertex to add
@@ -227,7 +238,8 @@ public abstract class Network<T,E extends Vertex<T>> {
 	 */
 	public String cytoScape() {
 		String cyto = listEdges().toString();
-		return cyto.substring(1, cyto.length()-1);
+		cyto = cyto.substring(1, cyto.length()-1).replaceAll("(?<=\n), ", "");
+		return cyto;
 	}
 	
 	/**
@@ -296,7 +308,7 @@ class Vertex<T> extends Point {
 			int label = Integer.parseInt(getLabel().toString());
 			return "\nV" + label + ": [" + getEdges().toString() + "]";
 		} catch (NumberFormatException e) {
-			String label = "'" + getLabel() + "'";
+			String label = "'" + getLabel().toString() + "'";
 			return "\nV" + label + ": [" + getEdges().toString() + "]";
 		}
 	}

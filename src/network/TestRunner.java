@@ -6,17 +6,15 @@ public class TestRunner {
 	public static void main(String[] args) {
 		
 		UndirectedGraph albert = new UndirectedGraph();
-		albert.addVertex(' ');
-		albert.addVertex('b');
-		albert.addVertex('c');
-		albert.addVertex('a');
-		albert.addVertex('#');
-		albert.addEdge(' ', ' ');
-		albert.addEdge(' ', '#');
-		albert.addEdge(' ', 'a');
-		albert.addEdge('b', 'c');
+		
+		Character[] vertices = {'A','B','D','C'};
+		
+		albert.addVertex(vertices);
+		albert.addEdge('A', 'A');
+		albert.addEdge('A', 'B');
+		albert.addEdge('A', 'B');
+		albert.addEdge('D', 'C');
 		System.out.println(albert.cytoScape());
-		System.out.println();
 		System.out.println();
 		System.out.println(albert.getVertex(103));
 		System.out.println(albert.getVertex(104));

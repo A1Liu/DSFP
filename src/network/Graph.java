@@ -10,7 +10,7 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * Graphs have a maximum size of 95 vertices. Each vertex is labeled with a character and contains its own label and the edges coming from it.
 	 */
 	public Graph() {
-		super(" ".charAt(0));
+		super((char) 48);
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class Graph extends Network<Character,Vertex<Character>>{
 			return true;
 		}
 		
-		int x = 32;
+		int x = 48;
 		while (!addVertex(x) && x<=127) {
 			x++;
 		}
@@ -33,10 +33,15 @@ public class Graph extends Network<Character,Vertex<Character>>{
 
 	@Override
 	public boolean addVertex(Character t) {
-		if (getDefaultID()>127)
+		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
 			return false;
 		Vertex<Character> v = new Vertex<Character>(t);
 		return addVertex(t,v);
+	}
+	
+	public boolean addVertex(char c) {
+		Character i = (char) c;
+		return addVertex(i);
 	}
 	
 	/**
@@ -45,7 +50,7 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * @return whether operation was successful
 	 */
 	public boolean addVertex(int id) {
-		Character i = (char) id;
+		Character i = (char) (id+48);
 		return addVertex(i);
 	}
 	

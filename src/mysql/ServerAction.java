@@ -1,4 +1,4 @@
-package databaseObjectHandler;
+package mysql;
 
 public class ServerAction {
 
