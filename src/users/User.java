@@ -13,15 +13,7 @@ import java.util.Date;
 
 public class User extends NewAccount {
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
-	public User() {
-		this(null, null, null, null);
-	}
 	
 	public User(String username, String first, String last, Date birthday) {
 		this.setUsername(username);
@@ -29,5 +21,6 @@ public class User extends NewAccount {
 		this.setLast(last);
 		this.setBirthday(birthday);
 	}
+	
 	
 }

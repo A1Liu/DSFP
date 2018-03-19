@@ -5,9 +5,6 @@ import java.util.Date;
 
 public abstract class NewAccount implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
@@ -86,7 +83,7 @@ public abstract class NewAccount implements Serializable {
      */
     @Override
     public int hashCode() {
-        return (id != null) 
+        return (id != null)
              ? (this.getClass().hashCode() + id.hashCode()) 
              : super.hashCode();
     }

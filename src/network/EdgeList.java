@@ -115,3 +115,58 @@ class Edge implements Comparable<Edge> {
 	
 }
 
+/* --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+class EdgePair extends Edge {
+	
+	private final Point source;
+	
+	public EdgePair(Point p1, Point p2) {
+		this(p1,p2,1);
+	}
+	
+	public EdgePair(Point p1, Point p2, int l) {
+		super(p2,l);
+		source = p1;
+	}
+	
+	public EdgePair(Point p, Edge e) {
+		this(p,e.getDestination(),e.getLength());
+	}
+	
+	/**
+	 * getter for source point
+	 * @return source
+	 */
+	public Point getSource() {
+		return source;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof EdgePair))
+			return false;
+	
+		if(((EdgePair) o).getDestination() == getDestination() && ((EdgePair) o).getSource() == getSource())
+			return true;
+		
+		return false;
+	
+	}
+	
+	/**
+	 * toString, also a line in the csv
+	 */
+	public String toString() {
+		return (getLength() == 0)
+				? source.getLabel().toString() + "," + getDestination().getLabel().toString()
+				: source.getLabel().toString() + "," + getDestination().getLabel().toString() + "," + getLength() + "\n";
+	}
+}
+
