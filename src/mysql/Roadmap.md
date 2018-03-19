@@ -2,6 +2,9 @@
 
 This package needs to make it easier to create and execute commands in SQL.
 
+Security
+* search db for username,salt,hash row
+
 User Class
 * pull a row from the user table and create a user object based off of it
 * add a row to the user table using a user object
