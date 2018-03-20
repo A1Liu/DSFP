@@ -3,39 +3,49 @@ package mysql;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import users.User;
+import java.util.ArrayList;
 
 
-public class Query {
+
+public class TableDAO<E extends SQLObj<E>> extends DBDAO {
 	
-	private Connection connection;
-	private Statement statement;
+	private String tableName;
 	
-	public Query(Connection c) {
-		connection = c;
+	public TableDAO(Connection c, String table) throws SQLException {
+		super(c);
+		tableName = table;
 	}
 	
-	public boolean addUser(User u) {
+	public boolean addRow(E e) {
 		return true;
 	}
 	
-	public User getUser(Long id) {
+	public boolean deleteRow(Long id) {
+		return true;
+	}
+	
+	public E getRow(Long id) {
 		return null;
 	}
 	
-	public <E> ArrayList<E> getResults() {
+	public boolean checkCompatible() {
+		return true;
+	}
+	
+	private ResultSet executeStatement(String statement) {
+		return null;
 		
 	}
 	
-	public <E> E getResultRow(int row) {
-		
+	private ArrayList<E> getResults(ResultSet r) {
+		return null;
+	}
+	
+	private E getResultRow(int row) {
+		return null;
 	}
 	
 	public void hello() throws SQLException {
-	
-	statement = connection.createStatement();//makes a statement object
 	
 	
 	
@@ -45,7 +55,7 @@ public class Query {
     System.out.println("The SQL query is: " + selectQuery); // Echo For debugging
     System.out.println();
 
-    ResultSet results = statement.executeQuery(selectQuery);//executes query
+    ResultSet results = getStatement().executeQuery(selectQuery);//executes query
 
     // Step 4: Process the ResultSet by scrolling the cursor forward via next().
     System.out.println("The records selected are:");

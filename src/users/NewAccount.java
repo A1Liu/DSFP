@@ -1,9 +1,10 @@
 package users;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public abstract class NewAccount implements Serializable {
+import mysql.SQLObj;
+
+public abstract class NewAccount implements SQLObj<NewAccount> {
 
 	private static final long serialVersionUID = 1L;
 	

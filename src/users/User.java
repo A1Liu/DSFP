@@ -21,6 +21,18 @@ public class User extends NewAccount {
 		this.setLast(last);
 		this.setBirthday(birthday);
 	}
+
+	@Override
+	public ArrayList<Object> toSQLRow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NewAccount fromSQLRow(ArrayList<Object> fields) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
