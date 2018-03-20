@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-
+//table of objects of type E
 public class TableDAO<E extends SQLObj<E>> extends DBDAO {
 	
 	private String tableName;
@@ -17,6 +17,10 @@ public class TableDAO<E extends SQLObj<E>> extends DBDAO {
 	}
 	
 	public boolean addRow(E e) {
+		return true;
+	}
+	
+	public boolean addRow(ArrayList<E> e) {
 		return true;
 	}
 	
@@ -43,6 +47,14 @@ public class TableDAO<E extends SQLObj<E>> extends DBDAO {
 	
 	private E getResultRow(int row) {
 		return null;
+	}
+	
+	public String getTableName() {
+		return tableName;
+	}
+	
+	public void setTableName(String t) {
+		tableName = t;
 	}
 	
 	public void hello() throws SQLException {
