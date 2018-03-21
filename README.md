@@ -37,10 +37,10 @@ Project to make a real life version of MeowMeowBeenz.
 
 #### Ratings Network
 1. Learn how to implement Signal flow graphs
-2. Implement this structure first
-  1. Weight of ratings increases linearly as rating of source increases (maybe rating should be changed according to median?)
-  2. Users automatically rate themselves a 5
-  3. Users start with 10 ratings of 1, weight of 3, which get replaced by the first 10 ratings they get.
+2. Implement this structure first  
+   1. Weight of ratings increases linearly as rating of source increases (maybe rating should be changed according to median?)
+   2. Users automatically rate themselves a 5
+   3. Users start with 10 ratings of 1, weight of 3, which get replaced by the first 10 ratings they get.
 3. Next, implement structure above but change weight of ratings to increase quadratically as rating of source increases. Also, weight should increase if standard deviation of ratings is lower.
 
 ## MySQL Info
