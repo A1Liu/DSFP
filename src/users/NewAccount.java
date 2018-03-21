@@ -1,10 +1,9 @@
 package users;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import dao.SQLObj;
-
-public abstract class NewAccount implements SQLObj<NewAccount> {
+public abstract class NewAccount implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -14,6 +13,7 @@ public abstract class NewAccount implements SQLObj<NewAccount> {
 	private String first;
 	private String last;
 	private Date birthday;
+	private String password;
 	
 	public Long getId() {
 		return id;
@@ -62,6 +62,14 @@ public abstract class NewAccount implements SQLObj<NewAccount> {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	 public void setPassword(String password) {
+	        this.password = password;
+	    }
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
