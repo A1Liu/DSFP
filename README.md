@@ -41,7 +41,7 @@ Project to make a real life version of MeowMeowBeenz.
    1. Weight of ratings increases linearly as rating of source increases (maybe rating should be changed according to median?)
    2. Users automatically rate themselves a 5
    3. Users start with 10 ratings of 1, weight of 3, which get replaced by the first 10 ratings they get.
-3. Next, implement structure above but change weight of ratings to increase quadratically as rating of source increases. Also, weight should increase if standard deviation of ratings is lower.
+3. Next, implement structure above but change weight of ratings to increase quadratically as rating of source increases. Also, weight should increase for 4's and 5's if standard deviation of ratings is lower, and weight should decrease for 1's and 2's.
 
 ## MySQL Info
 IP: 192.168.1.5  
