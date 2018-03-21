@@ -88,3 +88,4 @@ These are links that I found that helped me make this app. Well some of them wer
 * [Data Access Objects Explanation](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java)
 * [Data Access Objects Tutorial](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html)
 * [Establishing a connection to server/client](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
+* [What is a signal-flow graph?](https://en.wikipedia.org/wiki/Signal-flow_graph)
