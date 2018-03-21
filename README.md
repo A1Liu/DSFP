@@ -10,12 +10,13 @@ Project to make a real life version of MeowMeowBeenz.
   * [MySQL](https://github.com/A1Liu/DSFP/blob/master/README.md#mysql-package)
   * [Network](https://github.com/A1Liu/DSFP/blob/master/README.md#network-package)
   * [Server](https://github.com/A1Liu/DSFP/blob/master/README.md#server-package)
+  * [Security](https://github.com/A1Liu/DSFP/blob/master/README.md#security-package)
   * [Users](https://github.com/A1Liu/DSFP/blob/master/README.md#user-package)
 * [Reference Links](https://github.com/A1Liu/DSFP/blob/master/README.md#reference-links)
 
 ## TODO
 * Start learning SQL
-[x] Add config file support for server package  
+* [x] Add config file support for server package  
 * Add user file support for user class  
 * Add admins with extra priveledges  
 * Add datastructure for ratings system  
@@ -25,10 +26,10 @@ Project to make a real life version of MeowMeowBeenz.
 
 ## Plan
 #### Basics
-1. Create User Class with basic fields
-2. Create SQL Handler
+1. [x] Create User Class with basic fields
+2. [x] Create SQL Handler
 3. Create connection between server and user
-4. Create connection between server and SQL server
+4. [x] Create connection between server and SQL server
 
 #### Friend Network
 1. Add classes for user and server package to make and send networks.
@@ -72,8 +73,8 @@ This package holds the back-end for the server stuff. It uses the network packag
 * Classes to build networks
 * Classes to update networks
 
-#### Server Security Package
-This package holds the security protocols for the server-user interactions. Still not exactly sure how or if this will be implemented.
+#### Security Package
+This package holds the security protocols for the server-user interactions.
 
 #### User Package
 This package holds the back-end for the user application. It includes:
