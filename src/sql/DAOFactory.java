@@ -9,15 +9,16 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import dao.DAOConfigurationException;
-import dao.DAOFactory;
+
 import dao.DAOProperties;
 
-public abstract class DAOFactorySQL implements DAOFactory {//use preparedstatement instead of statement
+public abstract class DAOFactory implements dao.DAOTypes {//use preparedstatement instead of statement
 
 	    private static final String PROPERTY_URL = "url";
 	    private static final String PROPERTY_DRIVER = "driver";
 	    private static final String PROPERTY_USERNAME = "username";
 	    private static final String PROPERTY_PASSWORD = "password";
+	    
 	    /**
 	     * Returns a new DAOFactory instance for the given database name.
 	     * @param name The database name to return a new DAOFactory instance for.
@@ -26,7 +27,7 @@ public abstract class DAOFactorySQL implements DAOFactory {//use preparedstateme
 	     * missing in the classpath or cannot be loaded, or if a required property is missing in the
 	     * properties file, or if either the driver cannot be loaded or the datasource cannot be found.
 	     */
-	    public static DAOFactorySQL getInstance(String name) throws DAOConfigurationException {
+	    public static DAOFactory getInstance(String name) throws DAOConfigurationException {
 	        if (name == null) {
 	            throw new DAOConfigurationException("Database name is null.");
 	        }
@@ -36,7 +37,7 @@ public abstract class DAOFactorySQL implements DAOFactory {//use preparedstateme
 	        String driverClassName = properties.getProperty(PROPERTY_DRIVER, false);
 	        String password = properties.getProperty(PROPERTY_PASSWORD, false);
 	        String username = properties.getProperty(PROPERTY_USERNAME, password != null);
-	        DAOFactorySQL instance;
+	        DAOFactory instance;
 
 	        // If driver is specified, then load it to let it register itself with DriverManager.
 	        if (driverClassName != null) {
@@ -67,7 +68,12 @@ public abstract class DAOFactorySQL implements DAOFactory {//use preparedstateme
 
 	        return instance;
 	    }
-
+	    
+	    @Override
+		public UserDAO getUserDAO() {
+			return new UserDAO(this);
+	    }
+	    
 	    /**
 	     * Returns a connection to the database. Package private so that it can be used inside the DAO
 	     * package only.
@@ -81,7 +87,7 @@ public abstract class DAOFactorySQL implements DAOFactory {//use preparedstateme
 	/**
 	 * The DriverManager based DAOFactory.
 	 */
-	class DriverManagerDAOFactory extends DAOFactorySQL {
+	class DriverManagerDAOFactory extends DAOFactory {
 	    private String url;
 	    private String username;
 	    private String password;
@@ -96,12 +102,13 @@ public abstract class DAOFactorySQL implements DAOFactory {//use preparedstateme
 	    Connection getConnection() throws SQLException {
 	        return DriverManager.getConnection(url, username, password);
 	    }
+
 	}
 
 	/**
-	 * The DataSource based DAOFactory.
+	 * The DataSource based SQL DAOFactory.
 	 */
-	class DataSourceDAOFactory extends DAOFactorySQL {
+	class DataSourceDAOFactory extends DAOFactory {
 	    private DataSource dataSource;
 
 	    DataSourceDAOFactory(DataSource dataSource) {
@@ -115,9 +122,9 @@ public abstract class DAOFactorySQL implements DAOFactory {//use preparedstateme
 	}
 
 	/**
-	 * The DataSource-with-Login based DAOFactory.
+	 * The DataSource-with-Login based SQL DAOFactory.
 	 */
-	class DataSourceWithLoginDAOFactory extends DAOFactorySQL {
+	class DataSourceWithLoginDAOFactory extends DAOFactory {
 	    private DataSource dataSource;
 	    private String username;
 	    private String password;

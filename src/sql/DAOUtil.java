@@ -11,9 +11,9 @@ import java.sql.Statement;
  * single static methods. As far it contains a PreparedStatement values setter and a
  * <code>java.util.Date</code> to <code>java.sql.Date</code> converter.
  */
-public final class DAOUtilSQL {
+public final class DAOUtil {
 
-    private DAOUtilSQL() {
+    private DAOUtil() {
         // Utility class, hide constructor.
     }
 

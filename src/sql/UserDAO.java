@@ -1,6 +1,6 @@
 package sql;
 
-import static sql.DAOUtilSQL.*;
+import static sql.DAOUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +18,7 @@ import users.User;
  * @author BalusC
  * @link http://balusc.blogspot.com/2008/07/dao-tutorial-data-layer.html
  */
+
 public class UserDAO implements dao.UserDAO {
 
     // Constants ----------------------------------------------------------------------------------
@@ -41,7 +42,7 @@ public class UserDAO implements dao.UserDAO {
 
     // Vars ---------------------------------------------------------------------------------------
 
-    private DAOFactorySQL daoFactory;
+    private DAOFactory daoFactory;
 
     // Constructors -------------------------------------------------------------------------------
 
@@ -50,7 +51,7 @@ public class UserDAO implements dao.UserDAO {
      * inside the DAO package only.
      * @param daoFactory The DAOFactory to construct this User DAO for.
      */
-    UserDAO(DAOFactorySQL daoFactory) {
+    UserDAO(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 
@@ -241,7 +242,7 @@ public class UserDAO implements dao.UserDAO {
     // Helpers ------------------------------------------------------------------------------------
 
     /**
-     * Map the current row of the given ResultSet to an User.
+     * Map the current row of the given ResultSet to a User.
      * @param resultSet The ResultSet of which the current row is to be mapped to an User.
      * @return The mapped User from the current row of the given ResultSet.
      * @throws SQLException If something fails at database level.
