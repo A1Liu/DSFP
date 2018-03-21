@@ -1,4 +1,4 @@
-package mysql;
+package dao;
 
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -7,14 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DBDAO {
-
-	private Connection con;
-	private Statement stmt;
+public class DBStuff extends Stuff{
 	
-	public DBDAO(Connection c) throws SQLException {
-		con = c;
-		stmt = con.createStatement();
+	public DBStuff(Connection c) throws SQLException {
+		super(c);
 	}
 	
 	public int getRowCount(String t) {
@@ -36,13 +32,4 @@ public class DBDAO {
 	public ArrayList<String> listTables() {
 		return null;
 	}
-	
-	public Connection getConnection() {
-		return con;
-	}
-	
-	public Statement getStatement() {
-		return stmt;
-	}
-	
 }

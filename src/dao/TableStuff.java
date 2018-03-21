@@ -1,4 +1,4 @@
-package mysql;
+package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 
 //table of objects of type E
-public class TableDAO<E extends SQLObj<E>> extends DBDAO {
+public class TableStuff<E extends SQLObj<E>> extends Stuff {
 	
 	private String tableName;
 	
-	public TableDAO(Connection c, String table) throws SQLException {
+	public TableStuff(Connection c, String table) throws SQLException {
 		super(c);
 		tableName = table;
 	}

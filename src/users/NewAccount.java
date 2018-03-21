@@ -2,7 +2,7 @@ package users;
 
 import java.util.Date;
 
-import mysql.SQLObj;
+import dao.SQLObj;
 
 public abstract class NewAccount implements SQLObj<NewAccount> {
 

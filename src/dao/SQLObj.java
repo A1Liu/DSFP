@@ -1,4 +1,4 @@
-package mysql;
+package dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;

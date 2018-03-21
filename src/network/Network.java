@@ -203,6 +203,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	 * @param start vertex
 	 * @return list of edges
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<EdgePair> listEdges(T start) {
 		
 		//creating necessary containers
