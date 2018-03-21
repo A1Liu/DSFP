@@ -1,8 +1,6 @@
 package dao;
 
 import java.util.List;
-
-import users.NewAccount;
 import users.User;
 
 /**
@@ -46,7 +44,7 @@ public interface UserDAO {
      * @throws IllegalArgumentException If the user ID is not null.
      * @throws DAOException If something fails at database level.
      */
-    public void create(NewAccount user) throws IllegalArgumentException, DAOException;
+    public void create(User user) throws IllegalArgumentException, DAOException;
 
     /**
      * Update the given user in the database. The user ID must not be null, otherwise it will throw

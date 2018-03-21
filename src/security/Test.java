@@ -1,4 +1,4 @@
-package serverSecurity;
+package security;
 
 public class Test {
 

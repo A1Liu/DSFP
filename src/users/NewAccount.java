@@ -27,11 +27,13 @@ public abstract class NewAccount implements Serializable {
 	}	
 	
 	public NewAccount(NewAccount a) {
-		username = a.getUsername();
-		email = a.getEmail();
-		first = a.getFirst();
-		last = a.getLast();
-		password = a.getPassword();
+		if (a != null) {
+			username = a.getUsername();
+			email = a.getEmail();
+			first = a.getFirst();
+			last = a.getLast();
+			password = a.getPassword();
+		}
 	}
 
 	public String getUsername() {
@@ -115,8 +117,8 @@ public abstract class NewAccount implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("User[id=%d,email=%s,firstname=%s,lastname=%s,birthdate=%s]", 
-        					getID(), email, first, last, birthday);
+        return String.format("User[id=%d,username=%s,email=%s,firstname=%s,lastname=%s,birthdate=%s]", 
+        					getID(), username, email, first, last, birthday);
     }
 	
 	

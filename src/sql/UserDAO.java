@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAOException;
-import users.NewAccount;
 import users.User;
 
 /**
@@ -25,17 +24,17 @@ public class UserDAO implements dao.UserDAO {
     // Constants ----------------------------------------------------------------------------------
 
     private static final String SQL_FIND_BY_ID =
-        "SELECT id, email, firstname, lastname, birthdate FROM User WHERE id = ?";
+        "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE id = ?";
     private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD =
-            "SELECT id, email, firstname, lastname, birthdate FROM User WHERE username = ? AND password = MD5(?)";
+            "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE username = ? AND password = MD5(?)";
     private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD =
-        "SELECT id, email, firstname, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
+        "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
     private static final String SQL_LIST_ORDER_BY_ID =
-        "SELECT id, email, firstname, lastname, birthdate FROM User ORDER BY id";
+        "SELECT id, username, email, firstname, lastname, birthdate FROM User ORDER BY id";
     private static final String SQL_INSERT =
-        "INSERT INTO User (email, password, firstname, lastname, birthdate) VALUES (?, MD5(?), ?, ?, ?)";
+        "INSERT INTO User (username, email, password, firstname, lastname, birthdate) VALUES (?, ?, MD5(?), ?, ?, ?)";
     private static final String SQL_UPDATE =
-        "UPDATE User SET email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
+        "UPDATE User SET username = ?, email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
     private static final String SQL_DELETE =
         "DELETE FROM User WHERE id = ?";
     private static final String SQL_EXIST_EMAIL =
@@ -68,9 +67,13 @@ public class UserDAO implements dao.UserDAO {
     }
 
     @Override
-    public User find(String email, String password) throws DAOException {
-        return find(SQL_FIND_BY_EMAIL_AND_PASSWORD, email, password);
+    public User find(String name, String password) throws DAOException {
+        return 	(name.indexOf('@')==-1)
+        		? find(SQL_FIND_BY_USERNAME_AND_PASSWORD, name, password)
+        		: find(SQL_FIND_BY_EMAIL_AND_PASSWORD, name, password);
     }
+    
+    
 
     /**
      * Returns the user from the database matching the given SQL query with the given values.
@@ -117,12 +120,13 @@ public class UserDAO implements dao.UserDAO {
     }
 
     @Override
-    public void create(NewAccount user) throws IllegalArgumentException, DAOException {
+    public void create(User user) throws IllegalArgumentException, DAOException {
         if (user.getID() != null) {
             throw new IllegalArgumentException("User is already created, the user ID is not null.");
         }
 
         Object[] values = {
+        	user.getUsername(),
             user.getEmail(),
             user.getPassword(),
             user.getFirst(),
@@ -141,7 +145,7 @@ public class UserDAO implements dao.UserDAO {
             
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                	user = new User(generatedKeys.getLong(1),user);
+                	user.setID(generatedKeys.getLong(1));
                 } else {
                     throw new DAOException("Creating user failed, no generated key obtained.");
                 }
@@ -158,6 +162,7 @@ public class UserDAO implements dao.UserDAO {
         }
 
         Object[] values = {
+        	user.getUsername(),
             user.getEmail(),
             user.getFirst(),
             user.getLast(),
@@ -192,12 +197,33 @@ public class UserDAO implements dao.UserDAO {
             if (affectedRows == 0) {
                 throw new DAOException("Deleting user failed, no rows affected.");
             } else {
-                user = new User(user);
+                user.setID(null);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
+    
+    @Override
+	public boolean existUsername(String name) throws DAOException {
+		 Object[] values = { 
+		            name
+		        };
+
+		        boolean exist = false;
+
+		        try (
+		            Connection connection = daoFactory.getConnection();
+		            PreparedStatement statement = prepareStatement(connection, SQL_EXIST_USERNAME, false, values);
+		            ResultSet resultSet = statement.executeQuery();
+		        ) {
+		            exist = resultSet.next();
+		        } catch (SQLException e) {
+		            throw new DAOException(e);
+		        }
+
+		        return exist;
+	}
 
     @Override
     public boolean existEmail(String email) throws DAOException {
@@ -243,6 +269,8 @@ public class UserDAO implements dao.UserDAO {
             throw new DAOException(e);
         }
     }
+    
+    
 
     // Helpers ------------------------------------------------------------------------------------
 
@@ -261,26 +289,5 @@ public class UserDAO implements dao.UserDAO {
         		resultSet.getDate("birthdate"));
         return user;
     }
-
-	@Override
-	public boolean existUsername(String name) throws DAOException {
-		 Object[] values = { 
-		            name
-		        };
-
-		        boolean exist = false;
-
-		        try (
-		            Connection connection = daoFactory.getConnection();
-		            PreparedStatement statement = prepareStatement(connection, SQL_EXIST_USERNAME, false, values);
-		            ResultSet resultSet = statement.executeQuery();
-		        ) {
-		            exist = resultSet.next();
-		        } catch (SQLException e) {
-		            throw new DAOException(e);
-		        }
-
-		        return exist;
-	}
 
 }

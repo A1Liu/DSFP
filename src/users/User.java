@@ -13,15 +13,19 @@ import java.util.Date;
 public class User extends NewAccount {
 	
 	private static final long serialVersionUID = 1L;
-	private final Long id;
+	private Long id;
 	
-	public User(Long id, NewAccount u) {
-		super(u);
-		this.id = id;
+	public User() {
+		this(null);
 	}
 	
 	public User(NewAccount u) {
 		this(null,u);
+	}
+	
+	public User(Long id, NewAccount u) {
+		super(u);
+		this.id = id;
 	}
 	
 	public User(Long id, String username, String email, String first, String last, Date birthday) {
@@ -32,6 +36,10 @@ public class User extends NewAccount {
 	@Override
 	public Long getID() {
 		return id;
+	}
+	
+	public void setID(Long id) {
+		this.id=id;
 	}
 	
 }
