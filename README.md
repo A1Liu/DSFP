@@ -36,7 +36,12 @@ Project to make a real life version of MeowMeowBeenz.
 3. Use breadth-first traversal to get list of friends and friends' friends, etc.
 
 #### Ratings Network
-NEED TO PLAN THIS OUT WAY THE FUCK MORE ITS SO RIDICULOUSLY COMPLICATED THIS PROJECT FUCKING SUCKS
+1. Learn how to implement Signal flow graphs
+2. Implement this structure first
+ 1. Weight of ratings increases linearly as rating of source increases (maybe rating should be changed according to median?)
+ 2. Users automatically rate themselves a 5
+ 3. Users start with 10 ratings of 1, weight of 3, which get replaced by the first 10 ratings they get.
+3. Next, implement structure above but change weight of ratings to increase quadratically as rating of source increases. Also, weight should increase if standard deviation of ratings is lower.
 
 ## MySQL Info
 IP: 192.168.1.5  
