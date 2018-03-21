@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAOException;
+import users.NewAccount;
 import users.User;
 
 /**
@@ -25,6 +26,8 @@ public class UserDAO implements dao.UserDAO {
 
     private static final String SQL_FIND_BY_ID =
         "SELECT id, email, firstname, lastname, birthdate FROM User WHERE id = ?";
+    private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD =
+            "SELECT id, email, firstname, lastname, birthdate FROM User WHERE username = ? AND password = MD5(?)";
     private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD =
         "SELECT id, email, firstname, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
     private static final String SQL_LIST_ORDER_BY_ID =
@@ -37,6 +40,8 @@ public class UserDAO implements dao.UserDAO {
         "DELETE FROM User WHERE id = ?";
     private static final String SQL_EXIST_EMAIL =
         "SELECT id FROM User WHERE email = ?";
+    private static final String SQL_EXIST_USERNAME =
+            "SELECT id FROM User WHERE username = ?";
     private static final String SQL_CHANGE_PASSWORD =
         "UPDATE User SET password = MD5(?) WHERE id = ?";
 
@@ -112,8 +117,8 @@ public class UserDAO implements dao.UserDAO {
     }
 
     @Override
-    public void create(User user) throws IllegalArgumentException, DAOException {
-        if (user.getId() != null) {
+    public void create(NewAccount user) throws IllegalArgumentException, DAOException {
+        if (user.getID() != null) {
             throw new IllegalArgumentException("User is already created, the user ID is not null.");
         }
 
@@ -136,7 +141,7 @@ public class UserDAO implements dao.UserDAO {
             
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    user.setId(generatedKeys.getLong(1));
+                	user = new User(generatedKeys.getLong(1),user);
                 } else {
                     throw new DAOException("Creating user failed, no generated key obtained.");
                 }
@@ -148,7 +153,7 @@ public class UserDAO implements dao.UserDAO {
 
     @Override
     public void update(User user) throws DAOException {
-        if (user.getId() == null) {
+        if (user.getID() == null) {
             throw new IllegalArgumentException("User is not created yet, the user ID is null.");
         }
 
@@ -157,7 +162,7 @@ public class UserDAO implements dao.UserDAO {
             user.getFirst(),
             user.getLast(),
             toSqlDate(user.getBirthday()),
-            user.getId()
+            user.getID()
         };
 
         try (
@@ -176,7 +181,7 @@ public class UserDAO implements dao.UserDAO {
     @Override
     public void delete(User user) throws DAOException {
         Object[] values = { 
-            user.getId()
+            user.getID()
         };
 
         try (
@@ -187,7 +192,7 @@ public class UserDAO implements dao.UserDAO {
             if (affectedRows == 0) {
                 throw new DAOException("Deleting user failed, no rows affected.");
             } else {
-                user.setId(null);
+                user = new User(user);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -217,13 +222,13 @@ public class UserDAO implements dao.UserDAO {
 
     @Override
     public void changePassword(User user) throws DAOException {
-        if (user.getId() == null) {
+        if (user.getID() == null) {
             throw new IllegalArgumentException("User is not created yet, the user ID is null.");
         }
 
         Object[] values = {
             user.getPassword(),
-            user.getId()
+            user.getID()
         };
 
         try (
@@ -248,13 +253,34 @@ public class UserDAO implements dao.UserDAO {
      * @throws SQLException If something fails at database level.
      */
     private static User map(ResultSet resultSet) throws SQLException {
-        User user = new User(null, null, null, null);
-        user.setId(resultSet.getLong("id"));
-        user.setEmail(resultSet.getString("email"));
-        user.setFirst(resultSet.getString("firstname"));
-        user.setLast(resultSet.getString("lastname"));
-        user.setBirthday(resultSet.getDate("birthdate"));
+        User user = new User(resultSet.getLong("id"),
+        		resultSet.getString("username"),
+        		resultSet.getString("email"),
+        		resultSet.getString("firstname"),
+        		resultSet.getString("lastname"),
+        		resultSet.getDate("birthdate"));
         return user;
     }
+
+	@Override
+	public boolean existUsername(String name) throws DAOException {
+		 Object[] values = { 
+		            name
+		        };
+
+		        boolean exist = false;
+
+		        try (
+		            Connection connection = daoFactory.getConnection();
+		            PreparedStatement statement = prepareStatement(connection, SQL_EXIST_USERNAME, false, values);
+		            ResultSet resultSet = statement.executeQuery();
+		        ) {
+		            exist = resultSet.next();
+		        } catch (SQLException e) {
+		            throw new DAOException(e);
+		        }
+
+		        return exist;
+	}
 
 }

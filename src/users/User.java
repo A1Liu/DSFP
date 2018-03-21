@@ -1,6 +1,5 @@
 package users;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 //This class handles all the actions the user can use the application to do.
@@ -14,16 +13,25 @@ import java.util.Date;
 public class User extends NewAccount {
 	
 	private static final long serialVersionUID = 1L;
+	private final Long id;
 	
-	public User() {
-		this(null, null, null, null);
+	public User(Long id, NewAccount u) {
+		super(u);
+		this.id = id;
 	}
 	
-	public User(String username, String first, String last, Date birthday) {
-		this.setUsername(username);
-		this.setFirst(first);
-		this.setLast(last);
-		this.setBirthday(birthday);
+	public User(NewAccount u) {
+		this(null,u);
+	}
+	
+	public User(Long id, String username, String email, String first, String last, Date birthday) {
+		super(username,email,first,last,birthday);
+		this.id = id;
 	}	
+	
+	@Override
+	public Long getID() {
+		return id;
+	}
 	
 }

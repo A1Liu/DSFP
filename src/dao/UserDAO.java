@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import users.NewAccount;
 import users.User;
 
 /**
@@ -45,7 +46,7 @@ public interface UserDAO {
      * @throws IllegalArgumentException If the user ID is not null.
      * @throws DAOException If something fails at database level.
      */
-    public void create(User user) throws IllegalArgumentException, DAOException;
+    public void create(NewAccount user) throws IllegalArgumentException, DAOException;
 
     /**
      * Update the given user in the database. The user ID must not be null, otherwise it will throw
@@ -65,7 +66,15 @@ public interface UserDAO {
     public void delete(User user) throws DAOException;
 
     /**
-     * Returns true if the given email address exist in the database.
+     * Returns true if the given username exists in the database.
+     * @param email The email address which is to be checked in the database.
+     * @return True if the given email address exist in the database.
+     * @throws DAOException If something fails at database level.
+     */
+    public boolean existUsername(String name) throws DAOException;
+    
+    /**
+     * Returns true if the given email address exists in the database.
      * @param email The email address which is to be checked in the database.
      * @return True if the given email address exist in the database.
      * @throws DAOException If something fails at database level.

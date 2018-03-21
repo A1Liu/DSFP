@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public abstract class NewAccount implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
 	private String username;
 	private String email;
 	private String first;
@@ -15,12 +14,24 @@ public abstract class NewAccount implements Serializable {
 	private Date birthday;
 	private String password;
 	
-	public Long getId() {
-		return id;
+	public NewAccount() {
+		
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
+	public NewAccount(String username, String email, String first, String last, Date birthday) {
+		this.setEmail(email);
+		this.setUsername(username);
+		this.setFirst(first);
+		this.setLast(last);
+		this.setBirthday(birthday);
+	}	
+	
+	public NewAccount(NewAccount a) {
+		username = a.getUsername();
+		email = a.getEmail();
+		first = a.getFirst();
+		last = a.getLast();
+		password = a.getPassword();
 	}
 
 	public String getUsername() {
@@ -70,10 +81,11 @@ public abstract class NewAccount implements Serializable {
 	 public void setPassword(String password) {
 	        this.password = password;
 	    }
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	 
+	 public Long getID() {
+		 return null;
+	 }
+
 	
 	  /**
      * The user ID is unique for each User. So this should compare User by ID only.
@@ -81,8 +93,8 @@ public abstract class NewAccount implements Serializable {
      */
     @Override
     public boolean equals(Object other) {
-        return (other instanceof User) && (id != null)
-             ? id.equals( ( (User) other).getId() )
+        return (other instanceof NewAccount) && (getID() != null)
+             ? getID().equals( ( (NewAccount) other).getID() )
              : (other == this);
     }
 
@@ -92,8 +104,8 @@ public abstract class NewAccount implements Serializable {
      */
     @Override
     public int hashCode() {
-        return (id != null)
-             ? (this.getClass().hashCode() + id.hashCode()) 
+        return (getID() != null)
+             ? (this.getClass().hashCode() + getID().hashCode()) 
              : super.hashCode();
     }
 
@@ -104,7 +116,7 @@ public abstract class NewAccount implements Serializable {
     @Override
     public String toString() {
         return String.format("User[id=%d,email=%s,firstname=%s,lastname=%s,birthdate=%s]", 
-        					id, email, first, last, birthday);
+        					getID(), email, first, last, birthday);
     }
 	
 	
