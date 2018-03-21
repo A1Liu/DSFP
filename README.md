@@ -15,7 +15,7 @@ Project to make a real life version of MeowMeowBeenz.
 
 ## TODO
 * Start learning SQL
-* Add config file support for server package  
+[x] Add config file support for server package  
 * Add user file support for user class  
 * Add admins with extra priveledges  
 * Add datastructure for ratings system  
@@ -31,8 +31,8 @@ Project to make a real life version of MeowMeowBeenz.
 4. Create connection between server and SQL server
 
 #### Friend Network
-1. Add to User package
-2. Add to SQL Handler
+1. Add classes for user and server package to make and send networks.
+2. Add edge table and a way for DAO's to parse through it
 3. Use breadth-first traversal to get list of friends and friends' friends, etc.
 
 #### Ratings Network
