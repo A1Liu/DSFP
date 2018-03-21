@@ -1,4 +1,4 @@
-# FinalProj
+# Data Structures Final Project
 Project to make a real life version of MeowMeowBeenz.
 
 ## Contents
