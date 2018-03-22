@@ -5,8 +5,7 @@ import users.User;
 
 /**
  * This interface represents a contract for a DAO for the {@link User} model.
- * Note that all methods which returns the {@link User} from the DB, will not
- * fill the model with the password, due to security reasons.
+ * Note that users are fully disconnected from passwords for security reasons.
  */
 public interface UserDAO {
 

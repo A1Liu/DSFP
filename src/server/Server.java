@@ -91,12 +91,10 @@ public class Server {
         boolean exist = userDAO.existEmail("foo@bar.com");
         System.out.println("This email should not exist anymore, so this should print false: " + exist);
 
-        // Change password.
-        userDAO.changePassword(anotherUser);
-        System.out.println("Another user's password successfully changed: " + anotherUser);
+
 
         // Get another user by email and password.
-        User foundAnotherUser = userDAO.find("bar@foo.com", "newAnotherPassword");
+        User foundAnotherUser = userDAO.find("bar@foo.com");
         System.out.println("Another user successfully queried with new password: " + foundAnotherUser);
 /*
         // Delete another user.

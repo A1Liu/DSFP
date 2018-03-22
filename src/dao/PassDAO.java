@@ -4,6 +4,11 @@ import java.util.List;
 
 import users.User;
 
+/**
+ * all the methods that need to be implemented by a PassDAO
+ * @author Alyer
+ *
+ */
 public interface PassDAO {
 
     /**
@@ -13,82 +18,55 @@ public interface PassDAO {
      * @throws DAOException If something fails at database level.
      */
     public List<Long> list() throws DAOException;
-
-    /**
-     * Create the given user in the database. The user ID must be null, otherwise it will throw
-     * IllegalArgumentException. After creating, the DAO will set the obtained ID in the given user.
-     * @param user The user to be created in the database.
-     * @throws IllegalArgumentException If the user ID is not null.
-     * @throws DAOException If something fails at database level.
-     */
-    public void createPass(User user, String pass) throws IllegalArgumentException, DAOException;
     
     /**
-     * Create the given user in the database. The user ID must be null, otherwise it will throw
-     * IllegalArgumentException. After creating, the DAO will set the obtained ID in the given user.
+     * Create a password entry for the given id and password in the database. The user ID must not be null, otherwise it will throw
+     * IllegalArgumentException.
      * @param user The user to be created in the database.
-     * @throws IllegalArgumentException If the user ID is not null.
+     * @throws IllegalArgumentException If the ID is null.
      * @throws DAOException If something fails at database level.
      */
     public void createPass(Long id, String pass) throws IllegalArgumentException, DAOException;
-
-    /**
-     * Create the given user in the database. The user ID must be null, otherwise it will throw
-     * IllegalArgumentException. After creating, the DAO will set the obtained ID in the given user.
-     * @param user The user to be created in the database.
-     * @throws IllegalArgumentException If the user ID is not null.
-     * @throws DAOException If something fails at database level.
-     */
-    public void deletePass(User user, String pass) throws IllegalArgumentException, DAOException;
     
     /**
-     * Create the given user in the database. The user ID must be null, otherwise it will throw
-     * IllegalArgumentException. After creating, the DAO will set the obtained ID in the given user.
+     * delete the given user entry in the database. The user ID must not be null, otherwise it will throw
+     * IllegalArgumentException.
      * @param user The user to be created in the database.
-     * @throws IllegalArgumentException If the user ID is not null.
+     * @throws IllegalArgumentException If the user ID is null.
      * @throws DAOException If something fails at database level.
      */
     public void deletePass(Long id, String pass) throws IllegalArgumentException, DAOException;
     
-    public default Long getSalt(User user) {
-    	return getSalt(user.getID());
-    }
-    
-    public Long getSalt(Long id);
+    /**
+     * Returns the salt of the given id
+     * @param id id of the user whose salt is being retrieved
+     * @return the salt of the user
+     * @throws DAOException If something fails at the database level.
+     */
+    public int getSalt(Long id) throws DAOException;
     
     /**
      * Update the password of a user. After deleting, the DAO will set the ID of the given
      * user to null.
      * @param user The user to be deleted from the database.
      * @throws DAOException If something fails at database level.
+     * @throws IllegalArgumentException If newPass is null or empty
      */
-    public void changePass(User user, String oldPass, String newPass) throws DAOException;
-    
-    /** Returns true if the given email address exists in the database.
-    * @param email The email address which is to be checked in the database.
-    * @return True if the given email address exist in the database.
-    * @throws DAOException If something fails at database level.
-    */
-   public default boolean existID(User user) throws DAOException {
-	   return existID(user.getID());
-   }
+    public void changePass(Long id, String oldPass, String newPass) throws IllegalArgumentException, DAOException;
     
     /**
-     * Returns true if the given email address exists in the database.
-     * @param email The email address which is to be checked in the database.
-     * @return True if the given email address exist in the database.
+     * Returns true if the given ID has an associated password
+     * @param id The id which is to be checked in the database.
+     * @return True if the given id exists in the database.
      * @throws DAOException If something fails at database level.
      */
     public boolean existID(Long id) throws DAOException;
-
-    public default boolean getPass(User user) {
-    	return getPass(user.getID());
-    }
     
     /**
-     * 
-     * @param id
-     * @return
+     * returns the password of the given ID
+     * @param id The id whose password is being checked
+     * @return The password of the id
+     * @throws DAOException if something fails at the database level.
      */
-    public boolean getPass(Long id);
+    public String getPass(Long id) throws DAOException;
 }

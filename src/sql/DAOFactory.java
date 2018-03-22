@@ -12,7 +12,7 @@ import dao.DAOConfigurationException;
 
 import dao.DAOProperties;
 
-public abstract class DAOFactory implements dao.DAOTypes {
+public abstract class DAOFactory extends dao.DAOFactory {
 
 	    private static final String PROPERTY_URL = "url";
 	    private static final String PROPERTY_DRIVER = "driver";

@@ -25,14 +25,14 @@ public class UserDAO implements dao.UserDAO {
 
     private static final String SQL_FIND_BY_ID =
         "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE id = ?";
-    private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD =
-            "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE username = ? AND password = MD5(?)";
-    private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD =
-        "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE email = ? AND password = MD5(?)";
+    private static final String SQL_FIND_BY_USERNAME =
+            "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE username = ?";
+    private static final String SQL_FIND_BY_EMAIL =
+            "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE email = ?";
     private static final String SQL_LIST_ORDER_BY_ID =
         "SELECT id, username, email, firstname, lastname, birthdate FROM User ORDER BY id";
     private static final String SQL_INSERT =
-        "INSERT INTO User (username, email, password, firstname, lastname, birthdate) VALUES (?, ?, MD5(?), ?, ?, ?)";
+        "INSERT INTO User (username, email, firstname, lastname, birthdate) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE =
         "UPDATE User SET username = ?, email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
     private static final String SQL_DELETE =
@@ -41,8 +41,6 @@ public class UserDAO implements dao.UserDAO {
         "SELECT id FROM User WHERE email = ?";
     private static final String SQL_EXIST_USERNAME =
             "SELECT id FROM User WHERE username = ?";
-    private static final String SQL_CHANGE_PASSWORD =
-        "UPDATE User SET password = MD5(?) WHERE id = ?";
 
     // Vars ---------------------------------------------------------------------------------------
 
@@ -67,10 +65,10 @@ public class UserDAO implements dao.UserDAO {
     }
 
     @Override
-    public User find(String name, String password) throws DAOException {
+    public User find(String name) throws DAOException {
         return 	(name.indexOf('@')==-1)
-        		? find(SQL_FIND_BY_USERNAME_AND_PASSWORD, name, password)
-        		: find(SQL_FIND_BY_EMAIL_AND_PASSWORD, name, password);
+        		? find(SQL_FIND_BY_USERNAME, name)
+        		: find(SQL_FIND_BY_EMAIL, name);
     }
     
     
@@ -128,7 +126,6 @@ public class UserDAO implements dao.UserDAO {
         Object[] values = {
         	user.getUsername(),
             user.getEmail(),
-            user.getPassword(),
             user.getFirst(),
             user.getLast(),
             toSqlDate(user.getBirthday())
@@ -244,30 +241,6 @@ public class UserDAO implements dao.UserDAO {
         }
 
         return exist;
-    }
-
-    @Override
-    public void changePassword(User user) throws DAOException {
-        if (user.getID() == null) {
-            throw new IllegalArgumentException("User is not created yet, the user ID is null.");
-        }
-
-        Object[] values = {
-            user.getPassword(),
-            user.getID()
-        };
-
-        try (
-            Connection connection = daoFactory.getConnection();
-            PreparedStatement statement = prepareStatement(connection, SQL_CHANGE_PASSWORD, false, values);
-        ) {
-            int affectedRows = statement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new DAOException("Changing password failed, no rows affected.");
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
     }
     
     
