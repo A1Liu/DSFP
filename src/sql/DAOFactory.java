@@ -12,7 +12,7 @@ import dao.DAOConfigurationException;
 
 import dao.DAOProperties;
 
-public abstract class DAOFactory implements dao.DAOTypes {//use preparedstatement instead of statement
+public abstract class DAOFactory implements dao.DAOTypes {
 
 	    private static final String PROPERTY_URL = "url";
 	    private static final String PROPERTY_DRIVER = "driver";
@@ -72,6 +72,11 @@ public abstract class DAOFactory implements dao.DAOTypes {//use preparedstatemen
 	    @Override
 		public UserDAO getUserDAO() {
 			return new UserDAO(this);
+	    }
+	    
+	    @Override
+	    public PassDAO getPassDAO() {
+	    	return new PassDAO(this);
 	    }
 	    
 	    /**

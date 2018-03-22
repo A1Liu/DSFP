@@ -4,4 +4,6 @@ public interface DAOTypes {
 
 	UserDAO getUserDAO();
 	
+	PassDAO getPassDAO();
+	
 }

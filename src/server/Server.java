@@ -51,17 +51,15 @@ public class Server {
 
         // Create user.
         User user = new User();
-        user.setUsername("hello");
-        user.setEmail("foo@bar.com");
-        user.setPassword("password");
+        user.setUsername("hell");
+        user.setEmail("foo@badr.com");
         userDAO.create(user);
         System.out.println("User successfully created: " + user);
 
         // Create another user.
         User anotherUser = new User();
-        anotherUser.setUsername("help");
-        anotherUser.setEmail("bar@foo.com");
-        anotherUser.setPassword("anotherPassword");
+        anotherUser.setUsername("helep");
+        anotherUser.setEmail("bar@fooa.com");
         anotherUser.setFirst("Bar");
         anotherUser.setLast("Foo");
         anotherUser.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("1978-03-26"));
@@ -84,24 +82,23 @@ public class Server {
         List<User> users = userDAO.list();
         System.out.println("List of users successfully queried: " + users);
         System.out.println("Thus, amount of users in database is: " + users.size());
-
+/*
         // Delete user.
         userDAO.delete(user);
-        System.out.println("User successfully deleted: " + user);
+        System.out.println("User successfully deleted: " + user);*/
 
         // Check if email exists.
         boolean exist = userDAO.existEmail("foo@bar.com");
         System.out.println("This email should not exist anymore, so this should print false: " + exist);
 
         // Change password.
-        anotherUser.setPassword("newAnotherPassword");
         userDAO.changePassword(anotherUser);
         System.out.println("Another user's password successfully changed: " + anotherUser);
 
         // Get another user by email and password.
         User foundAnotherUser = userDAO.find("bar@foo.com", "newAnotherPassword");
         System.out.println("Another user successfully queried with new password: " + foundAnotherUser);
-
+/*
         // Delete another user.
         userDAO.delete(foundAnotherUser);
         System.out.println("Another user successfully deleted: " + foundAnotherUser);
@@ -110,7 +107,7 @@ public class Server {
         users = userDAO.list();
         System.out.println("List of users successfully queried: " + users);
         
-       System.out.println("Thus, amount of users in database is: " + users.size());
+       System.out.println("Thus, amount of users in database is: " + users.size());*/
        
     }
 }

@@ -12,7 +12,6 @@ public abstract class NewAccount implements Serializable {
 	private String first;
 	private String last;
 	private Date birthday;
-	private String password;
 	
 	public NewAccount() {
 		
@@ -32,7 +31,6 @@ public abstract class NewAccount implements Serializable {
 			email = a.getEmail();
 			first = a.getFirst();
 			last = a.getLast();
-			password = a.getPassword();
 		}
 	}
 
@@ -75,14 +73,6 @@ public abstract class NewAccount implements Serializable {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	 public void setPassword(String password) {
-	        this.password = password;
-	    }
 	 
 	 public Long getID() {
 		 return null;

@@ -27,7 +27,7 @@ public interface UserDAO {
      * @return The user from the database matching the given email and password, otherwise null.
      * @throws DAOException If something fails at database level.
      */
-    public User find(String email, String password) throws DAOException;
+    public User find(String name) throws DAOException;
 
     /**
      * Returns a list of all users from the database ordered by user ID. The list is never null and
@@ -78,14 +78,4 @@ public interface UserDAO {
      * @throws DAOException If something fails at database level.
      */
     public boolean existEmail(String email) throws DAOException;
-
-    /**
-     * Change the password of the given user. The user ID must not be null, otherwise it will throw
-     * IllegalArgumentException.
-     * @param user The user to change the password for.
-     * @throws IllegalArgumentException If the user ID is null.
-     * @throws DAOException If something fails at database level.
-     */
-    public void changePassword(User user) throws DAOException;
-
 }
