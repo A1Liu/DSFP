@@ -1,5 +1,22 @@
 package dao;
 
-public abstract class DAOFactory implements DAOTypes {
+/**
+ * The interface that specifies all the types of DAO's that need to be implemented in the DAOFactories
+ * @author Alyer
+ *
+ */
+public interface DAOFactory {
+
+	/**
+	 * UserDAO for handing simple User data
+	 * @return
+	 */
+	UserDAO getUserDAO();
+	
+	/**
+	 * PassDAO for handling user passwords and salts
+	 * @return
+	 */
+	PassDAO getPassDAO();
 	
 }
