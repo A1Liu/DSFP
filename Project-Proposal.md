@@ -1,14 +1,11 @@
 # Data Structures and Algorithms Final Project:
-#### "MeowMeowBeenz"
+The idea for this project comes from the TV show *Community*, in an episode titled "App Development and Condiments". Essentially, this app allows users to rate each other on a 1 to 5 scale. Everyone's rating is public, as are their ratings of others. The catch is that each person's ratings are weighted according to how popular they are. So for instance, a user with a 5 would get more of a vote on other peoples' ratings than someone with a 1. I aim to create this app using a SQL database to store the information; a Java server to handle user requests, access the database, and perform signal-flow graph calculations; and a Java client to send user requests.
 
 ## Contents
-* [Project Proposal](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#project-proposal)
 * [Data Structures](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#data-structures)
 * [Roadmap](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#roadmap)
 * [References](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#references)
 
-## Project Proposal
-The idea for this project comes from the TV show *Community*, in an episode titled "App Development and Condiments". Essentially, this app allows users to rate each other on a 1 to 5 scale. Everyone's rating is public, as are their ratings of others. The catch is that each person's ratings are weighted according to how popular they are. So for instance, a user with a 5 would get more of a vote on other peoples' ratings than someone with a 1. I aim to create this app using a SQL database to store the information; a Java server to handle user requests, access the database, and perform signal-flow graph calculations; and a Java client to send user requests.
 
 ## Data Structures
 This project will employ multiple data structures to store user information and handle user requests. These include:
@@ -19,6 +16,7 @@ This project will employ multiple data structures to store user information and 
 * A relational database of user information, friendships, and ratings
   * User, password, and edge tables
   * DAO's for all the tables
+
 
 ## Roadmap
 1. [ ] **A simple app for making users**
@@ -44,11 +42,12 @@ This project will employ multiple data structures to store user information and 
     * [ ] User actions and server logic
     * [ ] User UI
 
+
 ## References
 These are links that I found that helped me make this app. 
-* [**Building a social network server**](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
+* [**Building a social network server**](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network) - I didn't really use this one, but it gave me the understanding of what type of system I should be using, and also gave me a general understanding of how servers and databases are implemented.
 * [**Establishing a connection to the database**](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
-* [**Data Access Objects Explanation**](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java) - This helped
+* [**Data Access Objects Explanation**](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java) - This helped me understand how DAO's worked, and made it a lot easier to implement the DAO tutorial and expand on it.
 * [**Data Access Objects Tutorial**](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html) - This was really helpful for writing the UserDAO. Basically all of my code for the UserDAO and the DAOFactory came from this tutorial, although I messed around with inheritance to try to make it more modular and ended up implementing some of my own interfaces as well.
-* [**Establishing a connection to server/client**](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
-* [**What is a signal-flow graph?**](https://en.wikipedia.org/wiki/Signal-flow_graph)
+* [**Establishing a connection to server/client**](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java) - I haven't used this yet
+* [**What is a signal-flow graph?**](https://en.wikipedia.org/wiki/Signal-flow_graph) - I haven't used this yet
