@@ -21,27 +21,27 @@ This project will employ multiple data structures to store user information and 
   * DAO's for all the tables
 
 ### Roadmap
-1. [] A simple app for making users
+1. [ ] A simple app for making users
   * [x] Basic database implementation
   * [x] Basic user table and user DAO's
   * [x] Basic password salting and hashing using MD5
-  * [] Single-thread client-server connection
-  * [] Multi-thread client-server connection
-  * [] Full Client-Server-DB integration (Server Logic)
-  * [] Client UI
-  * [] Server command prompt
-2. [] A simple app for making and friending users
-  * [] Database implementation for social graph
-  * [] DAO's for social graph edges
-  * [] Network handler to traverse and load social graph
-  * [] User actions and server logic
-  * [] User UI
-3. [] MeowMeowBeenz
-  * [] Database implementation for ratings graph
-  * [] DAO's for ratings graph
-  * [] Network handler for ratings graph
-  * [] Network updater for server-stored ratings graph
-  * [] User actions and server logic
-  * [] User UI
+  * [ ] Single-thread client-server connection
+  * [ ] Multi-thread client-server connection
+  * [ ] Full Client-Server-DB integration (Server Logic)
+  * [ ] Client UI
+  * [ ] Server command prompt
+2. [ ] A simple app for making and friending users
+  * [ ] Database implementation for social graph
+  * [ ] DAO's for social graph edges
+  * [ ] Network handler to traverse and load social graph
+  * [ ] User actions and server logic
+  * [ ] User UI
+3. [ ] MeowMeowBeenz
+  * [ ] Database implementation for ratings graph
+  * [ ] DAO's for ratings graph
+  * [ ] Network handler for ratings graph
+  * [ ] Network updater for server-stored ratings graph
+  * [ ] User actions and server logic
+  * [ ] User UI
 
 ### References
