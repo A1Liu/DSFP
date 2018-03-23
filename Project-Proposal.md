@@ -46,9 +46,9 @@ This project will employ multiple data structures to store user information and 
 
 ## References
 These are links that I found that helped me make this app. 
-* [Building a social network server](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
-* [Establishing a connection to the database](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
-* [Data Access Objects Explanation](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java)
-* [Data Access Objects Tutorial](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html)
-* [Establishing a connection to server/client](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
-* [What is a signal-flow graph?](https://en.wikipedia.org/wiki/Signal-flow_graph)
+* [**Building a social network server**](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
+* [**Establishing a connection to the database**](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
+* [**Data Access Objects Explanation**](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java) - This helped
+* [**Data Access Objects Tutorial**](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html) - This was really helpful for writing the UserDAO. Basically all of my code for the UserDAO and the DAOFactory came from this tutorial, although I messed around with inheritance to try to make it more modular and ended up implementing some of my own interfaces as well.
+* [**Establishing a connection to server/client**](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
+* [**What is a signal-flow graph?**](https://en.wikipedia.org/wiki/Signal-flow_graph)
