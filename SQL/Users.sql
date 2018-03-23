@@ -38,4 +38,8 @@ CREATE TABLE javabase.ratings (
     PRIMARY KEY (edgeID)
 );
 
+SELECT * FROM user;
+SELECT * FROM passwords;
+
+
 

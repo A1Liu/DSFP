@@ -1,7 +1,8 @@
 package server;
 
+import java.util.ArrayList;
 //import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 
 import sql.UserDAO;
@@ -9,6 +10,7 @@ import sql.DAOFactory;
 import sql.PassDAO;
 import users.User;
 
+import static server.ServerUtil.*;
 /**
  * Test harness for the sql package. This require the following preconditions:
  * <ol>
@@ -52,49 +54,11 @@ public class Server {
         PassDAO passDAO = javabase.getPassDAO();
         System.out.println("PassDAO successfully obtained: " + passDAO);
 
-        // Create user.
-        User user = new User();
-        user.setUsername("a");
-        user.setEmail("a");
-        user.setBirthday(new Date());
-        user.setFirst("albert");
-        user.setLast("Liu");
-        userDAO.create(user);
-        System.out.println("User successfully created: " + user);
-        passDAO.createPass(user.getID(), "hello");
-
-        // Create another user.
-        User anotherUser = new User();
-        anotherUser.setUsername("helep");
-        anotherUser.setEmail("bar@fooa.com");
-        anotherUser.setBirthday(new Date());
-        anotherUser.setFirst("Bar");
-        anotherUser.setLast("Foo");
-        //anotherUser.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("1978-03-26"));
-        userDAO.create(anotherUser);
-        System.out.println("Another user successfully created: " + anotherUser);
-        passDAO.createPass(anotherUser.getID(), "hello");
-        System.out.println(passDAO.checkPass(anotherUser.getID(), "hello"));
         
-        // Update user.
-        user.setFirst("Foo");
-        user.setLast("Bar");
-        userDAO.update(user);
-        System.out.println("User successfully updated: " + user);
+        ArrayList<User> users = fillDB("lib/userList.txt", userDAO, passDAO);
 
         // List all users.
-        List<User> users = userDAO.list();
         System.out.println("List of users successfully queried: " + users);
         System.out.println("Thus, amount of users in database is: " + users.size());
-
-        // Check if email exists.
-        boolean exist = userDAO.existEmail("foo@bar.com");
-        System.out.println("This email should not exist anymore, so this should print false: " + exist);
-
-
-
-        // Get another user by email and password.
-        User foundAnotherUser = userDAO.find("bar@foo.com");
-        System.out.println("Another user successfully queried with new password: " + foundAnotherUser);
     }
 }
