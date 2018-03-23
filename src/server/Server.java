@@ -76,8 +76,6 @@ public class Server {
         passDAO.createPass(anotherUser.getID(), "hello");
         System.out.println(passDAO.checkPass(anotherUser.getID(), "hello"));
         
-        
-
         // Update user.
         user.setFirst("Foo");
         user.setLast("Bar");
