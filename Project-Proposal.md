@@ -51,4 +51,5 @@ These are links that I found that helped me make this app.
 * [**Data Access Objects Explanation**](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java) - This helped me understand how DAO's worked, and made it a lot easier to implement the DAO tutorial and expand on it.
 * [**Data Access Objects Tutorial**](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html) - This was really helpful for writing the UserDAO. Basically all of my code for the UserDAO and the DAOFactory came from this tutorial, although I messed around with inheritance to try to make it more modular and ended up implementing some of my own interfaces as well.
 * [**Establishing a connection to server/client**](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java) - I haven't used this yet
+* [**Socket Programming**](https://www.javaworld.com/article/2077322/core-java/core-java-sockets-programming-in-java-a-tutorial.html) - I haven used this one yet
 * [**What is a signal-flow graph?**](https://en.wikipedia.org/wiki/Signal-flow_graph) - I haven't used this yet
