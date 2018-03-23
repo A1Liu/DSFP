@@ -1,23 +1,11 @@
 package dao;
 
-import java.util.List;
-
-import users.User;
-
 /**
  * all the methods that need to be implemented by a PassDAO
  * @author Alyer
  *
  */
 public interface PassDAO {
-
-    /**
-     * Returns a list of all usernames from the database ordered by user ID. The list is never null and
-     * is empty when the database does not contain any user.
-     * @return A list of all users from the database ordered by user ID.
-     * @throws DAOException If something fails at database level.
-     */
-    public List<Long> list() throws DAOException;
     
     /**
      * Create a password entry for the given id and password in the database. The user ID must not be null, otherwise it will throw
@@ -35,7 +23,7 @@ public interface PassDAO {
      * @throws IllegalArgumentException If the user ID is null.
      * @throws DAOException If something fails at database level.
      */
-    public void deletePass(Long id, String pass) throws IllegalArgumentException, DAOException;
+    public void deletePass(Long id) throws IllegalArgumentException, DAOException;
     
     /**
      * Returns the salt of the given id
@@ -48,12 +36,12 @@ public interface PassDAO {
     /**
      * Update the password of a user. After deleting, the DAO will set the ID of the given
      * user to null.
-     * @param user The user to be deleted from the database.
+     * @param id The id to be deleted from the database.
      * @throws DAOException If something fails at database level.
-     * @throws IllegalArgumentException If newPass is null or empty
+     * @throws IllegalArgumentException If newPass is null or empty or if id is null
      */
-    public void changePass(Long id, String oldPass, String newPass) throws IllegalArgumentException, DAOException;
-    
+    public void changePass(Long id, String newPass) throws IllegalArgumentException, DAOException;
+
     /**
      * Returns true if the given ID has an associated password
      * @param id The id which is to be checked in the database.
@@ -68,5 +56,9 @@ public interface PassDAO {
      * @return The password of the id
      * @throws DAOException if something fails at the database level.
      */
-    public String getPass(Long id) throws DAOException;
+    public String getPassHash(Long id) throws DAOException;
+    
+    public String getHash(String pass) throws DAOException;
+    
+    public boolean checkPass(Long id, String pass) throws DAOException;
 }

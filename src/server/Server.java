@@ -1,11 +1,12 @@
 package server;
 
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import sql.UserDAO;
 import sql.DAOFactory;
-
+import sql.PassDAO;
 import users.User;
 
 /**
@@ -48,29 +49,34 @@ public class Server {
         // Obtain UserDAO.
         UserDAO userDAO = javabase.getUserDAO();
         System.out.println("UserDAO successfully obtained: " + userDAO);
+        PassDAO passDAO = javabase.getPassDAO();
+        System.out.println("PassDAO successfully obtained: " + passDAO);
 
         // Create user.
         User user = new User();
-        user.setUsername("hell");
-        user.setEmail("foo@badr.com");
+        user.setUsername("a");
+        user.setEmail("a");
+        user.setBirthday(new Date());
+        user.setFirst("albert");
+        user.setLast("Liu");
         userDAO.create(user);
         System.out.println("User successfully created: " + user);
+        passDAO.createPass(user.getID(), "hello");
 
         // Create another user.
         User anotherUser = new User();
         anotherUser.setUsername("helep");
         anotherUser.setEmail("bar@fooa.com");
+        anotherUser.setBirthday(new Date());
         anotherUser.setFirst("Bar");
         anotherUser.setLast("Foo");
-        anotherUser.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("1978-03-26"));
+        //anotherUser.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("1978-03-26"));
         userDAO.create(anotherUser);
         System.out.println("Another user successfully created: " + anotherUser);
-
-        // Update user.
-        user.setFirst("Foo");
-        user.setLast("Bar");
-        userDAO.update(user);
-        System.out.println("User successfully updated: " + user);
+        passDAO.createPass(anotherUser.getID(), "hello");
+        System.out.println(passDAO.checkPass(anotherUser.getID(), "hello"));
+        
+        
 
         // Update user.
         user.setFirst("Foo");
@@ -82,10 +88,6 @@ public class Server {
         List<User> users = userDAO.list();
         System.out.println("List of users successfully queried: " + users);
         System.out.println("Thus, amount of users in database is: " + users.size());
-/*
-        // Delete user.
-        userDAO.delete(user);
-        System.out.println("User successfully deleted: " + user);*/
 
         // Check if email exists.
         boolean exist = userDAO.existEmail("foo@bar.com");
@@ -96,16 +98,5 @@ public class Server {
         // Get another user by email and password.
         User foundAnotherUser = userDAO.find("bar@foo.com");
         System.out.println("Another user successfully queried with new password: " + foundAnotherUser);
-/*
-        // Delete another user.
-        userDAO.delete(foundAnotherUser);
-        System.out.println("Another user successfully deleted: " + foundAnotherUser);
-
-        // List all users again.
-        users = userDAO.list();
-        System.out.println("List of users successfully queried: " + users);
-        
-       System.out.println("Thus, amount of users in database is: " + users.size());*/
-       
     }
 }
