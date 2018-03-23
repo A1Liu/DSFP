@@ -2,8 +2,8 @@
 #### "MeowMeowBeenz"
 
 ### Contents
-* [Project Proposal]()
-* [Roadmap]()
+* [Project Proposal](https://github.com/A1Liu/DSFP/edit/master/PROJECT-Proposal.md#project-proposal)
+* [Roadmap](https://github.com/A1Liu/DSFP/edit/master/PROJECT-Proposal.md#roadmap)
 
 ### Project Proposal
 The idea for this project comes from the TV show *Community*, in an episode titled "App Development and Condiments".
