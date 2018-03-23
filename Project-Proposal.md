@@ -46,7 +46,7 @@ This project will employ multiple data structures to store user information and 
 ## References
 These are links that I found that helped me make this app. 
 * [**Building a social network server**](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network) - I didn't really use this one, but it gave me the understanding of what type of system I should be using, and also gave me a general understanding of how servers and databases are implemented.
-* [**Establishing a connection to the database**](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
+* [**Establishing a connection to the database**](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database) - This helped me get a working connection between the MySQL server and the Java server. Really great tutorial on how to get started with bridging the two systems.
 * [**Data Access Objects Explanation**](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java) - This helped me understand how DAO's worked, and made it a lot easier to implement the DAO tutorial and expand on it.
 * [**Data Access Objects Tutorial**](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html) - This was really helpful for writing the UserDAO. Basically all of my code for the UserDAO and the DAOFactory came from this tutorial, although I messed around with inheritance to try to make it more modular and ended up implementing some of my own interfaces as well.
 * [**Establishing a connection to server/client**](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java) - I haven't used this yet
