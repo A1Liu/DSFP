@@ -23,6 +23,7 @@ This project will employ multiple data structures to store user information and 
     * [x] Basic database implementation
     * [x] Basic user table and user DAO's
     * [x] Basic password salting and hashing using MD5
+    * [x] Loading users from document
     * [ ] Single-thread client-server connection
     * [ ] Multi-thread client-server connection
     * [ ] Full Client-Server-DB integration (Server Logic)
