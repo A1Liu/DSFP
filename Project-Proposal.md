@@ -2,10 +2,10 @@
 #### "MeowMeowBeenz"
 
 ### Contents
-* [Project Proposal](https://github.com/A1Liu/DSFP/edit/master/Project-Proposal.md#project-proposal)
-* [Data Structures](https://github.com/A1Liu/DSFP/edit/master/Project-Proposal.md#data-structures)
-* [Roadmap](https://github.com/A1Liu/DSFP/edit/master/Project-Proposal.md#roadmap)
-* [References](https://github.com/A1Liu/DSFP/edit/master/Project-Proposal.md#references)
+* [Project Proposal](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#project-proposal)
+* [Data Structures](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#data-structures)
+* [Roadmap](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#roadmap)
+* [References](https://github.com/A1Liu/DSFP/blob/master/Project-Proposal.md#references)
 
 ### Project Proposal
 The idea for this project comes from the TV show *Community*, in an episode titled "App Development and Condiments". Essentially, this app allows users to rate each other on a 1 to 5 scale. Everyone's rating is public, as are their ratings of others. The catch is that each person's ratings are weighted according to how popular they are. So for instance, a user with a 5 would get more of a vote on other peoples' ratings than someone with a 1. I aim to create this app using a SQL database to store the information; a Java server to handle user requests, access the database, and perform signal-flow graph calculations; and a Java client to send user requests.
