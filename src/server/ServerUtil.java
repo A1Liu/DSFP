@@ -38,11 +38,11 @@ public class ServerUtil {
 				while (inputRow.size()>1) {
 					if(inputRow.get(0).contains("/")) {
 						try {
-							albert.setBirthday(new SimpleDateFormat("yyyy/MM/dd").parse(inputRow.get(0)));
+							albert.setBirthday(new SimpleDateFormat("MM/dd/yyyy").parse(inputRow.get(0)));
 							inputRow.remove(0);
 						} catch (ParseException e) {System.out.println("Item skipped in line " + line + ": incorrectly formatted date.");inputRow.remove(0);}
 					} else {
-						if (albert.getFirst() != null) {
+						if (albert.getFirst() == null) {
 							albert.setFirst(inputRow.get(0));
 							inputRow.remove(0);
 						} else {

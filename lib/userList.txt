@@ -1,4 +1,4 @@
-alyertkid,boi@gmail.com,hello
+alyertkid,boi@gmail.com,albert,liu,04/12/2000,hello
 chooj,jchoo@gmail.com,hello
 apaljugfc,andreaspaljug@gmail.com,hello
 noot,alexBro@gmail.com,hello
