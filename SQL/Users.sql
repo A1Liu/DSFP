@@ -14,7 +14,7 @@ CREATE TABLE javabase.user (
 	PRIMARY KEY (id),
 	UNIQUE (username),
 	UNIQUE (email)
-  );  
+  ); 
 CREATE TABLE javabase.passwords (
 	id BIGINT UNSIGNED NOT NULL,
 	salt INTEGER UNSIGNED NOT NULL,
