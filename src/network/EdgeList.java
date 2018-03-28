@@ -86,18 +86,34 @@ class Edge implements Comparable<Edge> {
 		return false;
 	}
 	
+	/**
+	 * getter for length
+	 * @return length
+	 */
 	public int getLength() {
 		return length;
 	}
 	
+	/**
+	 * setter for length
+	 * @param l length
+	 */
 	void setLength(int l) {
 		length = Math.abs(l);
 	}
 	
+	/**
+	 * getter for destination
+	 * @return node that the edge is pointing to
+	 */
 	public Point getDestination() {
 		return destination;
 	}
 	
+	/**
+	 * setter for destination
+	 * @param d destination
+	 */
 	void setDestination(Point d) {
 		destination = d;
 	}

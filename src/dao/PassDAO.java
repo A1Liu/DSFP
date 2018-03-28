@@ -58,7 +58,20 @@ public interface PassDAO {
      */
     public String getPassHash(Long id) throws DAOException;
     
+    /**
+     * Returns the MD5 Hash of a password
+     * @param pass
+     * @return a String version of the hexadecimal hash of a string
+     * @throws DAOException If something fails at the database level.
+     */
     public String getHash(String pass) throws DAOException;
     
+    /**
+     * checks to see if pass is the password of user with ID id
+     * @param id the id of the user we're checking
+     * @param pass the password we're guessing
+     * @return True if the passwords match
+     * @throws DAOException if something fails at the database level
+     */
     public boolean checkPass(Long id, String pass) throws DAOException;
 }

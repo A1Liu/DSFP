@@ -39,6 +39,11 @@ public class Graph extends Network<Character,Vertex<Character>>{
 		return addVertex(t,v);
 	}
 	
+	/**
+	 * creates a vertex
+	 * @param c identifier for vertexes. The key
+	 * @return True if a vertex is successfully added
+	 */
 	public boolean addVertex(char c) {
 		Character i = (char) c;
 		return addVertex(i);
@@ -200,9 +205,6 @@ class UndirectedGraph extends Graph {
 		return count/2;
 	}
 	
-	/**
-	 * Uses a Breadth-First Iterator instead of a standard list of edges
-	 */
 	@Override
 	public ArrayList<EdgePair> listEdges() {
 

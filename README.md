@@ -15,10 +15,16 @@ Project to make a real life version of MeowMeowBeenz.
 * [Reference Links](https://github.com/A1Liu/DSFP/blob/master/README.md#reference-links)
 
 ## TODO
-* Start learning SQL
+* Comments
+  * [x] DAO
+  * [x] Network
+  * [x] Server
+  * [x] Users
+  * [x] SQL
+* [x] Start learning SQL
 * [x] Add config file support for server package  
 * Add user file support for user class  
-* Add admins with extra priveledges  
+* Add admins with extra privileges  
 * Add datastructure for ratings system  
 * Add modular ID confirmation/security features 
 * Add App specific network classes and methods

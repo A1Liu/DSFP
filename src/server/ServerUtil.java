@@ -19,6 +19,14 @@ public class ServerUtil {
 		
 	}
 
+	/**
+	 * fills the database according to a txt file.
+	 * @param document the name of the txt file
+	 * @param userDAO The userDAO to use to add to the database
+	 * @param passDAO The passDAO to use to add to the database
+	 * @return An ArrayList of the users that were created
+	 * @throws IOException If something is wrong with the document name
+	 */
 	public static ArrayList<User> fillDB(String document, UserDAO userDAO, PassDAO passDAO) throws IOException {
 		FileReader readFile = new FileReader(document); //or input.readLine( ) if from prompt
 		BufferedReader inFile = new BufferedReader(readFile);

@@ -22,7 +22,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	/**
 	 * add a vertex of specific index
 	 * @param t the key of the vertex
-	 * @return whether operation was successful
+	 * @return true if operation was successful
 	 */
 	public abstract boolean addVertex(T t);
 	

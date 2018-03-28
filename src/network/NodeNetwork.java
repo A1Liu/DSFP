@@ -17,6 +17,12 @@ public class NodeNetwork<E> extends Network<String,Node<E>> {
 		return this.addNode(key, null);
 	}
 	
+	/**
+	 * Add a node
+	 * @param key the key value for the node
+	 * @param e the data the nodes in the network hold
+	 * @return true if a node was successfully created
+	 */
 	public boolean addNode(String key, E e) {
 		Node<E> newNode = new Node<E>(key,e);
 		return addVertex(key, newNode);

@@ -135,6 +135,13 @@ public class PassDAO implements dao.PassDAO {//use MD5 (?) for password sql stat
 		return getPassHash(id).equals(getHash(salt+pass));
 	}
 	
+	/**
+	 * execute sql statement that doesn't return anything
+	 * @param sql the statement to execute
+	 * @param errorStatement statement to put in the DAO exception error statement
+	 * @param values values to add to the prepared statement
+	 * @throws DAOException if something goes wrong at the database level
+	 */
 	private void executeVoid(String sql, String errorStatement, Object... values) throws DAOException {
 		  try (
 		            Connection connection = daoFactory.getConnection();
@@ -150,6 +157,13 @@ public class PassDAO implements dao.PassDAO {//use MD5 (?) for password sql stat
 		        }
 	}
 	
+	/**
+	 * executes an SQL statement that returns a boolean value
+	 * @param sql the sql statement to execute
+	 * @param values the values to add to the prepared statement
+	 * @return the appropriate boolean for the sql statement
+	 * @throws DAOException if something is wrong at the database level
+	 */
 	private boolean executeBool(String sql, Object... values) throws DAOException {
 		
 		boolean bool = false;

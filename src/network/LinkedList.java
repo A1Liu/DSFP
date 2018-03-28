@@ -130,6 +130,10 @@ public class LinkedList<E extends Comparable<E>> {
 		return counter;
 	}
 	
+	/**
+	 * making an arraylist of the network
+	 * @return an arraylist of the network
+	 */
 	public ArrayList<E> toArrayList() {
 		ListNode<E> current = front;
 		ArrayList<E> container = new ArrayList<E>();
