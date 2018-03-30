@@ -1,4 +1,4 @@
-package testingGrounds;
+package server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,13 +7,12 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ExampleServer extends Thread
-{
-    private ServerSocket serverSocket;
+public class ThreadHandler extends Thread {
+	private ServerSocket serverSocket;
     private int port;
     private boolean running = false;
 
-    public ExampleServer( int port )
+    public ThreadHandler( int port )
     {
         this.port = port;
     }
@@ -53,39 +52,28 @@ public class ExampleServer extends Thread
             }
         }
     }
-
-    public static void main( String[] args ) {
-        int port = 1100;
-        System.out.println( "Start server on port: " + port );
-
-        ExampleServer server = new ExampleServer( port );
-        server.startServer();
-
-        // Automatically shutdown in 1 minute
-        try {
-            Thread.sleep( 60000 );
-        } catch( Exception e ) {
-            e.printStackTrace();
-        }
-        server.stopServer();
-    }
 }
 
-class RequestHandler extends Thread
-{
+
+class RequestHandler extends Thread {
     private Socket socket;
+    
     RequestHandler( Socket socket ) {
         this.socket = socket;
     }
 
+    
+    /**
+     * This will hold a lot of the server logic. I'll make helper classes/methods to make the code of this simpler
+     */
     @Override
     public void run() {
         try {
             System.out.println( "Received a connection" );
 
             // Get input and output streams
-            BufferedReader in = new BufferedReader( new InputStreamReader( socket.getInputStream() ) );
-            PrintWriter out = new PrintWriter( socket.getOutputStream() );
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream());
 
             // Write out our header to the client
             out.println( "Echo Server 1.0" );

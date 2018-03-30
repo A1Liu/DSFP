@@ -14,6 +14,20 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
         
+    	int port = 1100;
+        System.out.println( "Start server on port: " + port );
+
+        ThreadHandler server = new ThreadHandler( port );
+        server.startServer();
+
+        // Automatically shutdown in 1 minute
+        try {
+            Thread.sleep( 10000 );
+        } catch( Exception e ) {
+            e.printStackTrace();
+        }
+        server.stopServer();
+    	
     	// Obtain DAO's
         DAOFactory javabase = DAOFactory.getInstance("javabase.jdbc");
         System.out.println("DAOFactory successfully obtained: " + javabase);

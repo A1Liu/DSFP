@@ -31,6 +31,7 @@ public class ExampleClient {
                 line = in.readLine();
             }
 
+            Thread.sleep(10000);
             // Close our streams
             in.close();
             out.close();
