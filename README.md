@@ -18,7 +18,9 @@ Project to make a real life version of MeowMeowBeenz.
 * Comments
   * [x] DAO
   * [x] Network
-  * [x] Server
+  * [ ] Server
+    * [ ] ThreadHandler
+    * [ ] RequestHandler
   * [x] Users
   * [x] SQL
 * [x] Start learning SQL
