@@ -10,6 +10,9 @@ import sql.PassDAO;
 
 import static server.ServerUtil.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class Server {
 
     public static void main(String[] args) throws Exception {
@@ -18,16 +21,28 @@ public class Server {
         System.out.println( "Start server on port: " + port );
 
         ThreadHandler server = new ThreadHandler( port );
-        server.startServer();
-
-        // Automatically shutdown in 1 minute
-        try {
-            Thread.sleep( 10000 );
-        } catch( Exception e ) {
-            e.printStackTrace();
+        
+		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
+        boolean on = true;
+        String input;
+        while (on) {
+        	input = consoleLine.readLine();
+        	
+        	switch (input) {
+        	case "start":
+        		server.startServer();
+        		System.out.println("Server Started!");
+        		break;
+        	case "stop":
+        		server.stopServer();
+        		System.out.println("Server Stopped.");
+        		on = false;
+        		break;
+        	default:
+        		System.out.print("That's not a valid command!");
+        	}
         }
-        server.stopServer();
-    	
+    	/*
     	// Obtain DAO's
         DAOFactory javabase = DAOFactory.getInstance("javabase.jdbc");
         System.out.println("DAOFactory successfully obtained: " + javabase);
@@ -37,8 +52,6 @@ public class Server {
         System.out.println("PassDAO successfully obtained: " + passDAO);
 
         fillDB("lib/userList.txt", userDAO, passDAO);
-        
-        
-        
+        */
     }
 }

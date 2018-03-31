@@ -14,7 +14,18 @@ CREATE TABLE javabase.user (
 	PRIMARY KEY (id),
 	UNIQUE (username),
 	UNIQUE (email)
-  ); 
+  );
+  
+CREATE TABLE javabase.admins (
+	id BIGINT UNSIGNED NOT NULL,
+	email VARCHAR(60) not null,
+    first VARCHAR(40) NULL,
+    last VARCHAR(40) null,
+
+	PRIMARY KEY (id),
+    UNIQUE (email)
+);
+  
 CREATE TABLE javabase.passwords (
 	id BIGINT UNSIGNED NOT NULL,
 	salt INTEGER UNSIGNED NOT NULL,

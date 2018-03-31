@@ -20,22 +20,28 @@ public class ExampleClient {
             PrintStream out = new PrintStream( socket.getOutputStream() );
             BufferedReader in = new BufferedReader( new InputStreamReader( socket.getInputStream() ) );
 
-            // Follow the HTTP protocol of GET <path> HTTP/1.0 followed by an empty line
-            out.println( "GET " + path + " HTTP/1.0" );
-            out.println("hello!");
-
-            // Read data from the server until we finish reading the document
-            String line = in.readLine();
-            while( line != null ) {
-                System.out.println( line );
-                line = in.readLine();
+            BufferedReader consoleLine;
+            boolean on = true;
+            String userIn;
+            while (on) {
+            	consoleLine = new BufferedReader (new InputStreamReader(System.in) );
+            	userIn = consoleLine.readLine();
+            	if (userIn.equals("stop")) {
+            		on = false;
+            	} else {
+            		out.println(userIn);
+            		String line = in.readLine();
+                    while( line != null) {
+                        System.out.println( line );
+                        line = in.readLine();
+                    }
+            	}
+            	if(!on) {
+            		in.close();
+            		out.close();
+            		socket.close();
+            	}
             }
-
-            Thread.sleep(10000);
-            // Close our streams
-            in.close();
-            out.close();
-            socket.close();
         } catch( Exception e ) {
             e.printStackTrace();
         }
