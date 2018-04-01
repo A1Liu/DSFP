@@ -1,11 +1,21 @@
 package network;
 
+import java.io.IOException;
 
 public class TestRunner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		UndirectedGraph albert = new UndirectedGraph();
+		
+		//Graph a = Graph.getGraph("Ratings Graph");
+		
+		RatingsGraph graph = new RatingsGraph();
+		
+		graph.loadNetwork("lib/Network.txt");
+		
+		System.out.println(graph.cytoScape());
+		
+		/*UndirectedGraph albert = new UndirectedGraph();
 		
 		Character[] vertices = {'A','B','D','C'};
 		
@@ -31,7 +41,7 @@ public class TestRunner {
 		//boolean b = albert.rmEdge(1, 2);
 		
 		
-		System.out.println(x);
+		System.out.println(x);*/
 		
 	}
 

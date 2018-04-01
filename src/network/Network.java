@@ -251,11 +251,22 @@ abstract class Network<T,E extends Vertex<T>> {
 		return vertices.keys();
 	}
 	
+	public ArrayList<T> keys() {
+		ArrayList<T> vertexList = new ArrayList<T>();
+		Enumeration<T> keys = enumVertices();
+		
+		while(keys.hasMoreElements()) {
+			vertexList.add(keys.nextElement());
+		}
+		
+		return vertexList;
+	}
+	
 	/**
 	 * Turns the network into an arrayList of vertices
 	 * @return an arrayList of vertices
 	 */
-	public ArrayList<Vertex<T>> listVertices() {
+	protected ArrayList<Vertex<T>> listVertices() {
 		
 		ArrayList<Vertex<T>> vertexList = new ArrayList<Vertex<T>>();
 		Enumeration<T> keys = enumVertices();

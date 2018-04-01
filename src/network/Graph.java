@@ -4,13 +4,28 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public class Graph extends Network<Character,Vertex<Character>>{
+public abstract class Graph extends Network<Character,Vertex<Character>>{
 
 	/**
 	 * Graphs have a maximum size of 95 vertices. Each vertex is labeled with a character and contains its own label and the edges coming from it.
 	 */
-	public Graph() {
+	protected Graph() {
 		super((char) 48);
+	}
+	
+	public static Graph getGraph(String name) {
+		switch (name) {
+		case "undirected graph":
+			return new UndirectedGraph();
+		case "directed graph":
+			return new DirectedGraph();
+		case "web":
+			return new Web();
+		case "Ratings Graph":
+			return new RatingsGraph();
+		default:
+			return new DirectedGraph();
+		}
 	}
 	
 	@Override
@@ -75,7 +90,7 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * @return vertex matching id
 	 */
 	public Vertex<Character> getVertex(int id) {
-		Character i = (char) id;
+		Character i = (char) (id+48);
 		return getVertex(i);
 	}
 	
@@ -87,8 +102,8 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * @return whether successful
 	 */
 	public boolean addEdge(int v1, int v2, int l) {
-		Character c1 = (char) v1;
-		Character c2 = (char) v2;
+		Character c1 = (char) (v1+48);
+		Character c2 = (char) (v2+48);
 		return addEdge(c1, c2, l);
 	}
 	
@@ -99,8 +114,8 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * @return whether successful
 	 */
 	public boolean addEdge(int v1, int v2) {
-		Character c1 = (char) v1;
-		Character c2 = (char) v2;
+		Character c1 = (char) (v1+48);
+		Character c2 = (char) (v2+48);
 		return addEdge(c1, c2, 1);
 	}
 	
@@ -111,8 +126,8 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * @return whether successfully removed
 	 */
 	public boolean rmEdge(int v1, int v2) {
-		Character c1 = (char) v1;
-		Character c2 = (char) v2;
+		Character c1 = (char) (v1+48);
+		Character c2 = (char) (v2+48);
 		return rmEdge(c1, c2);
 	}
 	
@@ -121,7 +136,7 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	 * @param v1 vertex to clear
 	 */
 	public boolean rmEdge(int v) {
-		Character c1 = (char) v;
+		Character c1 = (char) (v+48);
 		return rmEdge(c1);
 	}
 
@@ -131,32 +146,26 @@ public class Graph extends Network<Character,Vertex<Character>>{
 	}
 }
 
-class DirectedGraph extends Graph {
-	
-	public DirectedGraph() {
-	}
-	
-}
-
 class Web extends UndirectedGraph {
 	
 	public Web() {
 	}
 	
-	@Override
-	public boolean addEdge(Character v1, Character v2) {
-		return super.addEdge(v1, v2) && super.addEdge(v2, v1);
-	}
 	
 	@Override
 	public boolean addEdge(Character v1, Character v2, int l) {
-		return super.addEdge(v1, v2) && super.addEdge(v2, v1);
+		return super.addEdge(v1, v2);
 	}
 }
 
 class UndirectedGraph extends Graph {
 	
 	public UndirectedGraph() {
+	}
+	
+	@Override
+	public boolean addEdge(Character v1, Character v2) {
+		return super.addEdge(v1, v2) && super.addEdge(v2, v1);
 	}
 	
 	@Override
