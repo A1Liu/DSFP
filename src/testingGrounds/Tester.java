@@ -13,8 +13,8 @@ public class Tester {
 		albert.addVertex("spoopy");
 		albert.addVertex("poop");
 		albert.addEdge("hello", "hi",3);
-		
-		String x = albert.listVertices().toString();
+
+		String x = albert.keys().toString();
 		System.out.println(x);
 	}
 
