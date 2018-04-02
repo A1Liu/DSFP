@@ -34,7 +34,7 @@ class RatingsGraph extends Graph {
 		}
 	}
 	
-	public Double updateVertex(Character t) {
+	private Double updateVertex(Character t) {
 		
 		EdgeList edges = this.getVertex(t).getEdges();
 		
