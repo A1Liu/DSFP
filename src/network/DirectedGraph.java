@@ -17,6 +17,11 @@ class DirectedGraph extends Graph {
 	
 }
 
+/**
+ * need to make new vertex object that holds values, otherwise this will become complicated quickly
+ * @author liu_albert
+ *
+ */
 class RatingsGraph extends Graph {
 	
 	private Hashtable<Character,Double> values;
@@ -43,7 +48,12 @@ class RatingsGraph extends Graph {
 	
 	@Override
 	public boolean addVertex(Character t) {
-		return super.addVertex(t) && addEdge(t,t,1);
+		
+		if (super.addVertex(t) && addEdge(t,t,1)) {
+			values.put(t, 1.0);
+			return true;
+		} 
+		return false;
 	}
 	
 	/**

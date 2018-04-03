@@ -13,7 +13,7 @@ public class Server {
         
     	int port = 1100;
         System.out.println( "Start server on port: " + port );
-
+        
         ThreadHandler server = new ThreadHandler( port );
         
 		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
