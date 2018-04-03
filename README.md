@@ -94,7 +94,9 @@ This package holds the back-end for the user application. It includes:
 These are links that I found that helped me make this app. Well some of them were useless. But most of them were great.  
 * [I didn't use this but I might in the future](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)  
 * [Establishing a connection to the database](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
-* [Data Access Objects Explanation](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java)
-* [Data Access Objects Tutorial](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html)
+* [Data access objects explanation](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java)
+* [Data access objects tutorial](http://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html)
 * [Establishing a connection to server/client](http://www.ejbtutorial.com/distributed-systems/hello-world-for-socket-programming-using-java)
+* [Socket programming](https://www.javaworld.com/article/2077322/core-java/core-java-sockets-programming-in-java-a-tutorial.html)
 * [What is a signal-flow graph?](https://en.wikipedia.org/wiki/Signal-flow_graph)
+* [Making graphs in a RDBMS](https://www.slideshare.net/quipo/rdbms-in-the-social-networks-age/161-Thank_you_Contact_details_lorenzoibuildingscomhttpwwwalbertoninfotalks)

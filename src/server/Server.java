@@ -4,12 +4,6 @@ package server;
 //import java.util.Date;
 //import java.util.List;
 
-import sql.UserDAO;
-import sql.DAOFactory;
-import sql.PassDAO;
-
-import static server.ServerUtil.*;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
