@@ -16,13 +16,13 @@ Project to make a real life version of MeowMeowBeenz.
 
 ## TODO
 * Comments
-  * [x] DAO
-  * [x] Network
+  * [ ] DAO
+  * [ ] Network
   * [ ] Server
     * [ ] ThreadHandler
     * [ ] RequestHandler
-  * [x] Users
-  * [x] SQL
+  * [ ] Users
+  * [ ] SQL
 * [x] Start learning SQL
 * [x] Add config file support for server package  
 * Add user file support for user class  
