@@ -4,28 +4,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public abstract class Graph extends Network<Character,Vertex<Character>>{
+public abstract class Graph<T extends Vertex<Character>> extends Network<Character,T>{
 
 	/**
 	 * Graphs have a maximum size of 95 vertices. Each vertex is labeled with a character and contains its own label and the edges coming from it.
 	 */
 	protected Graph() {
 		super((char) 48);
-	}
-	
-	public static Graph getGraph(String name) {
-		switch (name) {
-		case "undirected graph":
-			return new UndirectedGraph();
-		case "directed graph":
-			return new DirectedGraph();
-		case "web":
-			return new Web();
-		case "Ratings Graph":
-			return new RatingsGraph();
-		default:
-			return new DirectedGraph();
-		}
 	}
 	
 	@Override
@@ -44,14 +29,6 @@ public abstract class Graph extends Network<Character,Vertex<Character>>{
 			x++;
 		}
 		return true;
-	}
-
-	@Override
-	public boolean addVertex(Character t) {
-		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
-			return false;
-		Vertex<Character> v = new Vertex<Character>(t);
-		return addVertex(t,v);
 	}
 	
 	/**
@@ -158,9 +135,17 @@ class Web extends UndirectedGraph {
 	}
 }
 
-class UndirectedGraph extends Graph {
+class UndirectedGraph extends Graph<Vertex<Character>> {
 	
 	public UndirectedGraph() {
+	}
+	
+	@Override
+	public boolean addVertex(Character t) {
+		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
+			return false;
+		Vertex<Character> v = new Vertex<Character>(t);
+		return addVertex(t,v);
 	}
 	
 	@Override
@@ -192,13 +177,10 @@ class UndirectedGraph extends Graph {
 			return false;
 		
 		EdgeList edges = toDelete.getEdges();
-		ListNode<Edge> current = edges.getFront();
 		
-		while(current != null) {
-			current.getData().getDestination().rmEdge(toDelete);
-			current=current.getNext();
+		for (int x = 0; x < edges.size(); x++) {
+			edges.get(x).getDestination().rmEdge(toDelete);
 		}
-		
 		super.rmEdge(v);
 		
 		return true;
@@ -234,7 +216,7 @@ class UndirectedGraph extends Graph {
 			if (!reached.contains(start)) {
 				queue.add(start);
 				while (queue.size() > 0) {
-					currentEdges = getVertex(queue.get(0)).getEdges().toArrayList();//list of edges
+					currentEdges = getVertex(queue.get(0)).getEdges();//list of edges
 					for (int x = 0; x<currentEdges.size();x++) {
 						currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
 						if (!reached.contains(currentNeighbor)) {

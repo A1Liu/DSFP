@@ -181,18 +181,15 @@ abstract class Network<T,E extends Vertex<T>> {
 	 */
 	public ArrayList<EdgePair> listEdges() {
 		Vertex<T> current;
-		ListNode<Edge> currentEdge;
 		ArrayList<Vertex<T>> vertexList = listVertices();
-		LinkedList<Edge> currentEdges;
+		EdgeList currentEdges;
 		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
 		for (int x = 0;x<size();x++) {
 			current = vertexList.get(x);
 			currentEdges = current.getEdges();
-			currentEdge = currentEdges.getFront();
-			while (currentEdge != null) {
-				EdgePair e = new EdgePair(current,currentEdge.getData());
+			for (int y = 0; y < currentEdges.size(); y++) {
+				EdgePair e = new EdgePair(current,currentEdges.get(y));
 				edgeList.add(e);
-				currentEdge=currentEdge.getNext();
 			}
 		}
 		return edgeList;
@@ -218,7 +215,7 @@ abstract class Network<T,E extends Vertex<T>> {
 			queue.add(vertices.get(start).getLabel());
 		
 		while (queue.size() > 0) {
-			currentEdges = vertices.get(queue.get(0)).getEdges().toArrayList();//list of edges
+			currentEdges = vertices.get(queue.get(0)).getEdges();//list of edges
 			for (int x = 0; x<currentEdges.size();x++) {
 				currentNeighbor = (T) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
 				if (!reached.contains(currentNeighbor)) {
@@ -360,7 +357,7 @@ class Point implements Comparable<Point> {
 	 * @return amount of edges coming from vertex
 	 */
 	public int countEdges() {
-		return edges.countElements();
+		return edges.size();
 	}
 	
 	/**
@@ -380,7 +377,7 @@ class Point implements Comparable<Point> {
 	 * @return whether edge was successfully added
 	 */
 	boolean addEdge(Edge newEdge) {
-		return edges.addElement(newEdge);
+		return edges.add(newEdge);
 	}
 	
 	/**
@@ -389,17 +386,11 @@ class Point implements Comparable<Point> {
 	 * @return the edge with the same destination as e, or null if there is none.
 	 */
 	Edge findEdge(Edge e) {
-		if (edges.getFront() == null)
+		if (e.getDestination() == null || edges.size() == 0)
 			return null;
-		
-		if(edges.getFront().getData().equals(e))
-			return edges.getFront().getData();
-		
-		ListNode<Edge> current = edges.findPrevious(e).getNext();
-		
-		if(current == null)
-			return null;
-		else return current.getData();
+		return edges.indexOf(e)==-1 
+				? null 
+				: edges.get(edges.indexOf(e));
 	}
 	
 	/**
@@ -416,7 +407,7 @@ class Point implements Comparable<Point> {
 	 * removes all edges from the point
 	 */
 	void rmAllEdges() {
-		edges.setFront(null);
+		edges = new EdgeList();
 	}
 	
 	/**
@@ -426,7 +417,7 @@ class Point implements Comparable<Point> {
 	 * @return whether successful in both operations
 	 */
 	boolean setEdge(Edge e1, Edge e2) {
-		return edges.remElement(e1) && edges.addElement(e2);
+		return edges.remove(e1) && edges.add(e2);
 	}
 	
 	/**
@@ -435,7 +426,7 @@ class Point implements Comparable<Point> {
 	 * @return whether the edge was present in the vertex to begin with
 	 */
 	boolean rmEdge(Edge e) {
-		return edges.remElement(e);
+		return edges.remove(e);
 	}
 	
 	/**
