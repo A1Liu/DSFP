@@ -9,7 +9,7 @@
   
 ( *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) &times; *w*<sub>1</sub> + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) &times; *w*<sub>2</sub> + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>) &times; *w*<sub>*t*</sub> )/*v*<sub>*n*</sub>  
   
-5. If *m*<sub>1...*t*</sub> is the set of all adjacent nodes to node *n*, and *r*<sub>*k*</sub> and *r*<sub>*k*</sub> denote the values of *r* and *v* for adjacent *m*<sub>*k*</sub>, then the value of *v*<sub>*n*</sub> is:  
+5. If *m*<sub>1...*t*</sub> is the set of all adjacent nodes to node *n*, and *r*<sub>*k*</sub> and *v*<sub>*k*</sub> denote the values of *r* and *v* for adjacent *m*<sub>*k*</sub>, then the value of *v*<sub>*n*</sub> is:  
   
 *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>)  
 
@@ -18,6 +18,8 @@
 1. *df*/*dr* > 0
 2. *df*/*dv* > 0
 3. *d*<sup>2</sup>*f*/*dv<sup>2</sup>* < 0
+4. If node *n* has no adjacent nodes, then *v*<sub>*n*</sub> = *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) = *r*<sub>*n*</sub> = 1
+5. The only solution to *v*<sub>*n*</sub> = *f*(1 , *v*<sub>*n*</sub>) is *v*<sub>*n*</sub> = 1
 
 ## Task
 
