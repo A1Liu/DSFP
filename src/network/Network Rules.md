@@ -11,6 +11,9 @@
           *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>)  
 
 
+<p style="text-align:center">hello!</p>  
+
+
 ## Rules for *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>)
 1. *df*/*dr* > 0
 2. *df*/*dv* > 0
