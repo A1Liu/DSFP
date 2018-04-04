@@ -6,9 +6,9 @@
 2. Each edge between two distinct nodes is weighted with an integral value 1 to 5 inclusive
 3. Each node has an edge directed at itself with a weight of 1
 4. If *m*<sub>1...*t*</sub> is the set of all adjacent nodes to node *n*, with *r*<sub>*k*</sub> and *r*<sub>*k*</sub> denoting the values of *r* and *v* for adjacent *m*<sub>*k*</sub>, and *w*<sub>*k*</sub> denotes the weight of edge (*m*<sub>*k*</sub>,*n*), the value of *r*<sub>*n*</sub> is:  
-> ( *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) &times; *w*<sub>1</sub> + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) &times; *w*<sub>2</sub> + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>) &times; *w*<sub>*t*</sub> )/*v*<sub>*n*</sub>
+``` ( *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) &times; *w*<sub>1</sub> + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) &times; *w*<sub>2</sub> + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>) &times; *w*<sub>*t*</sub> )/*v*<sub>*n*</sub>```
 5. If *m*<sub>1...*t*</sub> is the set of all adjacent nodes to node *n*, and *r*<sub>*k*</sub> and *r*<sub>*k*</sub> denote the values of *r* and *v* for adjacent *m*<sub>*k*</sub>, then the value of *v*<sub>*n*</sub> is:  
-> *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>)  
+```*f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>)```
 
 
 ## Rules for *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>)
