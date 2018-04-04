@@ -18,5 +18,5 @@
 
 ## Task
 
-1. Find function *f*(*r* , *v*) such that the values of *r*<sub>*n*<sub>*k*<sub><sub> and *v*<sub>*n*<sub>*k*<sub><sub> converge for all nodes *n*<sub>1...*j*</sub> of network size *j*
+1. Find function *f*(*r* , *v*) such that the values of *r*<sub>*n*<sub>*k*</sub></sub> and *v*<sub>*n*<sub>*k*</sub></sub> converge for all nodes *n*<sub>1...*j*</sub> of network size *j*
 2. Find a breadth-first algorithm that updates the values of *r* and *v*
