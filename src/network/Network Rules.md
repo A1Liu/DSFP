@@ -2,7 +2,7 @@
 
 ## General Rules for Network
 
-1. The network is a directed graph of nodes *n*<sub>1...*k*<sub> that hold 2 values: an integer *r*<sub>*n*<sub>*k*</sub></sub> from 1 to 5 inclusive, and a positive real number *v*<sub>*n*<sub>*k*</sub></sub>
+1. The network is a directed graph of nodes *n*<sub>1...*k*</sub> that hold 2 values: an integer *r*<sub>*n*<sub>*k*</sub></sub> from 1 to 5 inclusive, and a positive real number *v*<sub>*n*<sub>*k*</sub></sub>
 2. Each edge between two distinct nodes is weighted 1 to 5 inclusive
 3. Each node has an edge directed at itself with a weight of 1
 4. If *m*<sub>1...*k*</sub> is the set of all adjacent nodes to node *n*, and *w*<sub>*k*</sub> denotes the weight of edge (*m*<sub>*k*</sub>,*n*), the value of *r*<sub>*n*</sub> is:  
