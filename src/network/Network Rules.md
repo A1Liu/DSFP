@@ -13,11 +13,8 @@
   
 *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>)  
 
-
-<div style="text-align: center;"> and </div>
-
-
 ## Rules for *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>)
+
 1. *df*/*dr* > 0
 2. *df*/*dv* > 0
 3. *d*<sup>2</sup>*f*/*dv<sup>2</sup>* < 0
