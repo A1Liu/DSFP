@@ -32,6 +32,14 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		update(getVertex().getLabel());
 	}
 	
+	public void update(int i) {
+		System.out.println(this.keys());
+		System.out.println();
+		for (int x = 0; x < i; x++) {
+			System.out.print(getRatings());
+		}
+	}
+	
 	/**
 	 * LMAO NOT DONE AT ALL
 	 * @param t
@@ -83,6 +91,15 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		this.getVertex(t).update();;
 	}
 	
+	private ArrayList<Double> getRatings() {
+		ArrayList<RatingsNode> vertices = listVertices();
+		ArrayList<Double> ratings = new ArrayList<Double>();
+		for (int x = 0; x< vertices.size(); x++) {
+			ratings.add(Math.floor(vertices.get(x).getR()*100)/100);
+		}
+		return ratings;
+	}
+	
 	/**
 	 * loads edges into the network
 	 * @param document the name of the document to add from
@@ -106,52 +123,11 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		if (edge.length < 3)
 			return;
 		
-		if(edge[0].length()==1 || isNumber(edge[0])) {
-			if (edge[1].length()==1 || isNumber(edge[1])) {
-				int id1;
-				int id2;
-				
-				if(getVertex(edge[0].charAt(0))==null && getVertex(Integer.parseInt((edge[0]))) == null) {
-					if (isNumber(edge[0])) {
-						id1 = Integer.parseInt(edge[0]);
-						addVertex(id1);
-						addEdge(id1,id1,1);
-					} else {
-						id1 = edge[0].charAt(0)-48;
-						addVertex(id1);
-						addEdge(id1,id1,1);
-					}
-				} else {
-					if (isNumber(edge[0])) {
-						id1 = Integer.parseInt(edge[0]);
-					} else {
-						id1 = edge[0].charAt(0)-48;
-					}
-				}
-				
-				if(getVertex(edge[1].charAt(0))==null && getVertex(Integer.parseInt((edge[1]))) == null) {
-					if (isNumber(edge[1])) {
-						id2 = Integer.parseInt(edge[1]);
-						addVertex(id2);
-						addEdge(id2,id2,1);
-					} else {
-						id2 = edge[1].charAt(0)-48;
-						addVertex(id2);
-						addEdge(id2,id2,1);
-					}
-				} else {
-					if (isNumber(edge[0])) {
-						id2 = Integer.parseInt(edge[0]);
-					} else {
-						id2 = edge[0].charAt(0)-48;
-					}
-				}
-				
+		if(edge[0].length()==1 && edge[1].length()==1) {
 				if (isNumber(edge[2]))
-					addEdge(id1,id2,Integer.parseInt(edge[2]));
+					addEdge(edge[0].charAt(0),edge[1].charAt(0),Integer.parseInt(edge[2]));
 				else
-					addEdge(id1,id2,1);
-			}
+					addEdge(edge[0].charAt(0),edge[1].charAt(0),1);
 		}
 	}
 	

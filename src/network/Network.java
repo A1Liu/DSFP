@@ -168,7 +168,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	 */
 	public int countEdges() {
 		int count = 0;
-		ArrayList<Vertex<T>> vertexList = listVertices();
+		ArrayList<E> vertexList = listVertices();
 		for (int x = 0;x<size();x++) {
 			count+=vertexList.get(x).countEdges();
 		}
@@ -180,8 +180,8 @@ abstract class Network<T,E extends Vertex<T>> {
 	 * @return ArrayList of EdgePair objects
 	 */
 	public ArrayList<EdgePair> listEdges() {
-		Vertex<T> current;
-		ArrayList<Vertex<T>> vertexList = listVertices();
+		E current;
+		ArrayList<E> vertexList = listVertices();
 		EdgeList currentEdges;
 		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
 		for (int x = 0;x<size();x++) {
@@ -263,9 +263,9 @@ abstract class Network<T,E extends Vertex<T>> {
 	 * Turns the network into an arrayList of vertices
 	 * @return an arrayList of vertices
 	 */
-	protected ArrayList<Vertex<T>> listVertices() {
+	protected ArrayList<E> listVertices() {
 		
-		ArrayList<Vertex<T>> vertexList = new ArrayList<Vertex<T>>();
+		ArrayList<E> vertexList = new ArrayList<E>();
 		Enumeration<T> keys = enumVertices();
 		
 		while(keys.hasMoreElements()) {
