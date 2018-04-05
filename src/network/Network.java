@@ -7,10 +7,10 @@ import java.util.Hashtable;
 abstract class Network<T,E extends Vertex<T>> {
 
 	private T defaultID;
-	private Hashtable<T,Vertex<T>> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
+	private Hashtable<T,E> vertices;//I want this hashtable to use a key that is the same as the keytype of the vertex object
 	
 	protected Network(T initialID) {
-		vertices = new Hashtable<T, Vertex<T>>();
+		vertices = new Hashtable<T,E>();
 		defaultID = initialID;
 	}
 	
@@ -84,7 +84,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	 * gets the first vertex in the network
 	 * @return the first value of the network
 	 */
-	public Vertex<T> getVertex() {
+	public E getVertex() {
 		return vertices.get(vertices.keys().nextElement());
 	}
 	
@@ -93,7 +93,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	 * @param id identifier integer of the vertex
 	 * @return vertex matching id
 	 */
-	public Vertex<T> getVertex(T id) {
+	public E getVertex(T id) {
 		return vertices.get(id);
 	}
 	
@@ -204,7 +204,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	public ArrayList<EdgePair> listEdges(T start) {
 		
 		//creating necessary containers
-		Hashtable<T,T> reached = new Hashtable<T,T>();
+		Hashtable<T,Boolean> reached = new Hashtable<T,Boolean>();
 		ArrayList<T> queue = new ArrayList<T>();
 		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
 		ArrayList<Edge> currentEdges;
@@ -218,13 +218,13 @@ abstract class Network<T,E extends Vertex<T>> {
 			currentEdges = vertices.get(queue.get(0)).getEdges();//list of edges
 			for (int x = 0; x<currentEdges.size();x++) {
 				currentNeighbor = (T) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
-				if (!reached.contains(currentNeighbor)) {
+				if (!reached.containsKey(currentNeighbor)) {
 					edgeList.add(new EdgePair(vertices.get(queue.get(0)),currentEdges.get(x)));//if the neighbor hasn't been reached, add the edge
 					if (!queue.contains(currentNeighbor))
 						queue.add(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
 				}	
 			}
-			reached.put(queue.get(0),queue.get(0));
+			reached.put(queue.get(0),true);
 			queue.remove(0);
 		}
 		return edgeList;
@@ -411,13 +411,23 @@ class Point implements Comparable<Point> {
 	}
 	
 	/**
-	 * moves an edge -- THIS METHOD IS NOT VERY GOOD RIGHT NOW AVOID IF POSSIBLE
+	 * moves an edge
 	 * @param e1 edge to remove
 	 * @param e2 edge to add
-	 * @return whether successful in both operations
+	 * @return true if successful
 	 */
 	boolean setEdge(Edge e1, Edge e2) {
-		return edges.remove(e1) && edges.add(e2);
+		int index = edges.indexOf(e1);
+		Edge e = null;
+		if (index != -1)
+			e = edges.get(index);
+		if (edges.remove(e1)) {
+			if (edges.add(e2)) {
+				return true;
+			}
+			edges.add(e);
+		}
+		return false;
 	}
 	
 	/**

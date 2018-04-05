@@ -5,7 +5,10 @@ import static util.IOUtil.readFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+
+import sun.misc.Queue;
 
 /**
  * need to make new vertex object that holds values, otherwise this will become complicated quickly
@@ -14,10 +17,7 @@ import java.util.Hashtable;
  */
 public class RatingsGraph extends Graph<RatingsNode> {
 	
-	private Hashtable<Character,Double> values;
-	
 	public RatingsGraph() {
-		values = new Hashtable<Character,Double>();
 	}
 	
 	@Override
@@ -28,20 +28,64 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return addVertex(t,v);
 	}
 	
-	public void update() {
-		ArrayList<Character> names = this.keys();
-		ArrayList<Double> newValues = new ArrayList<Double>();
+	/**
+	 * LMAO NOT DONE AT ALL
+	 * @param t
+	 * @throws InterruptedException
+	 * @throws IllegalArgumentException
+	 */
+	public void update(Character t) throws InterruptedException, IllegalArgumentException {
+		Queue<Character> queue = new Queue<Character>();
 		
-		for (int x = 0; x< names.size(); x++) {
-			
+		if (size() == 0)
+			return;
+		
+		if (getVertex(t) == null)
+			throw new IllegalArgumentException("'" + t.toString() + "' is not a valid node identifier.");
+		
+		//creating necessary containers
+		Hashtable<Character, Boolean> reached = new Hashtable<Character,Boolean>();
+		Enumeration<Character> vertexList = enumVertices();
+		ArrayList<Edge> currentEdges;
+		Character current;
+		Character currentNeighbor;
+		Character start = t;
+		
+		while (reached.size()<size()) {
+			//start at a vertex
+			if (!reached.containsKey(start)) {
+				queue.enqueue(start);
+				while (!queue.isEmpty()) {
+					current = queue.dequeue();
+					if (!reached.containsKey(current)) {
+						currentEdges = getVertex(current).getEdges();//list of edges
+						for (int x = 0; x<currentEdges.size();x++) {
+							currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
+							if (!reached.containsKey(currentNeighbor)) {
+									queue.enqueue(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
+							}	
+						}
+						reached.put(current, true);
+					}
+				}
+			}
+			if (vertexList.hasMoreElements())
+				start = vertexList.nextElement();
 		}
 	}
 	
-	private Double updateVertex(Character t) {
+	private static <T> boolean queueContains(Queue<T> q,T o) {
+		Enumeration e = q.elements();
 		
-		EdgeList edges = this.getVertex(t).getEdges();
-		
-		return null;
+		while(e.hasMoreElements()) {
+			if (e.nextElement() == o)
+				return true;
+		}
+		return false;
+	}
+	
+	private void updateVertex(Character t) {
+		this.getVertex(t).update();;
 	}
 	
 	/**
@@ -58,7 +102,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		}
 	}
 	
-	/**
+	/**I should put this in Network probably
 	 * loads an edge into the network given an array of strings
 	 * @param edge the array of strings to input
 	 */
@@ -137,6 +181,13 @@ class RatingsNode extends Vertex<Character> {
 		super.addEdge(new Edge(this, 1));//addEdge adds to the edgelist, which is the list of ratings this node has received
 	}
 	
+	@Override
+	public boolean addEdge(Edge e) {
+		if (e.getDestination() instanceof RatingsNode)
+			return super.addEdge(e);
+		return false;
+	}
+	
 	/**
 	 * Adds a rating from this node to another node
 	 * @param n the node being rated
@@ -158,23 +209,46 @@ class RatingsNode extends Vertex<Character> {
 	 * recalculates the value of r and v and stores them
 	 */
 	void update() {
-		double rating;
-		double votes;
-		
-		ArrayList<Edge> received = this.getEdges();
-		
+		double ratingSum = 0;
+		double votes = 0;
+		RatingsNode current;
 		
 		for (int x = 0; x < this.countEdges(); x++) {
-			
+			current = (RatingsNode) this.getEdges().get(x).getDestination();
+			ratingSum+=this.getEdges().get(x).getLength()*current.getPower();
+			votes+=current.getPower();
 		}
+		
+		r = ratingSum/votes;
+		v = votes;
 	}
 	
-	public static double getVotingPower(double r, double v) {
-		return 0;
+	/**
+	 * Function to determine the power of a node given its rating and its total votes
+	 * @param r rating of the node
+	 * @param v votes the node has received
+	 * @return the power of the node
+	 */
+	public static double getPower(double r, double v) {
+		double x = 5.0 - Math.pow(1.5, 1-v);//first parameter of Math.power is the speed at which power increases relative to votes received
+		return Math.pow(2,r)*x;
 	}
 	
-	double getVotingPower() {
-		return getVotingPower(this.r,this.v);
+	/**
+	 * calculates the power of a specified rating node
+	 * @param n the node whose power we are calculating
+	 * @return the voting power
+	 */
+	public static double getPower(RatingsNode n) {
+		return getPower(n.getR(), n.getV());
+	}
+	
+	/**
+	 * calculates the power of this rating node
+	 * @return the power
+	 */
+	double getPower() {
+		return getPower(this.r,this.v);
 	}
 
 	double getR() {

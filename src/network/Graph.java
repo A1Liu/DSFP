@@ -128,7 +128,6 @@ class Web extends UndirectedGraph {
 	public Web() {
 	}
 	
-	
 	@Override
 	public boolean addEdge(Character v1, Character v2, int l) {
 		return super.addEdge(v1, v2);
@@ -203,7 +202,7 @@ class UndirectedGraph extends Graph<Vertex<Character>> {
 			return null;
 		
 		//creating necessary containers
-		Hashtable<Character, Character> reached = new Hashtable<Character,Character>();
+		Hashtable<Character, Boolean> reached = new Hashtable<Character,Boolean>();
 		ArrayList<Character> queue = new ArrayList<Character>();
 		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
 		Enumeration<Character> vertexList = enumVertices();
@@ -213,19 +212,19 @@ class UndirectedGraph extends Graph<Vertex<Character>> {
 		
 		while (reached.size()<size()) {
 			//start at a vertex
-			if (!reached.contains(start)) {
+			if (!reached.containsKey(start)) {
 				queue.add(start);
 				while (queue.size() > 0) {
 					currentEdges = getVertex(queue.get(0)).getEdges();//list of edges
 					for (int x = 0; x<currentEdges.size();x++) {
 						currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
-						if (!reached.contains(currentNeighbor)) {
+						if (!reached.containsKey(currentNeighbor)) {
 							edgeList.add(new EdgePair(getVertex(queue.get(0)),currentEdges.get(x)));//if the neighbor hasn't been reached, add the edge
 							if (!queue.contains(currentNeighbor))
 								queue.add(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
 						}	
 					}
-					reached.put(queue.get(0), queue.get(0));
+					reached.put(queue.get(0), true);
 					queue.remove(0);
 				}
 			}

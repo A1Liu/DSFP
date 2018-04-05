@@ -32,6 +32,9 @@ class EdgeList extends ArrayList<Edge> {
 	@Override
 	public boolean add(Edge e) {
 		
+		if (e == null)
+			return false;
+		
 		if (e.getDestination() == null)
 			return false;
 		
