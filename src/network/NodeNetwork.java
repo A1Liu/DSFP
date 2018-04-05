@@ -60,7 +60,7 @@ class Node<E> extends Vertex<String> {
 	 * getter for data
 	 * @return data
 	 */
-	public E getData() {
+	E getData() {
 		return data;
 	}
 	
@@ -68,7 +68,7 @@ class Node<E> extends Vertex<String> {
 	 * checks if the node is empty
 	 * @return whether the node is empty
 	 */
-	public boolean isEmpty() {
+	boolean isEmpty() {
 		return data==null;
 	}
 }

@@ -6,14 +6,11 @@ public class TestRunner {
 
 	public static void main(String[] args) throws IOException, IllegalArgumentException, InterruptedException {
 		
-		
-		//Graph a = Graph.getGraph("Ratings Graph");
-		
 		RatingsGraph graph = new RatingsGraph();
 		
-		graph.loadNetwork("lib/Network.txt");
+		graph.loadNetwork("lib/Network.csv");
 		
-		graph.update(20);
+		graph.update(40);
 		System.out.println(graph.cytoScape());
 		
 		/*UndirectedGraph albert = new UndirectedGraph();

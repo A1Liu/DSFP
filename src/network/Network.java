@@ -61,6 +61,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	
 	/**
 	 * setter for defaultID
+	 * @param id the initial default id
 	 */
 	protected void setDefaultID(T id) {
 		defaultID = id;
@@ -278,6 +279,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	/**
 	 * toString
 	 */
+	@Override
 	public String toString() {
 		return null;
 	}
@@ -302,7 +304,7 @@ class Vertex<T> extends Point {
 	}
 	
 	@Override
-	public T getLabel() {
+	T getLabel() {
 		return label;
 	}
 	
@@ -348,7 +350,7 @@ class Point implements Comparable<Point> {
 	 * gets a list of the edges
 	 * @return EdgeList of edges
 	 */
-	public EdgeList getEdges() {
+	EdgeList getEdges() {
 		return edges;
 	}
 	
@@ -356,7 +358,7 @@ class Point implements Comparable<Point> {
 	 * counts edges
 	 * @return amount of edges coming from vertex
 	 */
-	public int countEdges() {
+	int countEdges() {
 		return edges.size();
 	}
 	
@@ -453,7 +455,7 @@ class Point implements Comparable<Point> {
 	 * getter for label
 	 * @return label
 	 */
-	public Object getLabel() {
+	Object getLabel() {
 		return "Point";
 	}
 	

@@ -1,18 +1,16 @@
 package network;
 
-class DirectedGraph extends Graph<Vertex<Character>> {
+class DirectedGraph extends Graph<Vertex<Integer>> {
 	
 	
 	
-	public DirectedGraph() {
+	DirectedGraph() {
 		
 		}
 	
 	@Override
-	public boolean addVertex(Character t) {
-		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
-			return false;
-		Vertex<Character> v = new Vertex<Character>(t);
+	public boolean addVertex(Integer t) {
+		Vertex<Integer> v = new Vertex<Integer>(t);
 		return addVertex(t,v);
 	}
 	

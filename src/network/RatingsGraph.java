@@ -1,9 +1,5 @@
 package network;
 
-import static util.IOUtil.isNumber;
-import static util.IOUtil.readFile;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -18,34 +14,38 @@ import sun.misc.Queue;
 public class RatingsGraph extends Graph<RatingsNode> {
 	
 	public RatingsGraph() {
+	
 	}
 	
 	@Override
-	public boolean addVertex(Character t) {
+	public boolean addVertex(Integer t) {
 		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
 			return false;
 		RatingsNode v = new RatingsNode(t);
 		return addVertex(t,v);
 	}
 	
-	public boolean addRating(Character t1, Character t2, int l) {
-		if (getVertex(t1)==null || getVertex(t2)==null) {
-			return false;
-		}
-		getVertex(t1).rate(getVertex(t2), l);
-		return true;
-	}
-	
 	public void update() throws InterruptedException, IllegalArgumentException {
+		if (size() == 0)
+			return;
+		
 		update(getVertex().getLabel());
 	}
 	
 	public void update(int i) throws IllegalArgumentException, InterruptedException {
+		
+		if (size() == 0)
+			return;
+		
 		System.out.println(this.keys());
 		System.out.println(getRatings());
+		System.out.println(getVotes());
+		System.out.println();
 		for (int x = 0; x < i; x++) {
 			update();
-			System.out.println(getRatings());
+			System.out.println(x + ":\t " + getRatings());
+			System.out.println("\t" + getVotes());
+			System.out.println();
 		}
 	}
 	
@@ -55,8 +55,8 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	 * @throws InterruptedException If the queue screws up
 	 * @throws IllegalArgumentException If t isn't a node
 	 */
-	public void update(Character t) throws InterruptedException, IllegalArgumentException {
-		Queue<Character> queue = new Queue<Character>();
+	public void update(Integer t) throws InterruptedException, IllegalArgumentException {
+		Queue<Integer> queue = new Queue<Integer>();
 		
 		if (size() == 0)
 			return;
@@ -65,12 +65,12 @@ public class RatingsGraph extends Graph<RatingsNode> {
 			throw new IllegalArgumentException("'" + t.toString() + "' is not a valid node identifier.");
 		
 		//creating necessary containers
-		Hashtable<Character, Boolean> reached = new Hashtable<Character,Boolean>();
-		Enumeration<Character> vertexList = enumVertices();
+		Hashtable<Integer, Boolean> reached = new Hashtable<Integer,Boolean>();
+		Enumeration<Integer> vertexList = enumVertices();
 		ArrayList<Edge> currentEdges;
-		Character current;
-		Character currentNeighbor;
-		Character start = t;
+		Integer current;
+		Integer currentNeighbor;
+		Integer start = t;
 		
 		while (reached.size()<size()) {
 			//start at a vertex
@@ -82,7 +82,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 						updateVertex(current);
 						currentEdges = getVertex(current).getRatings();//list of edges
 							for (int x = 0; x<currentEdges.size();x++) {
-								currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
+								currentNeighbor = (Integer) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
 								if (!reached.containsKey(currentNeighbor)) {
 										queue.enqueue(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
 								}	
@@ -96,7 +96,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		}
 	}
 	
-	private void updateVertex(Character t) {
+	private void updateVertex(Integer t) {
 		this.getVertex(t).update();;
 	}
 	
@@ -109,74 +109,24 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return ratings;
 	}
 	
-	/**
-	 * loads edges into the network
-	 * @param document the name of the document to add from
-	 * @throws IOException if the document doesn't exist
-	 */
-	public void loadNetwork(String document) throws IOException {
-		ArrayList<String> input = readFile(document);
-		String[] line;
-		for (int x = 0; x< input.size(); x++) {
-			line = input.get(x).split(",");
-			loadEdge(line);
+	private ArrayList<Double> getVotes() {
+		ArrayList<RatingsNode> vertices = listVertices();
+		ArrayList<Double> votes = new ArrayList<Double>();
+		for (int x = 0; x< vertices.size(); x++) {
+			votes.add(Math.floor(vertices.get(x).getV()*100)/100);
 		}
+		return votes;
 	}
 	
-	/**I should put this in Network probably
-	 * loads an edge into the network given an array of strings
-	 * @param edge the array of strings to input
-	 */
-	private void loadEdge(String[] edge) {
-		
-		if (edge.length < 3) {
-			return;
-		}
-		
-		if(edge[0].length()==1 || isNumber(edge[0])) {
- 			if (edge[1].length()==1 || isNumber(edge[1])) {
- 				char id1;
- 				char id2;
- 				
- 				if(getVertex(edge[0].charAt(0))==null) {
- 					if (isNumber(edge[0])) {
- 						id1 = (char) (Integer.parseInt(edge[0])+48);
- 						if (getVertex(Integer.parseInt((edge[0]))) == null) {
- 	 						addVertex(id1);
- 	 					}
- 					} else {
-	 					id1 = edge[0].charAt(0);
-	 					addVertex(id1);
-	 				}	
- 				} else {
- 					id1 = edge[0].charAt(0);
- 				}
- 				
- 				if(getVertex(edge[1].charAt(0))==null) {
- 					if (isNumber(edge[1])) {
- 						id2 = (char) (Integer.parseInt(edge[1])+48);
- 						if (getVertex(Integer.parseInt((edge[1]))) == null) {
- 	 						addVertex(id2);
- 	 					}
- 					} else {
-	 					id2 = edge[1].charAt(0);
-	 					addVertex(id2);
-	 				}	
- 				} else {
- 					id2 = edge[1].charAt(0);
- 				}
- 				
- 				if(edge[0].length()==1 && edge[1].length()==1) {
-					if (isNumber(edge[2])) {
-						addRating(id1,id2,Integer.parseInt(edge[2]));
-					}else {
-						addRating(id1,id2,1);
-					}
- 				}
- 			}
-		}
+	@Override
+	public boolean addEdge(Integer n1, Integer n2, int r) {
+		if (getVertex(n1) == null || getVertex(n2) == null)
+			return false;
+		getVertex(n1).rate(getVertex(n2), r);
+		return true;
 	}
-
+	
+	
 	
 	@Override
 	public void incrementID() {
@@ -184,13 +134,19 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	}
 }
 
-class RatingsNode extends Vertex<Character> {
+/**
+ * edges in the inherited edgelist are the ratings this node has received
+ * Edges in the ratings Edgelist are the ratings this node has given to others
+ * @author Alyer
+ *
+ */
+class RatingsNode extends Vertex<Integer> {
 	
 	private double r;//this node's rating
 	private double v;//this node's total votes
 	private EdgeList ratings; //The list of ratings this node has made
 	
-	RatingsNode(Character t) {
+	RatingsNode(Integer t) {
 		super(t);
 		r = 1.0;
 		v = 1.0;
@@ -200,9 +156,11 @@ class RatingsNode extends Vertex<Character> {
 	}
 	
 	@Override
-	public boolean addEdge(Edge e) {
-		if (e.getDestination() instanceof RatingsNode && !(e.getDestination()==this))
+	boolean addEdge(Edge e) {
+		
+		if (e.getDestination() instanceof RatingsNode && !(e.getDestination()==this)) {
 			return super.addEdge(e);
+		}
 		return false;
 	}
 	
@@ -251,7 +209,7 @@ class RatingsNode extends Vertex<Character> {
 	 * @param v votes the node has received
 	 * @return the power of the node
 	 */
-	public static double getPower(double r, double v) {
+	static double getPower(double r, double v) {
 		double x = 5.0 - Math.pow(1.5, 1-v);//first parameter of Math.power is the speed at which power increases relative to votes received
 		return Math.pow(2,r)*x;
 	}
@@ -261,7 +219,7 @@ class RatingsNode extends Vertex<Character> {
 	 * @param n the node whose power we are calculating
 	 * @return the voting power
 	 */
-	public static double getPower(RatingsNode n) {
+	static double getPower(RatingsNode n) {
 		return getPower(n.getR(), n.getV());
 	}
 	

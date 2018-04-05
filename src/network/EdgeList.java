@@ -27,7 +27,7 @@ class EdgeList extends ArrayList<Edge> {
 	/**
 	 * adds the element e if it's not already in the list
 	 * @param e the element that we want to add
-	 * @return a 0 if successful, a 2 if unsuccessful
+	 * @return true if successfull
 	 */
 	@Override
 	public boolean add(Edge e) {
@@ -36,6 +36,9 @@ class EdgeList extends ArrayList<Edge> {
 			return false;
 		
 		if (e.getDestination() == null)
+			return false;
+		
+		if (this.contains(e))
 			return false;
 		
 		return super.add(e);
@@ -134,16 +137,16 @@ class EdgePair extends Edge {
 	
 	private final Point source;
 	
-	public EdgePair(Point p1, Point p2) {
+	EdgePair(Point p1, Point p2) {
 		this(p1,p2,1);
 	}
 	
-	public EdgePair(Point p1, Point p2, int l) {
+	EdgePair(Point p1, Point p2, int l) {
 		super(p2,l);
 		source = p1;
 	}
 	
-	public EdgePair(Point p, Edge e) {
+	EdgePair(Point p, Edge e) {
 		this(p,e.getDestination(),e.getLength());
 	}
 	
@@ -151,7 +154,7 @@ class EdgePair extends Edge {
 	 * getter for source point
 	 * @return source
 	 */
-	public Point getSource() {
+	Point getSource() {
 		return source;
 	}
 	

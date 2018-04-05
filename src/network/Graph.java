@@ -1,176 +1,125 @@
 package network;
 
+import static util.IOUtil.isNumber;
+import static util.IOUtil.readFile;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public abstract class Graph<T extends Vertex<Character>> extends Network<Character,T>{
+public abstract class Graph<T extends Vertex<Integer>> extends Network<Integer,T>{
 
 	/**
-	 * Graphs have a maximum size of 95 vertices. Each vertex is labeled with a character and contains its own label and the edges coming from it.
+	 * 
 	 */
 	protected Graph() {
-		super((char) 48);
+		super(0);
 	}
 	
 	@Override
 	public boolean addVertex() {
-		if (getDefaultID() > 127) {
-			return false;
-		}
-		
-		
-		if (addVertex((char) getDefaultID())) {
+		if (addVertex(getDefaultID())) {
 			return true;
 		}
-		
-		int x = 48;
-		while (!addVertex(x) && x<=127) {
+		int x = 0;
+		while (!addVertex(x)) {
 			x++;
 		}
 		return true;
 	}
-	
-	/**
-	 * creates a vertex
-	 * @param c identifier for vertexes. The key
-	 * @return True if a vertex is successfully added
-	 */
-	public boolean addVertex(char c) {
-		Character i = (char) c;
-		return addVertex(i);
-	}
-	
-	/**
-	 * add a vertex of specific index
-	 * @param t the integer key of the vertex
-	 * @return whether operation was successful
-	 */
-	public boolean addVertex(int id) {
-		Character i = (char) (id+48);
-		return addVertex(i);
-	}
-	
-	/**
-	 * removes a vertex with identifier id
-	 * @param id identifier integer of vertex
-	 * @return whether successful
-	 */
-	public boolean rmVertex(int id) {
-		Character i = (char) id;
-		return rmVertex(i);
-	}
-	
-	/**
-	 * returns the vertex of a certain id
-	 * @param id identifier integer of the vertex
-	 * @return vertex matching id
-	 */
-	public Vertex<Character> getVertex(int id) {
-		Character i = (char) (id+48);
-		return getVertex(i);
-	}
-	
-	/**
-	 * adds edge of specified length from a vertex to another vertex
-	 * @param v1 vertex sending edge
-	 * @param v2 vertex receiving edge
-	 * @param l length of edge
-	 * @return whether successful
-	 */
-	public boolean addEdge(int v1, int v2, int l) {
-		Character c1 = (char) (v1+48);
-		Character c2 = (char) (v2+48);
-		return addEdge(c1, c2, l);
-	}
-	
-	/**
-	 * adds edge of length 1 from a vertex to another vertex
-	 * @param v1 vertex sending edge
-	 * @param v2 vertex receiving edge
-	 * @return whether successful
-	 */
-	public boolean addEdge(int v1, int v2) {
-		Character c1 = (char) (v1+48);
-		Character c2 = (char) (v2+48);
-		return addEdge(c1, c2, 1);
-	}
-	
-	/**
-	 * removes an edge from vertex v1 to vertex v2
-	 * @param v1 vertex edge is coming from
-	 * @param v2 vertex edge is going to
-	 * @return whether successfully removed
-	 */
-	public boolean rmEdge(int v1, int v2) {
-		Character c1 = (char) (v1+48);
-		Character c2 = (char) (v2+48);
-		return rmEdge(c1, c2);
-	}
-	
-	/**
-	 * removes all edges from vertex v1
-	 * @param v1 vertex to clear
-	 */
-	public boolean rmEdge(int v) {
-		Character c1 = (char) (v+48);
-		return rmEdge(c1);
-	}
 
 	@Override
 	protected void incrementID() {
-		setDefaultID((char) (getDefaultID().toString().charAt(0)+1));
+		setDefaultID(getDefaultID() + 1);
 	}
+	
+	/**
+	 * loads edges into the network
+	 * @param document the name of the document to add from
+	 * @throws IOException if the document doesn't exist
+	 */
+	public void loadNetwork(String document) throws IOException {
+		ArrayList<String> input = readFile(document);
+		String[] line;
+		for (int x = 0; x< input.size(); x++) {
+			line = input.get(x).split(",");
+			loadEdge(line);
+		}
+	}
+	
+	/**
+	 * loads an edge into the network given an array of strings
+	 * @param edge the array of strings to input
+	 */
+	private void loadEdge(String[] edge) {
+		
+		if (edge.length < 3) {return;}
+		
+		for (int x = 0; x < 3; x++) {
+			if (!isNumber(edge[x])) {return;}
+		}
+
+		int id1 = Integer.parseInt(edge[0]);
+		int id2 = Integer.parseInt(edge[1]);
+		
+		if (getVertex(Integer.parseInt((edge[0]))) == null) {
+			addVertex(id1);
+		}
+		if (getVertex(Integer.parseInt((edge[1]))) == null) {
+			addVertex(id2);
+		}	
+		addEdge(id1,id2,Integer.parseInt(edge[2]));
+ 	}
 }
 
 class Web extends UndirectedGraph {
 	
-	public Web() {
+	Web() {
 	}
 	
 	@Override
-	public boolean addEdge(Character v1, Character v2, int l) {
+	public boolean addEdge(Integer v1, Integer v2, int l) {
 		return super.addEdge(v1, v2);
 	}
 }
 
-class UndirectedGraph extends Graph<Vertex<Character>> {
+class UndirectedGraph extends Graph<Vertex<Integer>> {
 	
-	public UndirectedGraph() {
+	UndirectedGraph() {
+	
 	}
 	
 	@Override
-	public boolean addVertex(Character t) {
-		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
-			return false;
-		Vertex<Character> v = new Vertex<Character>(t);
+	public boolean addVertex(Integer t) {
+		Vertex<Integer> v = new Vertex<Integer>(t);
 		return addVertex(t,v);
 	}
 	
 	@Override
-	public boolean addEdge(Character v1, Character v2) {
+	public boolean addEdge(Integer v1, Integer v2) {
 		return super.addEdge(v1, v2) && super.addEdge(v2, v1);
 	}
 	
 	@Override
-	public boolean addEdge(Character v1, Character v2, int l) {
+	public boolean addEdge(Integer v1, Integer v2, int l) {
 		return super.addEdge(v1, v2, l) && super.addEdge(v2, v1, l);
 	}
 	
 	@Override
-	public boolean rmVertex(Character id) {
+	public boolean rmVertex(Integer id) {
 		return this.rmEdge(id) && super.rmVertex(id);
 	}
 	
 	@Override
-	public boolean rmEdge(Character v1, Character v2) {
+	public boolean rmEdge(Integer v1, Integer v2) {
 		boolean b = super.rmEdge(v1, v2);
 		return super.rmEdge(v2, v1) || b;
 	}
 	
 	@Override
-	public boolean rmEdge(Character v) {
-		Vertex<Character> toDelete = getVertex(v);
+	public boolean rmEdge(Integer v) {
+		Vertex<Integer> toDelete = getVertex(v);
 		
 		if (toDelete == null)
 			return false;
@@ -188,7 +137,7 @@ class UndirectedGraph extends Graph<Vertex<Character>> {
 	@Override
 	public int countEdges() {
 		int count = 0;
-		ArrayList<Vertex<Character>> vertexList = listVertices();
+		ArrayList<Vertex<Integer>> vertexList = listVertices();
 		for (int x = 0;x<size();x++) {
 			count+=vertexList.get(x).countEdges();
 		}
@@ -202,13 +151,13 @@ class UndirectedGraph extends Graph<Vertex<Character>> {
 			return null;
 		
 		//creating necessary containers
-		Hashtable<Character, Boolean> reached = new Hashtable<Character,Boolean>();
-		ArrayList<Character> queue = new ArrayList<Character>();
+		Hashtable<Integer, Boolean> reached = new Hashtable<Integer,Boolean>();
+		ArrayList<Integer> queue = new ArrayList<Integer>();
 		ArrayList<EdgePair> edgeList = new ArrayList<EdgePair>();
-		Enumeration<Character> vertexList = enumVertices();
+		Enumeration<Integer> vertexList = enumVertices();
 		ArrayList<Edge> currentEdges;
-		Character currentNeighbor;
-		Character start = getVertex(vertexList.nextElement()).getLabel();
+		Integer currentNeighbor;
+		Integer start = getVertex(vertexList.nextElement()).getLabel();
 		
 		while (reached.size()<size()) {
 			//start at a vertex
@@ -217,7 +166,7 @@ class UndirectedGraph extends Graph<Vertex<Character>> {
 				while (queue.size() > 0) {
 					currentEdges = getVertex(queue.get(0)).getEdges();//list of edges
 					for (int x = 0; x<currentEdges.size();x++) {
-						currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
+						currentNeighbor = (Integer) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
 						if (!reached.containsKey(currentNeighbor)) {
 							edgeList.add(new EdgePair(getVertex(queue.get(0)),currentEdges.get(x)));//if the neighbor hasn't been reached, add the edge
 							if (!queue.contains(currentNeighbor))
@@ -233,5 +182,4 @@ class UndirectedGraph extends Graph<Vertex<Character>> {
 		}
 		return edgeList;
 	}
-
 }
