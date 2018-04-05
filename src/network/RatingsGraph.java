@@ -28,6 +28,10 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return addVertex(t,v);
 	}
 	
+	public void update() throws InterruptedException, IllegalArgumentException {
+		update(getVertex().getLabel());
+	}
+	
 	/**
 	 * LMAO NOT DONE AT ALL
 	 * @param t
@@ -58,7 +62,8 @@ public class RatingsGraph extends Graph<RatingsNode> {
 				while (!queue.isEmpty()) {
 					current = queue.dequeue();
 					if (!reached.containsKey(current)) {
-						currentEdges = getVertex(current).getEdges();//list of edges
+						updateVertex(current);
+						currentEdges = getVertex(current).getRatings();//list of edges
 						for (int x = 0; x<currentEdges.size();x++) {
 							currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
 							if (!reached.containsKey(currentNeighbor)) {
@@ -72,16 +77,6 @@ public class RatingsGraph extends Graph<RatingsNode> {
 			if (vertexList.hasMoreElements())
 				start = vertexList.nextElement();
 		}
-	}
-	
-	private static <T> boolean queueContains(Queue<T> q,T o) {
-		Enumeration e = q.elements();
-		
-		while(e.hasMoreElements()) {
-			if (e.nextElement() == o)
-				return true;
-		}
-		return false;
 	}
 	
 	private void updateVertex(Character t) {
@@ -203,6 +198,10 @@ class RatingsNode extends Vertex<Character> {
 			ratings.add(new Edge(n,r));
 			n.addEdge(new Edge(this,r));
 		}
+	}
+	
+	EdgeList getRatings() {
+		return this.ratings;
 	}
 	
 	/**
