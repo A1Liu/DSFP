@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class TestRunner {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, IllegalArgumentException, InterruptedException {
 		
 		
 		//Graph a = Graph.getGraph("Ratings Graph");

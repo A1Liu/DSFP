@@ -32,11 +32,12 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		update(getVertex().getLabel());
 	}
 	
-	public void update(int i) {
+	public void update(int i) throws IllegalArgumentException, InterruptedException {
 		System.out.println(this.keys());
-		System.out.println();
+		System.out.println(getRatings());
 		for (int x = 0; x < i; x++) {
-			System.out.print(getRatings());
+			update();
+			System.out.println(getRatings());
 		}
 	}
 	
@@ -72,12 +73,12 @@ public class RatingsGraph extends Graph<RatingsNode> {
 					if (!reached.containsKey(current)) {
 						updateVertex(current);
 						currentEdges = getVertex(current).getRatings();//list of edges
-						for (int x = 0; x<currentEdges.size();x++) {
-							currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
-							if (!reached.containsKey(currentNeighbor)) {
-									queue.enqueue(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
-							}	
-						}
+							for (int x = 0; x<currentEdges.size();x++) {
+								currentNeighbor = (Character) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
+								if (!reached.containsKey(currentNeighbor)) {
+										queue.enqueue(currentNeighbor);//only add the neighbor to the queue if it wasn't reached and isn't already in the queue
+								}	
+							}
 						reached.put(current, true);
 					}
 				}
@@ -120,16 +121,54 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	 */
 	private void loadEdge(String[] edge) {
 		
-		if (edge.length < 3)
+		if (edge.length < 3) {
 			return;
+		}
 		
-		if(edge[0].length()==1 && edge[1].length()==1) {
-				if (isNumber(edge[2]))
-					addEdge(edge[0].charAt(0),edge[1].charAt(0),Integer.parseInt(edge[2]));
-				else
-					addEdge(edge[0].charAt(0),edge[1].charAt(0),1);
+		if(edge[0].length()==1 || isNumber(edge[0])) {
+ 			if (edge[1].length()==1 || isNumber(edge[1])) {
+ 				char id1;
+ 				char id2;
+ 				
+ 				if(getVertex(edge[0].charAt(0))==null) {
+ 					if (isNumber(edge[0])) {
+ 						id1 = (char) (Integer.parseInt(edge[0])+48);
+ 						if (getVertex(Integer.parseInt((edge[0]))) == null) {
+ 	 						addVertex(id1);
+ 	 					}
+ 					} else {
+	 					id1 = edge[0].charAt(0);
+	 					addVertex(id1);
+	 				}	
+ 				} else {
+ 					id1 = edge[0].charAt(0);
+ 				}
+ 				
+ 				if(getVertex(edge[1].charAt(0))==null) {
+ 					if (isNumber(edge[1])) {
+ 						id2 = (char) (Integer.parseInt(edge[1])+48);
+ 						if (getVertex(Integer.parseInt((edge[1]))) == null) {
+ 	 						addVertex(id2);
+ 	 					}
+ 					} else {
+	 					id2 = edge[1].charAt(0);
+	 					addVertex(id2);
+	 				}	
+ 				} else {
+ 					id2 = edge[1].charAt(0);
+ 				}
+ 				
+ 				if(edge[0].length()==1 && edge[1].length()==1) {
+					if (isNumber(edge[2])) {
+						addEdge(id1,id2,Integer.parseInt(edge[2]));
+					}else {
+						addEdge(id1,id2,1);
+					}
+ 				}
+ 			}
 		}
 	}
+
 	
 	@Override
 	public void incrementID() {
@@ -147,14 +186,14 @@ class RatingsNode extends Vertex<Character> {
 		super(t);
 		r = 1.0;
 		v = 1.0;
-		
+		ratings = new EdgeList();
 		//adding self to the list of nodes that have rated this node. We don't need to add self to the list we've rated because we already have a reference to this node.
 		super.addEdge(new Edge(this, 1));//addEdge adds to the edgelist, which is the list of ratings this node has received
 	}
 	
 	@Override
 	public boolean addEdge(Edge e) {
-		if (e.getDestination() instanceof RatingsNode)
+		if (e.getDestination() instanceof RatingsNode && !(e.getDestination()==this))
 			return super.addEdge(e);
 		return false;
 	}
