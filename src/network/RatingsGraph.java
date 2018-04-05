@@ -28,6 +28,14 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return addVertex(t,v);
 	}
 	
+	public boolean addRating(Character t1, Character t2, int l) {
+		if (getVertex(t1)==null || getVertex(t2)==null) {
+			return false;
+		}
+		getVertex(t1).rate(getVertex(t2), l);
+		return true;
+	}
+	
 	public void update() throws InterruptedException, IllegalArgumentException {
 		update(getVertex().getLabel());
 	}
@@ -42,10 +50,10 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	}
 	
 	/**
-	 * LMAO NOT DONE AT ALL
-	 * @param t
-	 * @throws InterruptedException
-	 * @throws IllegalArgumentException
+	 * Updates the network, starting at node t
+	 * @param t the starting point of the breadth-first iteration
+	 * @throws InterruptedException If the queue screws up
+	 * @throws IllegalArgumentException If t isn't a node
 	 */
 	public void update(Character t) throws InterruptedException, IllegalArgumentException {
 		Queue<Character> queue = new Queue<Character>();
@@ -160,9 +168,9 @@ public class RatingsGraph extends Graph<RatingsNode> {
  				
  				if(edge[0].length()==1 && edge[1].length()==1) {
 					if (isNumber(edge[2])) {
-						addEdge(id1,id2,Integer.parseInt(edge[2]));
+						addRating(id1,id2,Integer.parseInt(edge[2]));
 					}else {
-						addEdge(id1,id2,1);
+						addRating(id1,id2,1);
 					}
  				}
  			}
@@ -202,11 +210,11 @@ class RatingsNode extends Vertex<Character> {
 	 * Adds a rating from this node to another node
 	 * @param n the node being rated
 	 * @param r the rating being given
+	 * @return 
 	 */
-	void addRating(RatingsNode n, int r) {
+	void rate(RatingsNode n, int r) {
 		if (ratings.add(new Edge(n,r))) {
 			n.addEdge(new Edge(this,r));
-			return;
 		} else {
 			ratings.remove(new Edge(n,r));
 			n.rmEdge(new Edge(this,r));

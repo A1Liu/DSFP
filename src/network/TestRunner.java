@@ -14,6 +14,7 @@ public class TestRunner {
 		graph.loadNetwork("lib/Network.txt");
 		
 		graph.update(20);
+		System.out.println(graph.cytoScape());
 		
 		/*UndirectedGraph albert = new UndirectedGraph();
 		
