@@ -1,12 +1,5 @@
 package network;
 
-import static util.IOUtil.readFile;
-import static util.IOUtil.isNumber;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-
 class DirectedGraph extends Graph<Vertex<Character>> {
 	
 	

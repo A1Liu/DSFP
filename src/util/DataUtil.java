@@ -11,7 +11,7 @@ public class DataUtil {
 	}
 	
 	public static <T> boolean queueContains(Queue<T> q,T o) {
-		Enumeration e = q.elements();
+		Enumeration<T> e = q.elements();
 		
 		while(e.hasMoreElements()) {
 			if (e.nextElement() == o)

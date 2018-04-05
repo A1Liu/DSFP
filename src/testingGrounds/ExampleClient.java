@@ -7,7 +7,6 @@ import java.net.Socket;
 
 public class ExampleClient {
     public static void main( String[] args ) {
-        String path = "server.ExampleServer";
         String server = "127.0.0.1";//can be localhost or ip address
 
         System.out.println( "Loading contents of URL: " + server );
