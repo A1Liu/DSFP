@@ -55,9 +55,16 @@ public abstract class Graph<T extends Vertex<Integer>> extends Network<Integer,T
 		ArrayList<String> input = readFile(document);
 		String[] line;
 		for (int x = 0; x< input.size(); x++) {
-			line = input.get(x).split(",");
-			loadEdge(line);
+			loadEdge(input.get(x));
 		}
+	}
+	
+	/**
+	 * loads an edge into the network given comma separated values
+	 * @param edge edge to add
+	 */
+	public void loadEdge(String edge) {
+		loadEdge(edge.split(","));
 	}
 	
 	/**

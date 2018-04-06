@@ -143,6 +143,19 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	}
 	
 	/**
+	 * updates until the network passes a threshold for accuracy (5 repetitions of the same rounded rating value across all nodes)
+	 * @return a String Array with an output similar to that of updateCSV, but with only the 0th iteration and the last 10 iterations, as well as the cytoscape network (without any edges that go into themselves)
+	 */
+	public String[] updateLoop() {
+		return null;
+	}
+	
+	@Override
+	public String cytoScape() {
+		return nul;
+	}
+	
+	/**
 	 * get a list of ratings of each of the nodes
 	 * @return an arraylist of ratings
 	 */

@@ -1,6 +1,9 @@
 package network;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
 import static util.IOUtil.writeFile;
 
 /**
@@ -14,13 +17,25 @@ public class TestRunner {
 	public static void main(String[] args) throws IOException, IllegalArgumentException, InterruptedException {
 		
 		RatingsGraph graph = new RatingsGraph();
-		
-		String path = "lib/Network.csv";
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		String edge = "";
 		String outPath = "out/Iterations.csv";
+		String path = "lib/Network.csv";
 		path = "C:/Users/Alyer/Desktop/Network.csv";
-		graph.loadNetwork(path);
 		
-		writeFile(outPath,graph.updateCSV(10));
+		while (!edge.equals("foo")) {
+			edge = input.readLine();
+			graph.loadEdge(edge);
+			System.out.println(graph.keys());
+			
+			writeFile(outPath,graph.updateCSV(10));
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 }
