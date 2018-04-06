@@ -6,6 +6,9 @@ import users.User;
 /**
  * This interface represents a contract for a DAO for the {@link User} model.
  * Note that users are fully disconnected from passwords for security reasons.
+ * 
+ * @author BalusC
+ * @link http://balusc.blogspot.com/2008/07/dao-tutorial-data-layer.html
  */
 public interface UserDAO {
 

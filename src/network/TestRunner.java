@@ -8,7 +8,9 @@ public class TestRunner {
 		
 		RatingsGraph graph = new RatingsGraph();
 		
-		graph.loadNetwork("lib/Network.csv");
+		String path = "lib/Network.csv";
+		path = "C:/Users/Alyer/Desktop/Network.csv";
+		graph.loadNetwork(path);
 		
 		graph.update(40);
 		System.out.println(graph.cytoScape());

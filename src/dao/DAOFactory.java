@@ -9,14 +9,26 @@ public interface DAOFactory {
 
 	/**
 	 * UserDAO for handing simple User data
-	 * @return
+	 * @return a UserDAO
 	 */
 	UserDAO getUserDAO();
 	
 	/**
 	 * PassDAO for handling user passwords and salts
-	 * @return
+	 * @return a PassDAO
 	 */
 	PassDAO getPassDAO();
+	
+	/**
+	 * FriendDAO for handling user friends/following
+	 * @return a FriendDAO object
+	 */
+	//FriendDAO getFriendDAO();
+	
+	/**
+	 * RatingDAO for handing MEOWMEOWBEENZ-specific rating data
+	 * @return a RatingDAO object
+	 */
+	//RatingDAO getRatingDAO();
 	
 }
