@@ -32,9 +32,9 @@ Security:MD5 salted hashing.
 
 Super secure:  (and terrible for speed)  
 
-user sends username, gets salt 1 and salt 2 back.
-user sends hash(salt2,hash(salt1,password)) back
-server accepts or denies based off of stored salt1, salt2, hash(salt1,password)
+user sends username, gets salt 1 and salt 2 back.  
+user sends hash(salt2,hash(salt1,password)) back  
+server accepts or denies based off of stored salt1, salt2, hash(salt1,password)  
 server changes salt 2
 
 Connections:  
