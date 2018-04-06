@@ -37,20 +37,17 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		update(getVertex().getLabel());
 	}
 	
+	/**
+	 * update the network i times
+	 * @param i the amount of iterations to update the network
+	 * @throws IllegalArgumentException
+	 * @throws InterruptedException
+	 */
 	public void update(int i) throws IllegalArgumentException, InterruptedException {
-		
 		if (size() == 0)
 			return;
-		
-		System.out.println(this.keys().toString().substring(1,this.keys().toString().length()-1));
-		System.out.println(getRatings());
-		System.out.println(getVotes());
-		System.out.println();
 		for (int x = 0; x < i; x++) {
 			update();
-			System.out.println(x + ":\t " + getRatings());
-			System.out.println("\t" + getVotes());
-			System.out.println();
 		}
 	}
 	
@@ -101,6 +98,14 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		}
 	}
 	
+	/**
+	 * This outputs a String array, where each element is a line in a csv file.
+	 * By adding newline characters between each element, it can be directly turned into a csv
+	 * @param i amount of update iterations
+	 * @return pseudo-csv, in the form of a string array
+	 * @throws IllegalArgumentException if update screws up
+	 * @throws InterruptedException if update screws up
+	 */
 	public String[] updateCSV(int i) throws IllegalArgumentException, InterruptedException {
 		
 		if (size() == 0)
@@ -129,10 +134,18 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return output;
 	}
 	
+	/**
+	 * update a specific vertex
+	 * @param t identifier of the vertex
+	 */
 	private void updateVertex(Integer t) {
 		this.getVertex(t).update();;
 	}
 	
+	/**
+	 * get a list of ratings of each of the nodes
+	 * @return an arraylist of ratings
+	 */
 	private ArrayList<Double> getRatings() {
 		ArrayList<RatingsNode> vertices = listVertices();
 		ArrayList<Double> ratings = new ArrayList<Double>();
@@ -142,6 +155,10 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return ratings;
 	}
 	
+	/**
+	 * Get the vote count of each of the nodes
+	 * @return an arraylist of vote counts
+	 */
 	private ArrayList<Double> getVotes() {
 		ArrayList<RatingsNode> vertices = listVertices();
 		ArrayList<Double> votes = new ArrayList<Double>();
@@ -158,8 +175,6 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		getVertex(n1).rate(getVertex(n2), r);
 		return true;
 	}
-	
-	
 	
 	@Override
 	public void incrementID() {
@@ -214,6 +229,10 @@ class RatingsNode extends Vertex<Integer> {
 		}
 	}
 	
+	/**
+	 * getter for ratings list
+	 * @return ratings edgelist
+	 */
 	EdgeList getRatings() {
 		return this.ratings;
 	}
@@ -264,15 +283,28 @@ class RatingsNode extends Vertex<Integer> {
 		return getPower(this.r,this.v);
 	}
 
+	/**
+	 * getter for rating
+	 * @return rating
+	 */
 	double getR() {
 		return r;
 	}
 
+	/**
+	 * setter for node's rating and votes
+	 * @param r
+	 * @param v
+	 */
 	void setNode(double r, double v) {
 		this.r = r;
 		this.v = v;
 	}
 
+	/**
+	 * getter for the vote count
+	 * @return vote count
+	 */
 	double getV() {
 		return v;
 	}
