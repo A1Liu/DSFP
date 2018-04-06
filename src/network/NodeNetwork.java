@@ -1,5 +1,14 @@
 package network;
 
+/**
+ * This class is designed to hold vertices named with strings, that hold a data type E. Right now it's just a more flexible version of Network.
+ * 
+ * Nodes are designed to hold an object of type E.
+ * 
+ * @author Alyer
+ *
+ * @param <E>
+ */
 public class NodeNetwork<E> extends Network<String,Node<E>> {
 	
 	
@@ -30,8 +39,7 @@ public class NodeNetwork<E> extends Network<String,Node<E>> {
 
 	@Override
 	protected void incrementID() {
-		// TODO Auto-generated method stub
-		
+		setDefaultID(""+(Integer.parseInt(getDefaultID())+1));
 	}
 }
 
@@ -43,6 +51,13 @@ public class NodeNetwork<E> extends Network<String,Node<E>> {
  * --------------------------------------------------------------------------------------------------------------------------------------------------
  */
 
+/**
+ * This class represents a vertex that holds a specific object in addition to its label.
+ * 
+ * @author Alyer
+ *
+ * @param <E> The type of object it holds
+ */
 class Node<E> extends Vertex<String> {
 	
 	private E data;

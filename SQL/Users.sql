@@ -10,6 +10,8 @@ CREATE TABLE javabase.user (
 	firstname VARCHAR(40) NULL,
 	lastname VARCHAR(40) NULL,
 	birthdate DATE NULL,
+    rating DECIMAL(6,5) UNSIGNED NOT NULL,
+    votes DECIMAL(15,5) UNSIGNED NOT NULL,
  
 	PRIMARY KEY (id),
 	UNIQUE (username),

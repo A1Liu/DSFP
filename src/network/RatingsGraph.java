@@ -13,7 +13,7 @@ import sun.misc.Queue;
  */
 public class RatingsGraph extends Graph<RatingsNode> {
 	
-	public RatingsGraph() {
+	RatingsGraph() {
 	
 	}
 	
@@ -25,6 +25,11 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return addVertex(t,v);
 	}
 	
+	/**
+	 * Traverses the network and updates it, starting from the first listed node in the network
+	 * @throws InterruptedException
+	 * @throws IllegalArgumentException
+	 */
 	public void update() throws InterruptedException, IllegalArgumentException {
 		if (size() == 0)
 			return;
@@ -66,7 +71,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		
 		//creating necessary containers
 		Hashtable<Integer, Boolean> reached = new Hashtable<Integer,Boolean>();
-		Enumeration<Integer> vertexList = enumVertices();
+		Enumeration<Integer> vertexList = enumKeys();
 		ArrayList<Edge> currentEdges;
 		Integer current;
 		Integer currentNeighbor;

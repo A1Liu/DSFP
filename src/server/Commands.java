@@ -2,6 +2,7 @@ package server;
 
 import dao.DAOException;
 
+
 class Commands {
 	
 	private Commands() {

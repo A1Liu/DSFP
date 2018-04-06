@@ -2,6 +2,11 @@ package network;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the Edge-specific ArrayList object that all point objects contain. Its goal is to hold the edges coming from a specific vertex
+ * @author Alyer
+ *
+ */
 class EdgeList extends ArrayList<Edge> {
 	
 	/**
@@ -12,12 +17,20 @@ class EdgeList extends ArrayList<Edge> {
 	EdgeList() {
 	}
 	
+	/**
+	 * constructor to create an edgeList from an existing ArrayList
+	 * @param a ArrayList to base the edgelist off of
+	 */
 	EdgeList(ArrayList<Edge> a) {
 		for(int x = 0; x < a.size(); x++) {
 			add(a.get(x));
 		}
 	}
 	
+	/**
+	 * constructor to create an edgeList from an existing Array
+	 * @param a Array to base the edgelist off of
+	 */
 	EdgeList(Edge[] a) {
 		for(int x = 0; x < a.length; x++) {
 			add(a[x]);
@@ -27,7 +40,7 @@ class EdgeList extends ArrayList<Edge> {
 	/**
 	 * adds the element e if it's not already in the list
 	 * @param e the element that we want to add
-	 * @return true if successfull
+	 * @return true if successful
 	 */
 	@Override
 	public boolean add(Edge e) {
@@ -68,6 +81,11 @@ class Edge implements Comparable<Edge> {
 		return this.getLength()-e.getLength();
 	}
 	
+	/**
+	 * This checks whether an edge is "equal" to another edge.
+	 * It only looks at destination to make other methods easier to implement.
+	 * To check length, use compareTo
+	 */
 	@Override
 	public boolean equals(Object o) {
 		
@@ -112,6 +130,9 @@ class Edge implements Comparable<Edge> {
 		destination = d;
 	}
 	
+	/**
+	 * Returns the destination and length of each edge in String form.
+	 */
 	@Override
 	public String toString() {
 		try {
@@ -133,6 +154,13 @@ class Edge implements Comparable<Edge> {
  * --------------------------------------------------------------------------------------------------------------------------------------------------
  */
 
+/**
+ * This class allows for easier implementation of listing full networks. Might get rid of it later depending on how I restructure code, but right now it does its job fine.
+ * 
+ * This could probably be removed if I restructure the code just a little bit.
+ * @author Alyer
+ *
+ */
 class EdgePair extends Edge {
 	
 	private final Point source;
@@ -171,7 +199,8 @@ class EdgePair extends Edge {
 	}
 	
 	/**
-	 * toString, also a line in the csv
+	 * returns the source, destination, and length of the edgepair.
+	 * The output is formatted as comma separated values.
 	 */
 	public String toString() {
 		return (getLength() == 0)
