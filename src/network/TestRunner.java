@@ -1,6 +1,7 @@
 package network;
 
 import java.io.IOException;
+import static util.IOUtil.writeFile;
 
 /**
  * This class is the test harness for methods in the network package.
@@ -14,14 +15,12 @@ public class TestRunner {
 		
 		RatingsGraph graph = new RatingsGraph();
 		
-		graph.addVertex(1);
-		
 		String path = "lib/Network.csv";
+		String outPath = "out/Iterations.csv";
 		path = "C:/Users/Alyer/Desktop/Network.csv";
 		graph.loadNetwork(path);
 		
-		graph.update(40);
-		System.out.println(graph.cytoScape());
+		writeFile(outPath,graph.updateCSV(10));
 	}
 
 }

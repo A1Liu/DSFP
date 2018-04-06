@@ -42,7 +42,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		if (size() == 0)
 			return;
 		
-		System.out.println(this.keys());
+		System.out.println(this.keys().toString().substring(1,this.keys().toString().length()-1));
 		System.out.println(getRatings());
 		System.out.println(getVotes());
 		System.out.println();
@@ -99,6 +99,34 @@ public class RatingsGraph extends Graph<RatingsNode> {
 			if (vertexList.hasMoreElements())
 				start = vertexList.nextElement();
 		}
+	}
+	
+	public String[] updateCSV(int i) throws IllegalArgumentException, InterruptedException {
+		
+		if (size() == 0)
+			return null;
+		
+		String[] output = new String[i*2+7];
+		//0 - label 1, 1 - header, 2 - it 0, 3...i+2 ratings, i+3 blank, i+4 - label, i+5 - header, i+6 it 0, i+7...2i+6 values
+		//3...i+2 ratings, i+3 blank, i+4 - label, i+5 - header, i+6 it 0, i+6...2i+5 values
+		String commas = "";
+		for (int x = 0;x < this.keys().size()-1;x++) {
+			commas+=",";
+		}
+		
+		output[0] = "Ratings," + i + " iterations," + commas;
+		output[1] = "Iteration," + this.keys().toString().substring(1,this.keys().toString().length()-1);
+		output[2] = "0," + getRatings().toString().substring(1, getRatings().toString().length()-1);
+		output[i+3] = commas + ",";
+		output[i+4] = "Vote Counts," +i + " iterations," + commas;
+		output[i+5] = "Iteration," + this.keys().toString().substring(1,this.keys().toString().length()-1);
+		output[i+6] = "0," + getVotes().toString().substring(1, getVotes().toString().length()-1);
+		for (int x = 0; x < i; x++) {
+			update();
+			output[x+3] = (x+1) + "," + getRatings().toString().substring(1, getRatings().toString().length()-1);
+			output[x+i+7] = (x+1) + ","+ getVotes().toString().substring(1, getVotes().toString().length()-1);
+		}
+		return output;
 	}
 	
 	private void updateVertex(Integer t) {
