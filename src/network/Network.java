@@ -238,7 +238,7 @@ abstract class Network<T,E extends Vertex<T>> {
 		while (reached.size() < vertices.size()) {
 			while (!queue.isEmpty()) {
 				current = queue.dequeue();
-				if (reached.containsKey(current)) {
+				if (!reached.containsKey(current)) {
 					currentEdges = vertices.get(current).getEdges();//list of edges
 					for (int x = 0; x<currentEdges.size();x++) {
 						currentNeighbor = (T) currentEdges.get(x).getDestination().getLabel(); //neighbor we're looking at
