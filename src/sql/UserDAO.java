@@ -49,7 +49,7 @@ public class UserDAO implements dao.UserDAO {
     // Constructors -------------------------------------------------------------------------------
 
     /**
-     * Construct an User DAO for the given DAOFactory. Package private so that it can be constructed
+     * Construct a User DAO for the given DAOFactory. Package private so that it can be constructed
      * inside the DAO package only.
      * @param daoFactory The DAOFactory to construct this User DAO for.
      */

@@ -71,7 +71,7 @@ public abstract class Graph<T extends Vertex<Integer>> extends Network<Integer,T
 	 * loads an edge into the network given an array of strings
 	 * @param edge the array of strings to input
 	 */
-	private void loadEdge(String[] edge) {
+	protected void loadEdge(String[] edge) {
 		
 		if (edge.length < 3) {return;}//edge should be like this: [SourceName,DestinationName,weight] In this case the names are also integers
 		

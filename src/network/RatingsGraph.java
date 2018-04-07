@@ -3,6 +3,7 @@ package network;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import static util.IOUtil.isNumber;
 
 import sun.misc.Queue;
 
@@ -142,17 +143,71 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		this.getVertex(t).update();;
 	}
 	
+	@Override
+	public void loadEdge(String edge) {
+		String[] edges = edge.split(",");
+		if (edges.length > 2)
+			if (isNumber(edges[2]) && Integer.parseInt(edges[2]) > 5)
+					edges[2] = "5";
+		super.loadEdge(edges);
+	}
+	
 	/**
 	 * updates until the network passes a threshold for accuracy (5 repetitions of the same rounded rating value across all nodes)
 	 * @return a String Array with an output similar to that of updateCSV, but with only the 0th iteration and the last 10 iterations, as well as the cytoscape network (without any edges that go into themselves)
+	 * @throws InterruptedException 
+	 * @throws IllegalArgumentException 
 	 */
-	public String[] updateLoop() {
-		return null;
-	}
-	
-	@Override
-	public String cytoScape() {
-		return nul;
+	public String[] updateLoop() throws IllegalArgumentException, InterruptedException {
+		if (size() == 0)
+			return null;
+		Queue<String> ratings = new Queue<String>();
+		Queue<String> votes = new Queue<String>();
+		String[] output = new String[29];
+		String commas = "";
+		for (int x = 0;x < this.keys().size()-1;x++) {
+			commas+=",";
+		}
+		
+		output[1] = "Iteration," + this.keys().toString().substring(1,this.keys().toString().length()-1);
+		output[2] = "0," + getRatings().toString().substring(1, getRatings().toString().length()-1);
+		output[13] = commas + ",";
+		
+		output[15] = "Iteration," + this.keys().toString().substring(1,this.keys().toString().length()-1);
+		output[16] = "0," + getVotes().toString().substring(1, getVotes().toString().length()-1);
+		
+		System.out.println(output[16]);
+		
+		int x= 0;
+		for (x = 0; x < 10; x++) {
+			update();
+			output[x+3] = (x+1) + "," + getRatings().toString().substring(1, getRatings().toString().length()-1);
+			output[x+17] = (x+1) + ","+ getVotes().toString().substring(1, getVotes().toString().length()-1);
+			ratings.enqueue(output[x+3]);
+			votes.enqueue(output[x+17]);
+		}
+		
+		while (!output[((x - 2) % 10) + 3].substring(output[((x - 2) % 10) + 3].indexOf(',')).equals(output[((x-1) % 10) + 3].substring(output[((x-1) % 10) + 3].indexOf(',')))) {//while the  most recent iteration results and its preceding results dont match, keep going
+			update();
+			output[(x % 10) +3] = (x+1) + "," + getRatings().toString().substring(1, getRatings().toString().length()-1);//output holds the 10 most recent results
+			output[(x % 10) +17] = (x+1) + ","+ getVotes().toString().substring(1, getVotes().toString().length()-1);
+			ratings.dequeue();
+			ratings.enqueue(output[(x % 10) +3]);//queue holds the 10 most recent as well
+			votes.dequeue();
+			votes.enqueue(output[(x % 10) +17]);
+			x++;
+		}
+		
+		for (int y = 0; y < 10; y++) {
+			output[y+3] = ratings.dequeue();//fill output with 10 most recent
+			output[y+17] = votes.dequeue();
+		}
+		
+		output[0] = "Ratings," + (x) + " iterations," + commas;//output amount of iterations
+		output[14] = "Vote Counts," + (x) + " iterations," + commas;
+		output[27] = "," + commas;
+		output[28] = this.cytoScape();
+		return output;
 	}
 	
 	/**
@@ -181,6 +236,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		return votes;
 	}
 	
+	
 	@Override
 	public boolean addEdge(Integer n1, Integer n2, int r) {
 		if (getVertex(n1) == null || getVertex(n2) == null)
@@ -188,6 +244,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 		getVertex(n1).rate(getVertex(n2), r);
 		return true;
 	}
+	
 	
 	@Override
 	public void incrementID() {
