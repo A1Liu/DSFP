@@ -16,9 +16,9 @@
 1. *df*/*dr* > 0
 2. *df*/*dv* > 0
 3. *d*<sup>2</sup>*f*/*dv<sup>2</sup>* < 0
-4. If node *n* has no adjacent nodes, then *v*<sub>*n*</sub> = *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) = *r*<sub>*n*</sub> = 1
-5. The only solution to *v*<sub>*n*</sub> = *f*(1 , *v*<sub>*n*</sub>) is *v*<sub>*n*</sub> = 1
-6. When *v*<sub>*k*</sub> is defined as *f*(1 , *v*<sub>*k*-1</sub>) for all k > 0, *lim* as *k*->*infinity*(*v*<sub>*k*</sub>) = 1 for all *v*<sub>0</sub>
+4. If node *n* has no adjacent nodes, then *v*<sub>*n*</sub> = *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) = 0 and  *r*<sub>*n*</sub> = 1
+5. The only solution to *v*<sub>*n*</sub> = *f*(1 , *v*<sub>*n*</sub>) is *v*<sub>*n*</sub> = 0
+6. When *v*<sub>*k*</sub> is defined as *f*(1 , *v*<sub>*k*-1</sub>) for all k > 0, *lim* as *k*->*infinity*(*v*<sub>*k*</sub>) = 0 for all *v*<sub>0</sub>
 
 ## Task
 
