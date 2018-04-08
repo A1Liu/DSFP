@@ -332,8 +332,8 @@ class RatingsNode extends Vertex<Integer> {
 	 * @return the power of the node
 	 */
 	static double getPower(double r, double v) {
-		double x = 5.0 - Math.pow(1.5, 1-v);//first parameter of Math.power is the speed at which power increases relative to votes received
-		return Math.pow(2,r)*x;
+		double x = 2.0 - Math.pow(5, 1-v);//first parameter of Math.power is the speed at which power increases relative to votes received
+		return Math.pow(Math.pow(2,r),x/4.0);
 	}
 	
 	/**
