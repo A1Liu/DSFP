@@ -7,7 +7,10 @@
 
 ### Node Significance Rules
 
-1. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the rating-based significance threshhold for node *n*, *S*<sub>*r*</sub> is:
+1. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the rating change threshhold for node *n*, *S*<sub>*r*</sub> is:
+
+
+
 
 2. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the voting power-based significance threshhold for node *n*, *S*<sub>*r*</sub> is:
 
