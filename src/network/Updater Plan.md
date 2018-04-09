@@ -16,8 +16,6 @@
 
 *df* = (*t* &times; *v*<sub>*m*</sub>)/(*w* - *r*<sub>*m*</sub> &times; *v*<sub>*m*</sub>)
 
-4. If *w* denotes the weight of new edge *e* = (*n* , *m*) between nodes *n* and *m*, the minimum voting power necessary for *e* to cause an update in *m* is:
+4. If *m* and *n* are non-adjacent noes, and *w* denotes the weight of new edge *e* = (*n* , *m*) from *n* to *m*, the minimum voting power necessary for *e* to cause an update in *m* is:
 
 *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) = (*t* &times; *v*<sub>*m*</sub>)/(*w* - *r*<sub>*m*</sub> &times; *v*<sub>*m*</sub>)
-
-### Node
