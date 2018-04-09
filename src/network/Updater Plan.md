@@ -4,4 +4,15 @@
 
 ## Solution
 
-Beats me.
+
+### Node Significance Rules
+
+1. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the rating-based significance threshhold for node *n*, *S*<sub>*r*</sub> is:
+
+2. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the voting power-based significance threshhold for node *n*, *S*<sub>*r*</sub> is:
+
+
+
+WIP
+  
+( *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) &times; *w*<sub>1</sub> + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) &times; *w*<sub>2</sub> + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>) &times; *w*<sub>*t*</sub> )/*v*<sub>*n*</sub>  
