@@ -22,4 +22,5 @@
 
 ## Task
 
-1. Find function *f*(*r*<sub>*n*<sub>*k*</sub></sub> , *v*<sub>*n*<sub>*k*</sub></sub>) such that the values of *r*<sub>*n*<sub>*k*</sub></sub> and *v*<sub>*n*<sub>*k*</sub></sub> converge for all nodes *n*<sub>1...*j*</sub> of network size *j*
+1. Find function *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) such that the values of *r*<sub>*n*<sub>*k*</sub></sub> and *v*<sub>*n*<sub>*k*</sub></sub> converge for all nodes *n*<sub>1...*j*</sub> of network size *j*
+2. Optimize *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) so that the network converges in as few iterations as possible
