@@ -18,6 +18,25 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	
 	}
 	
+	/**
+	 * make a copy of an existing RatingsGraph, including its vertices' states
+	 * @param g graph to copy
+	 * @throws InterruptedException if something fucks up with the Queue
+	 */
+	RatingsGraph(RatingsGraph g) throws InterruptedException {
+		String[] input = g.cytoScape().split("\n");
+		for (int x = 0; x < input.length; x++) {
+			this.loadEdge(input[x]);
+		}
+		
+		Enumeration<Integer> vertices = g.enumKeys();
+		Integer current = 0;
+		while (vertices.hasMoreElements()) {
+			current = vertices.nextElement();
+			this.getVertex().setNode(g.getVertex(current).getR(), g.getVertex(current).getV());
+		}
+	}
+	
 	@Override
 	public boolean addVertex(Integer t) {
 		if (getDefaultID()>127 || (t.toString().charAt(0) < 48))
@@ -113,8 +132,6 @@ public class RatingsGraph extends Graph<RatingsNode> {
 			return null;
 		
 		String[] output = new String[i*2+7];
-		//0 - label 1, 1 - header, 2 - it 0, 3...i+2 ratings, i+3 blank, i+4 - label, i+5 - header, i+6 it 0, i+7...2i+6 values
-		//3...i+2 ratings, i+3 blank, i+4 - label, i+5 - header, i+6 it 0, i+6...2i+5 values
 		String commas = "";
 		for (int x = 0;x < this.keys().size()-1;x++) {
 			commas+=",";
