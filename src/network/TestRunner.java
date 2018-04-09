@@ -26,12 +26,11 @@ public class TestRunner {
 		String outPath = "out/Iterations.csv";
 		String path = "lib/Network.csv";
 		path = "C:/Users/Alyer/Desktop/Network - Out.csv";
-		graph.loadNetwork(path);
-		
-		
+		graph.loadNetwork(path);	
 		
 		writeFile(outPath,graph.updateLoop());
 		System.out.println("Enter in new edge.");
+
 		/*while (!edge.equals("foo")) {
 			edge = input.readLine();
 			if (!edge.equals("foo")) {
@@ -47,11 +46,6 @@ public class TestRunner {
 		System.out.println(graph.countEdges());
 		System.out.println(graph.size());
 		System.out.println(graph.countEdges()/graph.size());
-		
-		
-		
-		
-		
 	}
 
 }
