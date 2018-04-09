@@ -98,10 +98,28 @@ abstract class Network<T,E extends Vertex<T>> {
 	}
 	
 	/**
+	 * returns the toString of a specific vertex
+	 * @param id the id of the vertex
+	 * @return toString for the specified vertex
+	 */
+	public String vertexToString(T id) {
+		return vertices.get(id).toString();
+	}
+	
+	/**
+	 * Checks to see if vertex with id is in the network
+	 * @param id id of the vertex we want to check
+	 * @return true if the vertex is in the network
+	 */
+	public boolean checkVertex(T id) {
+		return vertices.containsKey(id);
+	}
+	
+	/**
 	 * gets the first vertex in the network
 	 * @return the first value of the network
 	 */
-	public E getVertex() {
+	protected E getVertex() {
 		return vertices.get(vertices.keys().nextElement());
 	}
 	
@@ -110,7 +128,7 @@ abstract class Network<T,E extends Vertex<T>> {
 	 * @param id identifier integer of the vertex
 	 * @return vertex matching id
 	 */
-	public E getVertex(T id) {
+	protected E getVertex(T id) {
 		return vertices.get(id);
 	}
 	
