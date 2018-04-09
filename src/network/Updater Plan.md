@@ -4,18 +4,20 @@
 
 ## Solution
 
+### Node Updater Rules
 
-### Node Significance Rules
+1. The minimum potential rating change necessary to trigger an update in a node is denoted as threshhold *t*
 
-1. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the rating change threshhold for node *n*, *S*<sub>*r*</sub> is:
+2.  If *m* is an outgoing adjacent nodes to node *n*, where *w* denotes the weight of edge *e* = (*n* , *m*),*e*'s the rating change threshhold for *e* to trigger an update in *m* is:
 
+*dw* = (*t* &times; *v*<sub>*m*</sub>)/*f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>)
 
+3.  If *m* is an outgoing adjacent nodes to node *n*, where *w* denotes the weight of edge *e* = (*n* , *m*), *n*'s voting power change threshhold for *e* to trigger an update in *m* is:
 
+*df* = (*t* &times; *v*<sub>*m*</sub>)/(*w* - *r*<sub>*m*</sub> &times; *v*<sub>*m*</sub>)
 
-2. If *r*<sub>*n*</sub> and *v*<sub>*kn</sub> denote the values of *r* and *v* for node *n* the voting power-based significance threshhold for node *n*, *S*<sub>*r*</sub> is:
+4. If *w* denotes the weight of new edge *e* = (*n* , *m*) between nodes *n* and *m*, the minimum voting power necessary for *e* to cause an update in *m* is:
 
+*f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) = (*t* &times; *v*<sub>*m*</sub>)/(*w* - *r*<sub>*m*</sub> &times; *v*<sub>*m*</sub>)
 
-
-WIP
-  
-( *f*(*r*<sub>*n*</sub> , *v*<sub>*n*</sub>) + *f*(*r*<sub>1</sub> , *v*<sub>1</sub>) &times; *w*<sub>1</sub> + *f*(*r*<sub>2</sub> , *v*<sub>2</sub>) &times; *w*<sub>2</sub> + ... *f*(*r*<sub>*t*</sub> , *v*<sub>*t*</sub>) &times; *w*<sub>*t*</sub> )/*v*<sub>*n*</sub>  
+### Node
