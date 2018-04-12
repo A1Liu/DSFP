@@ -26,10 +26,9 @@ public class Server {
 		this.port = port;
 	}
 	
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] arg) throws Exception {
         
     	Server server = new Server("javabase.jdbc", 1100);
-    	
     	int port = 1100;
         System.out.println( "Start server on port: " + port );
         
