@@ -157,7 +157,7 @@ public class RatingsGraph extends Graph<RatingsNode> {
 	 * @param t identifier of the vertex
 	 */
 	private void updateVertex(Integer t) {
-		this.getVertex(t).update();;
+		this.getVertex(t).update();
 	}
 	
 	@Override
@@ -326,6 +326,7 @@ class RatingsNode extends Vertex<Integer> {
 	
 	/**
 	 * recalculates the value of r and v and stores them
+	 * NOTE: Need to move this method to the RatingsGraph Class and remake it.
 	 */
 	void update() {
 		double ratingSum = 0;
