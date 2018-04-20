@@ -1,2 +1,4 @@
-/bin/
-/Properties/
+/Client/bin/
+/Client/Properties/
+/Server/bin/
+/Server/Properties/
