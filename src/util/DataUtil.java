@@ -1,7 +1,6 @@
 package util;
 
 import java.util.Enumeration;
-
 import sun.misc.Queue;
 
 public class DataUtil {
