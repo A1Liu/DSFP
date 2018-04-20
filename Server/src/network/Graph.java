@@ -53,7 +53,6 @@ public abstract class Graph<T extends Vertex<Integer>> extends Network<Integer,T
 	 */
 	public void loadNetwork(String document) throws IOException {
 		ArrayList<String> input = readFile(document);
-		String[] line;
 		for (int x = 0; x< input.size(); x++) {
 			loadEdge(input.get(x));
 		}
