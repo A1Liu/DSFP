@@ -1,0 +1,16 @@
+/.DS_Store
+/Network.csv
+/client.properties
+/dao/
+/dao.properties
+/mysql-connector-java-5.1.46.jar
+/network/
+/network.properties
+/security/
+/server/
+/server.properties
+/sql/
+/testingGrounds/
+/userList.txt
+/users/
+/util/
