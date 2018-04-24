@@ -17,7 +17,6 @@ public class Runner extends Application {
     public void start(Stage primaryStage) {
         
 		primaryStage.setTitle("JavaFX Welcome");
-        
         Scene scene = new LoginPage();
         primaryStage.setScene(scene);
         

@@ -21,16 +21,20 @@ public class Const {
 		
 		Properties props = new Properties();
 		try {
-			props.load(new FileInputStream(PROPERTIES_FILE));
+			props.load(new FileInputStream(PROPERTIES_FILE));//read in from properties file
+			
+			//get info from properties file
 			WIDTH = Integer.parseInt(props.getProperty("client.width"));
 			HEIGHT = Integer.parseInt(props.getProperty("client.height"));
 			SERVER_PORT = Integer.parseInt(props.getProperty("server.port"));
 			
+			//Test connection with server
 			Socket test = new Socket(props.getProperty("server.ip"),SERVER_PORT);
 			test.close();
 			
 			String sessID = props.getProperty("server.sessionid");
 			
+			//If the client has a stored sessionID then use it, otherwise set sessionID to null
 			if (sessID == null || sessID.trim().length() == 0 || !isNumber(sessID)) {
 				sessionID = null;
 			} else {
