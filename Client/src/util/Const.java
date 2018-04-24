@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.net.ConnectException;
 import java.net.Socket;
+import static util.IOUtil.isNumber;
 
 public class Const {
 	
@@ -30,7 +31,7 @@ public class Const {
 			
 			String sessID = props.getProperty("server.sessionid");
 			
-			if (sessID.equals("") || sessID.trim().length() == 0) {
+			if (sessID == null || sessID.trim().length() == 0 || !isNumber(sessID)) {
 				sessionID = null;
 			} else {
 				sessionID = Integer.parseInt(sessID);
