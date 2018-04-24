@@ -1,9 +1,7 @@
 package server;
 
-import static gui.Const.SERVER_PORT;
-
+import static util.Const.SERVER_PORT;
 import java.io.Serializable;
-
 import sun.misc.Queue;
 
 public class PacketHandler {
