@@ -11,7 +11,7 @@ import static util.IOUtil.isNumber;
 public class Const {
 	
 	
-	public static final String PROPERTIES_FILE = "client.properties";
+	public static final String PROPERTIES_FILE = "Properties/client.properties";
 	public static final double WIDTH;
 	public static final double HEIGHT;
 	public static final int SERVER_PORT;
@@ -29,7 +29,9 @@ public class Const {
 			SERVER_PORT = Integer.parseInt(props.getProperty("server.port"));
 			
 			//Test connection with server
-			Socket test = new Socket(props.getProperty("server.ip"),SERVER_PORT);
+			/*
+			 * 
+			 * Socket test = new Socket(props.getProperty("server.ip"),SERVER_PORT);
 			test.close();
 			
 			String sessID = props.getProperty("server.sessionid");
@@ -41,6 +43,8 @@ public class Const {
 				sessionID = Integer.parseInt(sessID);
 			}
 			
+			*/
+			
 		} catch (FileNotFoundException f) {
 			throw new StartUpException("Encountered an error loading information on start up.");
 		} catch (NumberFormatException n) {
@@ -50,5 +54,9 @@ public class Const {
 		} catch (IOException e) {
 			throw new StartUpException("An unknown error occurred.");
 		}
+	}
+	
+	private Const() {
+		
 	}
 }
