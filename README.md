@@ -100,3 +100,4 @@ These are links that I found that helped me make this app. Well some of them wer
 * [Socket programming](https://www.javaworld.com/article/2077322/core-java/core-java-sockets-programming-in-java-a-tutorial.html)
 * [What is a signal-flow graph?](https://en.wikipedia.org/wiki/Signal-flow_graph)
 * [Making graphs in a RDBMS](https://www.slideshare.net/quipo/rdbms-in-the-social-networks-age/161-Thank_you_Contact_details_lorenzoibuildingscomhttpwwwalbertoninfotalks)
+* [Multi-page GUI](https://stackoverflow.com/questions/14588230/javafx-app-with-many-pages)
