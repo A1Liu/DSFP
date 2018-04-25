@@ -22,6 +22,7 @@ class NewLoginPage extends Page {
 	private static PasswordField pwBox;
 	private static Label password2;
 	private static PasswordField pw2Box;
+	private static Text placeholder;
 	private static Button btn;
 	private static int count = 0;
 	
@@ -32,61 +33,65 @@ class NewLoginPage extends Page {
         pane.setHgap(10);
         pane.setVgap(10);
         pane.setPadding(new Insets(25, 25, 25, 25));
-        pane.getColumnConstraints().add(new ColumnConstraints(100));
+        pane.getColumnConstraints().add(new ColumnConstraints(200));
+        pane.getColumnConstraints().add(new ColumnConstraints(50));
         
         title = new Text("Create an Account");
         title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        pane.add(title, 0, count++, 2, 1);
-
+        
         userName = new Label("User Name:");
-        pane.add(userName, 0,count++);
-
+        
         userNameText = new TextField();
         userNameText.setPromptText("Username");
-        userNameText.setPrefWidth(100);
-        pane.add(userNameText, 0, count++);
         
         name = new Label("Name:");
-        pane.add(name, 0,count++);
-
+        
         nameText = new TextField();
         nameText.setPromptText("John Doe");
-        nameText.setPrefWidth(100);
-        pane.add(nameText, 0, count++);
-        
+
         email = new Label("Email:");
-        pane.add(email, 0,count++);
 
         emailText = new TextField();
         emailText.setPromptText("johnDoe@gmail.com");
-        emailText.setPrefWidth(800);
-        pane.add(emailText, 0, count++);
-
+        
         password = new Label("Password:");
-        pane.add(password, 0, count++);
-
+        
         pwBox = new PasswordField();
         pwBox.setPromptText("StrongPasswordThatCan'tBeHacked");
-        pane.add(pwBox, 0, count++);
-		
+        
         password2 = new Label("Confirm Password:");
-        pane.add(password2, 0, count++);
 
         pw2Box = new PasswordField();
         pw2Box.setPromptText("StrongPasswordThatCan'tBeHacked");
-        pane.add(pw2Box, 0, count++);
+      
+        placeholder = new Text("");
         
         btn = new Button();
 		btn.setText("Create Account");
-		pane.add(btn, 4,20);
-
+		
+		pane.add(title, 0, 0, 2, 1);        
+        pane.add(userName, 0,1);
+        pane.add(userNameText, 0, 2,2,1);
+        pane.add(name, 0,3);
+		pane.add(nameText, 0, 4,2,1);
+		pane.add(email, 0,5);
+		pane.add(emailText, 0, 6,2,1);
+		pane.add(password, 0, 7);
+		pane.add(pwBox, 0, 8,2,1);
+		pane.add(password2, 0, 9);
+		pane.add(pw2Box, 0, 10,2,1);
+        pane.add(placeholder,0,11);
+		pane.add(btn, 1,12,2,1);
+        pane.setPrefHeight(100);
+		
 	}}
 	
 	public NewLoginPage(Controller c) {
 		super(pane,c,Const.WIDTH,Const.HEIGHT);
 		btn.setOnAction(var -> {
-			System.out.println("a");
-			getController().loginPage();
+			/*
+			 * Communicate with server 
+			 */
 		});
 	}
 }
