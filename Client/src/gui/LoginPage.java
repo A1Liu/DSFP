@@ -60,13 +60,13 @@ public class LoginPage extends Scene {
         	 
             @Override
             public void handle(ActionEvent e) {
-            	Cache.setUsername(userTextField.getText());
-            	Cache.setPassword(pwBox.getText());
-            	
-            	//Check if username exists
-//                actiontarget.setFill(Color.FIREBRICK);
-//                actiontarget.setText("Sign in button pressed");
-            	Cache.addRequest(1);
+            	/*
+            	 * Get username and password with these two methods, then pass then to main
+            	 * userTextField.getText();
+            	 * pwBox.getText();
+            	 * 
+            	 * 
+            	 */
             }
         });
 	}}

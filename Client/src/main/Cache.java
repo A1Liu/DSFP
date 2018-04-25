@@ -32,8 +32,12 @@ public class Cache {
 		queue.enqueue(i);
 	}
 	
-	public static Integer getNext() throws InterruptedException {
+	public static Integer getNext() {
 		return queue.dequeue();
+	}
+	
+	public static boolean isEmpty() {
+		return queue.isEmpty();
 	}
 }
 

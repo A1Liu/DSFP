@@ -1,9 +1,14 @@
 package main;
 
-import gui.LoginPage;
+import gui.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Runner extends Application {
 	
@@ -14,12 +19,28 @@ public class Runner extends Application {
 	}
 
 	@Override
-    public void start(Stage primaryStage) {
+    public void start(Stage window) {
         
-		primaryStage.setTitle("MEOWMEOWBEENZ");
-        Scene scene = new LoginPage();
-        primaryStage.setScene(scene);
+		window.setTitle("MEOWMEOWBEENZ");
+        Scene scene = new NewLoginPage();
+        window.setScene(scene);
         
-        primaryStage.show();
+        window.show();
+        
     }
+	
+	/**
+	 * Infinitely loops through the draw and utilities methods.
+	 */
+	public static void runAnimation() {
+		EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
+				
+			}
+		};
+		Timeline tl = new Timeline(new KeyFrame(Duration.ONE, eh));
+		tl.setCycleCount(Timeline.INDEFINITE);
+		tl.play();
+	}
 }

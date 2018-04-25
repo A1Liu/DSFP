@@ -24,8 +24,8 @@ public class Const {
 			props.load(new FileInputStream(PROPERTIES_FILE));//read in from properties file
 			
 			//get info from properties file
-			WIDTH = Integer.parseInt(props.getProperty("client.width"));
-			HEIGHT = Integer.parseInt(props.getProperty("client.height"));
+			WIDTH = Integer.parseInt(props.getProperty("window.width"));
+			HEIGHT = Integer.parseInt(props.getProperty("window.height"));
 			SERVER_PORT = Integer.parseInt(props.getProperty("server.port"));
 			
 			//Test connection with server
