@@ -19,9 +19,10 @@ public class Runner extends Application {
 	}
 
 	@Override
-    public void start(Stage window) {
+    public void start(Stage primaryStage) {
         
-		window.setTitle("MEOWMEOWBEENZ");
+		primaryStage.setTitle("MEOWMEOWBEENZ");
+		Controller window = new Controller(primaryStage);
         Scene scene = new NewLoginPage();
         window.setScene(scene);
         

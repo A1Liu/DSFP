@@ -46,7 +46,7 @@ public class Const {
 			*/
 			
 		} catch (FileNotFoundException f) {
-			throw new StartUpException("Encountered an error loading information on start up.");
+			throw new StartUpException("Could not find program data on start up.");
 		} catch (NumberFormatException n) {
 			throw new StartUpException("Encountered an error loading information on start up.");
 		} catch (ConnectException c) {
