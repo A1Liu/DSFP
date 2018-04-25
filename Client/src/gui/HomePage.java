@@ -1,15 +1,19 @@
 package gui;
 
-import javafx.application.Application;
-import javafx.stage.*;
 import javafx.scene.*;
+import static util.Const.HEIGHT;
+import static util.Const.WIDTH;
 
-public class HomePage extends Application {
+class HomePage extends Page {
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		
+	private final static Group g;
+	
+	static {
+		g = new Group();
+	}
+	
+	public HomePage(Controller c) {
+		super(g, c, WIDTH, HEIGHT);
 	}
 
 }

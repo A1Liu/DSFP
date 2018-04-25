@@ -6,7 +6,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -23,9 +22,7 @@ public class Runner extends Application {
         
 		primaryStage.setTitle("MEOWMEOWBEENZ");
 		Controller window = new Controller(primaryStage);
-        Scene scene = new NewLoginPage();
-        window.setScene(scene);
-        
+        window.newLoginPage();
         window.show();
         
     }
