@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.stage.Stage;
+import server.*;
 
 /**
  * handles instantiation and transition between pages
