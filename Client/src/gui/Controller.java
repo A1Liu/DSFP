@@ -12,6 +12,10 @@ public class Controller {
 
 	private Stage window;
 	
+	public Controller() {
+		this(new Stage());
+	}
+	
 	public Controller(Stage primaryStage) {
 		this.window = primaryStage;
 	}
