@@ -14,7 +14,7 @@ public class PacketHandler {
 		queue = new Queue<Serializable>();
 	}
 	
-	public <T> void addPacket(String label, T data) {
+	public <T> void addPacket(double label, T data) {
 		Packet<T> p = new Packet<T>(label, data);
 		queue.enqueue(p);
 	}

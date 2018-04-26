@@ -23,6 +23,7 @@ public class Runner extends Application {
 		primaryStage.setTitle("MEOWMEOWBEENZ");
 		Controller window = new Controller(primaryStage);
         window.newLoginPage();
+        window.display(new ErrorScreen());
         window.show();
         
     }
