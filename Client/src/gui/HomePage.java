@@ -1,19 +1,24 @@
 package gui;
 
-import javafx.scene.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+
 import static util.Const.HEIGHT;
 import static util.Const.WIDTH;
 
 class HomePage extends Page {
 
-	private final static Group g;
+	private final static StackPane container;
+	private final static GridPane grid;
 	
 	static {
-		g = new Group();
+		grid = new GridPane();
+		container = new StackPane();
+		container.getChildren().add(grid);
 	}
 	
 	public HomePage(Controller c) {
-		super(g, c, WIDTH, HEIGHT);
+		super(container, c, WIDTH, HEIGHT);
 	}
 
 }
