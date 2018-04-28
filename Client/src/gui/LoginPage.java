@@ -72,7 +72,7 @@ class LoginPage extends Page {
 	}}
 	
 	public LoginPage(Controller c) {
-		super(grid,c,Const.WIDTH,Const.HEIGHT);
+		super(grid,c);
 	}
 	
 	

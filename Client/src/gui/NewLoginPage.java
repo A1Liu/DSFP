@@ -87,7 +87,7 @@ class NewLoginPage extends Page {
 	}}
 	
 	public NewLoginPage(Controller c) {
-		super(pane,c,Const.WIDTH,Const.HEIGHT);
+		super(pane,c);
 		btn.setOnAction(var -> {
 			/*
 			 * Communicate with server 

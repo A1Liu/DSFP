@@ -13,7 +13,7 @@ class LoadingPage extends Page {
 	}
 	
 	protected LoadingPage(Controller control) {
-		super(grid, control, WIDTH, HEIGHT);
+		super(grid, control);
 		// TODO Auto-generated constructor stub
 	}
 

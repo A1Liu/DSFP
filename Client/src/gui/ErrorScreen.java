@@ -10,28 +10,31 @@ import javafx.scene.text.*;
 
 public class ErrorScreen extends GridPane {
 
-	private static Text message;
-	private static Rectangle box;
-	private static StackPane container;
+	private final Text message;
+	private static final Rectangle box;
+	private final StackPane container;
 	
-	static {
-		
+	static {	
 		box = new Rectangle(300, 250, Paint.valueOf("0000ff"));
-		container = new StackPane();
-		container.getChildren().add(box);
-		
-		message = new Text("Error");
-		message.setFont(new Font(100));
-		container.getChildren().add(message);
 	}
 	
 	public ErrorScreen() {
+		this("Error");
+	}
+	
+	public ErrorScreen(String message) {
+		container = new StackPane();
+		this.message = new Text();
+		this.message.setText(message);
 		this.setup();
 	}
 	
 	private void setup() {
+		container.getChildren().add(box);
+		message.setFont(new Font(100));
 		this.setAlignment(Pos.CENTER);
 		this.setPadding(new Insets(25,25,25,25));
+		container.getChildren().add(message);
 		this.add(container,0,0);
 	}
 	

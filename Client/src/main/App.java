@@ -1,5 +1,7 @@
 package main;
 
+import java.net.Socket;
+
 import gui.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -9,37 +11,37 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Runner extends Application {
+/**
+ * Contains the app logic for a single instance of the application.
+ * Has methods to connect back end to front end
+ * @author Alyer
+ *
+ */
+public class App {
 	
+	private final Stage window;
+	private final Controller gui;
+	private Socket server;
 	
-	
-	public static void main(String... args) {
-		launch(args);
+	public App() {
+		this(new Stage());
 	}
-
-	@Override
-    public void start(Stage primaryStage) {
-        
-		primaryStage.setTitle("MEOWMEOWBEENZ");
-		Controller window = new Controller(primaryStage);
-        window.newLoginPage();
-        window.display(new ErrorScreen());
-        window.show();
-        
-    }
 	
-	/**
-	 * Infinitely loops through the draw and utilities methods.
-	 */
-	public static void runAnimation() {
-		EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent t) {
-				
-			}
-		};
-		Timeline tl = new Timeline(new KeyFrame(Duration.ONE, eh));
-		tl.setCycleCount(Timeline.INDEFINITE);
-		tl.play();
+	public App(Stage primaryStage) {
+		window = primaryStage;
+		gui = new Controller(this);
+		startup();
 	}
+	
+	public void startup() {
+		gui.newLoginPage();
+        gui.show();
+	}
+	
+	public Stage getStage() {
+		return window;
+	}
+	
+	
+	
 }

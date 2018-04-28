@@ -3,11 +3,11 @@ package gui;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import server.*;
+import main.App;
 import static util.Const.*;
 
 /**
- * handles instantiation and transition between pages
+ * handles GUI logic
  * @author liu_albert
  *
  */
@@ -15,14 +15,9 @@ public class Controller {
 
 	private Stage window;
 	
-	public Controller() {
-		this(new Stage());
+	public Controller(App application) {
+		this.window = application.getStage();
 	}
-	
-	public Controller(Stage primaryStage) {
-		this.window = primaryStage;
-	}
-	
 	
 	//Methods to set the scene and show it.
 	public void display(Parent root) {
