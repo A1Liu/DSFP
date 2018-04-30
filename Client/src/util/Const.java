@@ -15,12 +15,12 @@ public class Const {
 	public static final double WIDTH;
 	public static final double HEIGHT;
 	public static final int SERVER_PORT;
-<<<<<<< HEAD
-	public static Integer sessionID;//session ID should be separated from the rest of constants
-=======
 	public static final String SERVER_IP;
-	public static Integer sessionID;
->>>>>>> e38d90a53afa9932d0426b6e512f8524ad4d4d4f
+	public static Integer sessionID;//session ID should be separated from the rest of constants
+
+
+
+
 	
 	static {
 		
