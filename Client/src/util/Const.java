@@ -15,7 +15,7 @@ public class Const {
 	public static final double WIDTH;
 	public static final double HEIGHT;
 	public static final int SERVER_PORT;
-	public static Integer sessionID;
+	public static Integer sessionID;//session ID should be separated from the rest of constants
 	
 	static {
 		
