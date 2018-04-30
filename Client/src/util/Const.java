@@ -15,7 +15,12 @@ public class Const {
 	public static final double WIDTH;
 	public static final double HEIGHT;
 	public static final int SERVER_PORT;
+<<<<<<< HEAD
 	public static Integer sessionID;//session ID should be separated from the rest of constants
+=======
+	public static final String SERVER_IP;
+	public static Integer sessionID;
+>>>>>>> e38d90a53afa9932d0426b6e512f8524ad4d4d4f
 	
 	static {
 		
@@ -27,13 +32,7 @@ public class Const {
 			WIDTH = Integer.parseInt(props.getProperty("window.width"));
 			HEIGHT = Integer.parseInt(props.getProperty("window.height"));
 			SERVER_PORT = Integer.parseInt(props.getProperty("server.port"));
-			
-			//Test connection with server
-			/*
-			 * 
-			 * Socket test = new Socket(props.getProperty("server.ip"),SERVER_PORT);
-			test.close();
-			
+			SERVER_IP = props.getProperty("server.ip");
 			String sessID = props.getProperty("server.sessionid");
 			
 			//If the client has a stored sessionID then use it, otherwise set sessionID to null
@@ -41,9 +40,7 @@ public class Const {
 				sessionID = null;
 			} else {
 				sessionID = Integer.parseInt(sessID);
-			}
-			
-			*/
+			}			
 			
 		} catch (FileNotFoundException f) {
 			throw new StartUpException("Could not find program data on start up.");

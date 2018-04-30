@@ -1,6 +1,4 @@
 package main;
-
-import gui.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -9,23 +7,17 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Runner extends Application {
-	
-	
-	
+public class SingleClient extends Application {
+
 	public static void main(String... args) {
 		launch(args);
 	}
 
 	@Override
     public void start(Stage primaryStage) {
-        
+        App application = new App(primaryStage);
 		primaryStage.setTitle("MEOWMEOWBEENZ");
-		Controller window = new Controller(primaryStage);
-        window.newLoginPage();
-        window.display(new ErrorScreen());
-        window.show();
-        
+        application.startup();
     }
 	
 	/**
