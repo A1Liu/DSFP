@@ -1,32 +1,23 @@
 package main;
-
-import gui.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Runner extends Application {
-	
-	
-	
+public class SingleClient extends Application {
+
 	public static void main(String... args) {
 		launch(args);
 	}
 
 	@Override
-    public void start(Stage window) {
-        
-		window.setTitle("MEOWMEOWBEENZ");
-        Scene scene = new NewLoginPage();
-        window.setScene(scene);
-        
-        window.show();
-        
+    public void start(Stage primaryStage) {
+        App application = new App(primaryStage);
+		primaryStage.setTitle("MEOWMEOWBEENZ");
+        application.startup();
     }
 	
 	/**

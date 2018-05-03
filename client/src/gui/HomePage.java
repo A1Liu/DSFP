@@ -1,15 +1,25 @@
 package gui;
 
-import javafx.application.Application;
-import javafx.stage.*;
-import javafx.scene.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
-public class HomePage extends Application {
+import static util.Const.HEIGHT;
+import static util.Const.WIDTH;
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		
+class HomePage extends Page {
+
+	private final static StackPane container;
+	private final static GridPane grid;
+	
+	static {
+		grid = new GridPane();
+		container = new StackPane();
+		container.getChildren().add(grid);
+	}
+	
+	public HomePage(Controller c) {
+		super(container, c);
+
 	}
 
 }
