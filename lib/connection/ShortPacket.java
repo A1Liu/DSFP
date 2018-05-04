@@ -1,4 +1,4 @@
-package server;
+package connection;
 
 public class ShortPacket extends Packet<Integer> {
 
@@ -8,3 +8,4 @@ public class ShortPacket extends Packet<Integer> {
 		super(label, data);
 	}
 }
+ 
