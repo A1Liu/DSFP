@@ -1,5 +1,6 @@
 package gui;
 
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
@@ -37,5 +38,4 @@ public class ErrorScreen extends GridPane {
 		container.getChildren().add(message);
 		this.add(container,0,0);
 	}
-	
 }

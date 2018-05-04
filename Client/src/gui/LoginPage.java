@@ -9,6 +9,7 @@ import javafx.scene.text.*;
 import main.Cache;
 import util.Const;
 
+
 class LoginPage extends Page {
 	
 	private static GridPane grid;
@@ -28,7 +29,9 @@ class LoginPage extends Page {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
-        scenetitle = new Text("Sign In");
+
+        scenetitle = new Text("Sign in");
+
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -71,6 +74,7 @@ class LoginPage extends Page {
         });
 	}}
 	
+
 	public LoginPage(Controller c) {
 		super(grid,c);
 	}

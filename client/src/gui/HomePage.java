@@ -19,6 +19,7 @@ class HomePage extends Page {
 	
 	public HomePage(Controller c) {
 		super(container, c);
+
 	}
 
 }

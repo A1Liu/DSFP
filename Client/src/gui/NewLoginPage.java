@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import util.Const;
 
+
 class NewLoginPage extends Page {
 	
 	private static GridPane pane;
