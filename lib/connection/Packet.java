@@ -2,6 +2,12 @@ package connection;
 
 import java.io.Serializable;
 
+/**
+ * Object that holds information in a way that can be interpreted easily by server and client
+ * @author aliu
+ *
+ * @param <T>
+ */
 public class Packet<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
