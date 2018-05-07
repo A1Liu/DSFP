@@ -18,7 +18,7 @@
 		<link>
 			<name>lib</name>
 			<type>2</type>
-			<location>/Users/liu_albert/Desktop/DSFP/lib</location>
+			<locationURI>PARENT-1-PROJECT_LOC/lib</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
