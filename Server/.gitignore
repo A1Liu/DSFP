@@ -22,3 +22,5 @@
 hs_err_pid*
 
 /Properties/
+
+.DS_Store
