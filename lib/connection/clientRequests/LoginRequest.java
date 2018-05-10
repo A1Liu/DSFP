@@ -18,10 +18,10 @@ import users.User;
 public class LoginRequest extends ClientRequest {
 
 	private static final long serialVersionUID = 1L;
-	private final Long sessionID;
+	private final long sessionID;
 	private final User user;
 	
-	public LoginRequest(Long sessionID) {
+	public LoginRequest(long sessionID) {
 		super(2);
 		this.user = null;
 		this.sessionID = sessionID;
@@ -30,10 +30,10 @@ public class LoginRequest extends ClientRequest {
 	public LoginRequest(boolean isNew, User user) {
 		super(isNew ? 0 : 1);
 		this.user = user;
-		this.sessionID = null;
+		this.sessionID = -1;
 	}
 
-	public Long getSessionID() {
+	public long getSessionID() {
 		return sessionID;
 	}
 

@@ -12,13 +12,8 @@ import connection.Packet;
 public abstract class ClientRequest extends Packet {
 
 	private static final long serialVersionUID = 1L;
-	private final int tag;
 	
 	protected ClientRequest(int tag) {
-		this.tag = tag;
-	}
-
-	public int getTag() {
-		return tag;
+		super(tag);
 	}
 }

@@ -11,20 +11,14 @@ import connection.Packet;
 public class ServerPacket<T> extends Packet {
 	
 	private static final long serialVersionUID = 1L;
-	private final double label;
 	private final T data;
 	
-	public ServerPacket(double label, T data) {
-		this.label = label;
+	public ServerPacket(int label, T data) {
+		super(label);
 		this.data = data;
 	}
 	
 	public T getData() {
 		return data;
 	}
-	
-	public double getLabel() {
-		return label;
-	}
-	
 }
