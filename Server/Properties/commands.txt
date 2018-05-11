@@ -1,0 +1,27 @@
+login:0;SessionID login
+	newUser:2;new user
+	user:1;user login in
+user:20;ask for refresh of other user
+	refresh:10
+	config
+		email:11
+		username:12
+		password:13
+	rate:21
+	friend:22
+logout
+root;way to access server commands. Appends a null to beginning of input to access commands
+Null
+	user;prepend to use user commands
+	logout
+	server
+		get
+			active
+			sessionid
+			stats
+		add
+		delete
+	network
+		crawl
+	start:100
+	stop:101
