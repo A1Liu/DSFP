@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.DAOException;
@@ -24,23 +25,29 @@ public class UserDAO implements dao.UserDAO {
     // Constants ----------------------------------------------------------------------------------
 
     private static final String SQL_FIND_BY_ID =
-        "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE id = ?";
+        "SELECT id, username, email, name, birthdate FROM Users WHERE id = ?";
     private static final String SQL_FIND_BY_USERNAME =
-            "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE username = ?";
+            "SELECT id, username, email, name, birthdate FROM Users WHERE username = ?";
     private static final String SQL_FIND_BY_EMAIL =
-            "SELECT id, username, email, firstname, lastname, birthdate FROM User WHERE email = ?";
+            "SELECT id, username, email, name, birthdate FROM Users WHERE email = ?";
     private static final String SQL_LIST_ORDER_BY_ID =
-        "SELECT id, username, email, firstname, lastname, birthdate FROM User ORDER BY id";
+        "SELECT id, username, email, name, birthdate FROM Users ORDER BY id";
     private static final String SQL_INSERT =
-        "INSERT INTO User (username, email, firstname, lastname, birthdate) VALUES (?, ?, ?, ?, ?)";
+        "INSERT INTO Users (username, email, name, birthdate) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE =
-        "UPDATE User SET username = ?, email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
+        "UPDATE Users SET username = ?, email = ?, name = ? WHERE id = ?";
+    private static final String SQL_UPDATE_EMAIL = 
+    		"UPDATE Users SET email = ? WHERE id = ?";
+    private static final String SQL_UPDATE_USERNAME = 
+    		"UPDATE Users SET username = ? WHERE id = ?";
+    private static final String SQL_UPDATE_NAME = 
+    		"UPDATE Users SET name = ? WHERE id = ?";
     private static final String SQL_DELETE =
-        "DELETE FROM User WHERE id = ?";
+        "DELETE FROM Users WHERE id = ?";
     private static final String SQL_EXIST_EMAIL =
-        "SELECT id FROM User WHERE email = ?";
+        "SELECT id FROM Users WHERE email = ?";
     private static final String SQL_EXIST_USERNAME =
-            "SELECT id FROM User WHERE username = ?";
+            "SELECT id FROM Users WHERE username = ?";
 
     // Vars ---------------------------------------------------------------------------------------
 
@@ -118,7 +125,7 @@ public class UserDAO implements dao.UserDAO {
     }
 
     @Override
-    public void create(User user) throws IllegalArgumentException, DAOException {
+    public User create(User user) throws IllegalArgumentException, DAOException {
         if (user.getID() != null) {
             throw new IllegalArgumentException("User is already created, the user ID is not null.");
         }
@@ -126,8 +133,7 @@ public class UserDAO implements dao.UserDAO {
         Object[] values = {
         	user.getUsername(),
             user.getEmail(),
-            user.getFirst(),
-            user.getLast(),
+            user.getName(),
             toSqlDate(user.getBirthday())
         };
 
@@ -142,7 +148,7 @@ public class UserDAO implements dao.UserDAO {
             
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                	user.setID(generatedKeys.getLong(1));
+                	user = new UserObj(generatedKeys.getLong(1), user);
                 } else {
                     throw new DAOException("Creating user failed, no generated key obtained.");
                 }
@@ -150,6 +156,7 @@ public class UserDAO implements dao.UserDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         }
+        return user;
     }
 
     @Override
@@ -161,9 +168,7 @@ public class UserDAO implements dao.UserDAO {
         Object[] values = {
         	user.getUsername(),
             user.getEmail(),
-            user.getFirst(),
-            user.getLast(),
-            toSqlDate(user.getBirthday()),
+            user.getName(),
             user.getID()
         };
 
@@ -179,9 +184,33 @@ public class UserDAO implements dao.UserDAO {
             throw new DAOException(e);
         }
     }
+    
+    @Override
+    public void update(Long id, String name) throws DAOException {
+        if (id == null || name == null) {
+            throw new IllegalArgumentException("neither field can be null.");
+        }
+
+        Object[] values = {
+        	id,
+            name
+        };
+
+        try (
+            Connection connection = daoFactory.getConnection();
+            PreparedStatement statement = prepareStatement(connection, name.indexOf("@") == -1 ? SQL_UPDATE_USERNAME : SQL_UPDATE_EMAIL, false, values);
+        ) {
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new DAOException("Updating user failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
 
     @Override
-    public void delete(User user) throws DAOException {
+    public User delete(User user) throws DAOException {
         Object[] values = { 
             user.getID()
         };
@@ -194,11 +223,12 @@ public class UserDAO implements dao.UserDAO {
             if (affectedRows == 0) {
                 throw new DAOException("Deleting user failed, no rows affected.");
             } else {
-                user.setID(null);
+            	user = new UserObj(null,user);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
         }
+        return user;
     }
     
     @Override
@@ -254,13 +284,33 @@ public class UserDAO implements dao.UserDAO {
      * @throws SQLException If something fails at database level.
      */
     private static User map(ResultSet resultSet) throws SQLException {
-        User user = new User(resultSet.getLong("id"),
+        User user = new UserObj(resultSet.getLong("id"),
         		resultSet.getString("username"),
         		resultSet.getString("email"),
-        		resultSet.getString("firstname"),
-        		resultSet.getString("lastname"),
+        		resultSet.getString("name"),
         		resultSet.getDate("birthdate"));
         return user;
     }
 
+}
+
+/**
+ * only the UserDAO class can create and return user objects with id values
+ * @author aliu
+ *
+ */
+class UserObj extends User {
+
+	private static final long serialVersionUID = 1L;
+	
+	UserObj(Long id, String username, String email, String name, Date birthdate) {
+		super(id,username, email, name , birthdate);
+	}
+	
+	UserObj(Long id, User user) {
+		super(id, user.getUsername(), user.getEmail(), user.getName(), user.getBirthday());
+	}
+	
+	
+	
 }

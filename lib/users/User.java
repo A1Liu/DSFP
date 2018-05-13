@@ -10,42 +10,42 @@ public class User implements Serializable {
 	private Long id;
 	private String username;
 	private String email;
-	private String first;
-	private String last;
+	private String name;
 	private Date birthday;
 	
 	public User() {
-		id = null;
-		username = null;
-		email = null;
-		first = null;
-		last = null;
-		birthday = null;
+		this(null,null,null,null,null);
 	}
 	
-	public User(Long id, String username, String email, String first, String last, Date birthday) {
-		this(username,email,first,last,birthday);
+	public User(String username, String email, String name) {
+		this(null,username,email,name,null);
+	}
+	
+	protected User(Long id, String username, String email, String name, Date birthday) {
+		this.setEmail(email);
+		this.setUsername(username);
+		this.setName(name);
+		this.setBirthday(birthday);
 		this.id = id;
 	}	
 	
-	public User(String username, String email, String first, String last, Date birthday) {
-		this.setEmail(email);
-		this.setUsername(username);
-		this.setFirst(first);
-		this.setLast(last);
-		this.setBirthday(birthday);
-		this.id = null;
+	public User(String username, String email, String name, Date birthday) {
+		this(null, username, email, name, birthday);
 	}	
 	
 	public User(User other) {
-		this();
 		if (other != null) {
 			username = other.getUsername();
 			email = other.getEmail();
-			first = other.getFirst();
-			last = other.getLast();
-			id = other.getID();
+			name = other.getName();
+			birthday = other.getBirthday();
+		} else {
+			this.setEmail(null);
+			this.setUsername(null);
+			this.setName(null);
+			this.setBirthday(null);
 		}
+		id = null;
 	}
 
 	public String getUsername() {
@@ -64,21 +64,14 @@ public class User implements Serializable {
 		this.email = email;
 	}
 	
-	public String getFirst() {
-		return first;
+	public String getName() {
+		return name;
 	}
 	
-	public void setFirst(String first) {
-		this.first = first;
+	public void setName(String first) {
+		this.name = first;
 	}
-	
-	public String getLast() {
-		return last;
-	}
-	
-	public void setLast(String last) {
-		this.last = last;
-	}
+
 	
 	public Date getBirthday() {
 		return birthday;
@@ -93,8 +86,8 @@ public class User implements Serializable {
 	 }
 	 
 	 public void setID(Long id) {
-			this.id=id;
-	}
+		 this.id = id;
+	 }
 
 	
 	  /**
@@ -125,8 +118,8 @@ public class User implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("User[id=%d,username=%s,email=%s,firstname=%s,lastname=%s,birthdate=%s]", 
-        					getID(), username, email, first, last, birthday);
+        return String.format("User[id=%d,username=%s,email=%s,name=%s,birthdate=%s]", 
+        					getID(), username, email, name, birthday);
     }
 	
 	

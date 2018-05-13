@@ -33,16 +33,19 @@ public class Commands {
 		comList = new CommandList();
 	}
 	
+	public Object input(String in) {
+		return input(in.split("\\s+"));
+	}
+	
 	/**
 	 * takes an input and executes a command based off of it. Should traverse as far as it can down the command tree and then take the rest of the input as parameters
 	 * @param in the input string to take
 	 */
-	public Object input(String in) {
-		String[] stringList = in.split("\\s+");
+	public Object input(String[] in) {
 		int counter = 0;
 		ComTreeNode current = comList.getTree().getRoot();
-		while(counter < stringList.length && current.containsChild(stringList[counter])) {
-			current = current.getChild(stringList[counter]);
+		while(counter < in.length && current.containsChild(in[counter])) {
+			current = current.getChild(in[counter]);
 			counter++;
 		}
 		if (current == comList.getTree().getRoot()) {
@@ -50,16 +53,16 @@ public class Commands {
 		} else if (current.getID() == null && current.getChildren().size() != 0) {
 			String comPath = "";
 			for (int x = 0; x < counter; x++) {
-				comPath += stringList[x] + " ";
+				comPath += in[x] + " ";
 			}
 			comPath = comPath.trim();
-			if (counter < stringList.length) {
-				System.out.println("'" + stringList[counter] + "' is not a recognized subcommand of " + comPath);	
+			if (counter < in.length) {
+				System.out.println("'" + in[counter] + "' is not a recognized subcommand of " + comPath);	
 			} else {
 				System.out.println("'" + comPath + "' is not a complete command. Please pass more parameters.");
 			}
 		} else {
-			return comList.get(current.getID()).execute(Arrays.copyOfRange(stringList, counter, stringList.length));
+			return comList.get(current.getID()).execute(Arrays.copyOfRange(in, counter, in.length));
 		}
 		return null;
 	}

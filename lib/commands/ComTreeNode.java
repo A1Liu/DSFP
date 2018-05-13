@@ -90,7 +90,7 @@ class ComTreeNode {
 	public boolean equals(Object o) {
 		if (o instanceof ComTreeNode) {
 			if (((ComTreeNode) o).getName() == null) {
-				return ((ComTreeNode) o).getName() == name;
+				return name==null;
 			} else if (((ComTreeNode) o).getName().equals(name)) {
 				return true;
 			}

@@ -1,0 +1,25 @@
+package server.terminal.commands;
+
+import server.terminal.TCommands;
+import server.terminal.Terminal;
+import server.terminal.TerminalC;
+import users.User;
+
+public class LoginNewUser extends TerminalC {
+
+	public LoginNewUser(TCommands terminal) {
+		super(terminal, "String", "String", "String", "String");//username, email, name, password
+	}
+	
+	@Override
+	public void execute(Object... elist) {
+		if (!elist[0].toString().contains("@") && elist[1].toString().contains("@") && !elist[2].toString().contains("@")) {
+			User user = getObject().getServer().getLoginDAO().newAcct(new User((String) elist[0],(String) elist[1],(String) elist[2]), (String) elist[3]);
+			getObject().setUser(user);
+			setOutput(user);
+		} else setOutput("Incorrect input formatting!");
+		
+	}
+	
+	
+}

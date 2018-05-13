@@ -13,8 +13,6 @@ public class HelpC implements Command {
 		this.commands = commands;
 	}
 	
-	
-	
 	@Override
 	public void execute(Object... elist) {
 		
@@ -36,7 +34,6 @@ public class HelpC implements Command {
 				} else {
 					if (current == commands.getRoot()) {
 						System.out.printf("NOTE: '%s' is not a valid command. For a list of valid commands and their explanations, type 'help'.%n",element);
-						return;
 					} else {
 						System.out.printf("NOTE: '%s' is not a valid subcommand of '%s'.%n",element,current.getName());
 					}
@@ -62,7 +59,6 @@ public class HelpC implements Command {
 		} else {//if the parameters were given with a '...' at the end, which means that subcommands should also be outputted
 			if (current.getChildren().size() == 0) {
 				System.out.printf("'%s' doesn't have any subcommands.");
-				return;
 			}
 			
 			System.out.printf("Subcommands of'%s': %n",current.getName());
@@ -71,12 +67,7 @@ public class HelpC implements Command {
 				String help = node.getHelp() == null ? "'" + node.getName() + "' command." : node.getHelp();
 				System.out.printf("  %8s %s%n",name+":",help);
 			}
-			
 		}
-
-		
-		
-		
 	}
 
 }

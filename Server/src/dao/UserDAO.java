@@ -43,10 +43,11 @@ public interface UserDAO {
      * Create the given user in the database. The user ID must be null, otherwise it will throw
      * IllegalArgumentException. After creating, the DAO will set the obtained ID in the given user.
      * @param user The user to be created in the database.
+     * @return 
      * @throws IllegalArgumentException If the user ID is not null.
      * @throws DAOException If something fails at database level.
      */
-    public void create(User user) throws IllegalArgumentException, DAOException;
+    public User create(User user) throws IllegalArgumentException, DAOException;
 
     /**
      * Update the given user in the database. The user ID must not be null, otherwise it will throw
@@ -57,13 +58,15 @@ public interface UserDAO {
      */
     public void update(User user) throws IllegalArgumentException, DAOException;
 
+    public void update(Long id, String username) throws DAOException;
+    
     /**
      * Delete the given user from the database. After deleting, the DAO will set the ID of the given
      * user to null.
      * @param user The user to be deleted from the database.
      * @throws DAOException If something fails at database level.
      */
-    public void delete(User user) throws DAOException;
+    public User delete(User user) throws DAOException;
 
     /**
      * Returns true if the given username exists in the database.

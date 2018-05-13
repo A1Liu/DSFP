@@ -13,6 +13,8 @@ import java.util.List;
  */
 public abstract class ParamC implements Command {
 	
+	private Object output;
+	
 	/**
 	 * These are the names of the classes of the parameter requirements that this command object takes.
 	 */
@@ -24,6 +26,7 @@ public abstract class ParamC implements Command {
 	 */
 	protected ParamC(String...reqs) {
 		PARAM_REQS = reqs;
+		output = null;
 	}
 	
 	/**
@@ -44,7 +47,7 @@ public abstract class ParamC implements Command {
 		} else {
 			System.out.println("User input does not match required parameters for this command.");
 		}
-		return null;
+		return output;
 	}
 	
 	/**
@@ -116,5 +119,9 @@ public abstract class ParamC implements Command {
 		default:
 			return true;
 		}
+	}
+	
+	protected void setOutput(Object output) {
+		this.output = output;
 	}
 }

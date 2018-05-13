@@ -75,9 +75,7 @@ class CommandList {
 	}
 	
 	private String[] formatCommand(String raw) {
-		String command = (raw.substring(1).equals("null") || raw.substring(1).trim().equals("")) ? null : raw.substring(1).trim();
-		if (command == null) 
-			return new String[] {null};
+		String command = raw.substring(1).trim();
 		String[] out = command.split("\\s*;\\s*",2);
 		if (out.length > 1) {
 			
@@ -87,6 +85,8 @@ class CommandList {
 			out = out[0].split(":",2);
 		}
 		out[0] = out[0].toLowerCase().replaceAll("\\s","");
+		if (out[0].equals("null") || out[0].equals(""))
+			out[0] = null;
 		return out;
 	}
 	
