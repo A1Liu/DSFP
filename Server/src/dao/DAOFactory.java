@@ -20,6 +20,12 @@ public interface DAOFactory {
 	PassDAO getPassDAO();
 	
 	/**
+	 * Session for handling user passwords and salts
+	 * @return a SessionDAO
+	 */
+	SessionDAO getSessionDAO();
+	
+	/**
 	 * FriendDAO for handling user friends/following
 	 * @return a FriendDAO object
 	 */
