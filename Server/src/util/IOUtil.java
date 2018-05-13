@@ -59,4 +59,23 @@ public class IOUtil {
 		return output;
 	}
 	
+	/**
+	 * Reads the lines of a document and returns the entire document as a String Array
+	 * @param document name of document, or path
+	 * @return text in document as a string array, each element is one line.
+	 * @throws IOException if something goes wrong with inputs
+	 */
+	public static String[] readLines(String document) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(document));
+		ArrayList<String> output = new ArrayList<String>();
+		
+		String inputString = reader.readLine();
+		while(inputString != null) {
+			output.add(inputString);
+			inputString = reader.readLine();
+		}
+		reader.close();
+		return output.toArray(new String[output.size()]);
+	}
+	
 }

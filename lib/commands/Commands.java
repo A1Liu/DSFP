@@ -33,19 +33,16 @@ public class Commands {
 		comList = new CommandList();
 	}
 	
-	public void input(String in) {
-		this.input(in.split("\\s+"));
-	}
-	
 	/**
 	 * takes an input and executes a command based off of it. Should traverse as far as it can down the command tree and then take the rest of the input as parameters
 	 * @param in the input string to take
 	 */
-	public void input(String[] in) {
+	public Object input(String in) {
+		String[] stringList = in.split("\\s+");
 		int counter = 0;
 		ComTreeNode current = comList.getTree().getRoot();
-		while(counter < in.length && current.containsChild(in[counter])) {
-			current = current.getChild(in[counter]);
+		while(counter < stringList.length && current.containsChild(stringList[counter])) {
+			current = current.getChild(stringList[counter]);
 			counter++;
 		}
 		if (current == comList.getTree().getRoot()) {
@@ -53,17 +50,18 @@ public class Commands {
 		} else if (current.getID() == null && current.getChildren().size() != 0) {
 			String comPath = "";
 			for (int x = 0; x < counter; x++) {
-				comPath += in[x] + " ";
+				comPath += stringList[x] + " ";
 			}
 			comPath = comPath.trim();
-			if (counter < in.length) {
-				System.out.println("'" + in[counter] + "' is not a recognized subcommand of " + comPath);	
+			if (counter < stringList.length) {
+				System.out.println("'" + stringList[counter] + "' is not a recognized subcommand of " + comPath);	
 			} else {
 				System.out.println("'" + comPath + "' is not a complete command. Please pass more parameters.");
 			}
 		} else {
-			comList.get(current.getID()).execute(Arrays.copyOfRange(in, counter, in.length));
+			return comList.get(current.getID()).execute(Arrays.copyOfRange(stringList, counter, stringList.length));
 		}
+		return null;
 	}
 	
 	/**
@@ -81,15 +79,6 @@ public class Commands {
 	 */
 	public void setCommand(Integer label, Command command) {
 		comList.setCommand(label, command);
-	}
-	
-	/**
-	 * returns the executable command associated with the integer given
-	 * @param i integer identifier of command
-	 * @return command object to return
-	 */
-	public Command getCommand(Integer i) {
-		return comList.get(i);
 	}
 	
 	/**

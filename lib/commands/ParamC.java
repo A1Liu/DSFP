@@ -30,7 +30,7 @@ public abstract class ParamC implements Command {
 	 * Error traps for all user params that should be java primitives. Ignores any extra parameters
 	 * @param plist list of parameters that the user has inputted
 	 */
-	public final void execute(String...plist) {
+	public final Object execute(String...plist) {
 		if (checkParams(plist)) {//Check if parameters in plist work for the PARAM_REQS that this command object requires
 			List<Object> olist = new ArrayList<Object>();
 			int x;
@@ -44,6 +44,7 @@ public abstract class ParamC implements Command {
 		} else {
 			System.out.println("User input does not match required parameters for this command.");
 		}
+		return null;
 	}
 	
 	/**

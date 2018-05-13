@@ -1,8 +1,8 @@
-/**
+/*
 */
 CREATE TABLE groceries (
 	id INTEGER PRIMARY KEY,
-    name TEXT, 
+    name TEXT,
     quantity  INTEGER,
     cost LONG,
 	aisle INTEGER

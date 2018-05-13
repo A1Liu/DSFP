@@ -79,6 +79,11 @@ public abstract class DAOFactory implements dao.DAOFactory {
 	    	return new PassDAO(this);
 	    }
 	    
+	    @Override
+	    public SessionDAO getSessionDAO() {
+	    	return new SessionDAO(this);
+	    }
+	    
 	    /**
 	     * Returns a connection to the database. Package private so that it can be used inside the DAO
 	     * package only.

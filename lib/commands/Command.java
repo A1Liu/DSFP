@@ -11,8 +11,9 @@ public interface Command {
 	 * Behind the scenes method to take parameters. Used by built-in implementations of this interface to handle things like error trapping.
 	 * @param elist list of parameters that the user has inputted
 	 */
-	default void execute(String...elist) {
+	default Object execute(String...elist) {
 		execute((Object[]) elist);
+		return null;
 	}
 	
 	/**
