@@ -37,6 +37,7 @@ public class Server extends Thread {
 	public void run() {
 		terminal = new Terminal(this, new InputStreamReader(System.in));
 		Thread terminalThread = new Thread(terminal);
+		terminal.setRoot(true);
 		terminalThread.start();
 	}
 	

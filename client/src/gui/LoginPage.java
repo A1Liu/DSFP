@@ -21,6 +21,8 @@ class LoginPage extends GridPane {
 	private Button btn;
 	private HBox hbBtn;
 	private Text errorText;
+	private Button newbtn;
+	private HBox newhbBtn;
 	
 	{
         this.setAlignment(Pos.CENTER);
@@ -60,7 +62,11 @@ class LoginPage extends GridPane {
         errorText.setVisible(false);
         this.add(errorText, 0, 4,2,1);
         
-
+        newbtn = new Button("Sign up");
+        newhbBtn = new HBox(10);
+        newhbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        newhbBtn.getChildren().add(newbtn);
+        this.add(newhbBtn, 3, 6);
         
         btn.setOnAction(new EventHandler<ActionEvent>() {
         	 
@@ -87,6 +93,13 @@ class LoginPage extends GridPane {
             		errorText.setVisible(true);
             	}
             }
+        });
+        
+        newbtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				control.newLoginPage();
+			}
         });
 	}
 	
