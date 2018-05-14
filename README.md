@@ -5,13 +5,6 @@ Project to make a real life version of MeowMeowBeenz.
 * [To Do](https://github.com/A1Liu/DSFP/blob/master/README.md#todo)
 * [Plan](https://github.com/A1Liu/DSFP/blob/master/README.md#plan)
 * [MySQL Info](https://github.com/A1Liu/DSFP/blob/master/README.md#mysql-info)
-* [Packages](https://github.com/A1Liu/DSFP/blob/master/README.md#packages)  
-  * [DatabaseObjectHandler](https://github.com/A1Liu/DSFP/blob/master/README.md#database-object-handler-package)
-  * [MySQL](https://github.com/A1Liu/DSFP/blob/master/README.md#mysql-package)
-  * [Network](https://github.com/A1Liu/DSFP/blob/master/README.md#network-package)
-  * [Server](https://github.com/A1Liu/DSFP/blob/master/README.md#server-package)
-  * [Security](https://github.com/A1Liu/DSFP/blob/master/README.md#security-package)
-  * [Users](https://github.com/A1Liu/DSFP/blob/master/README.md#user-package)
 * [Reference Links](https://github.com/A1Liu/DSFP/blob/master/README.md#reference-links)
 
 ## TODO
