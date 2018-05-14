@@ -19,16 +19,16 @@ This project will employ multiple data structures to store user information and 
 
 
 ## Roadmap
-1. [ ] **A simple app for making users**
+1. [x] **A simple app for making users**
     * [x] Basic database implementation
     * [x] Basic user table and user DAO's
     * [x] Basic password salting and hashing using MD5
     * [x] Loading users from document
-    * [ ] Single-thread client-server connection
-    * [ ] Multi-thread client-server connection
-    * [ ] Full Client-Server-DB integration (Server Logic)
-    * [ ] Client UI 
-    * [ ] Server command prompt
+    * [x] Single-thread client-server connection
+    * [x] Multi-thread client-server connection
+    * [x] Full Client-Server-DB integration (Server Logic)
+    * [x] Client UI 
+    * [x] Server command prompt
 2. [ ] **A simple app for making and friending users**
     * [ ] Database implementation for social graph
     * [ ] DAO's for social graph edges
