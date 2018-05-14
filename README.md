@@ -19,14 +19,13 @@ Project to make a real life version of MeowMeowBeenz.
   * [ ] DAO
   * [ ] Network
   * [ ] Server
-    * [ ] ThreadHandler
+    * [ ] ClientHandler
     * [ ] RequestHandler
-  * [ ] Users
+  * [x] Users
   * [ ] SQL
 * [x] Start learning SQL
 * [x] Add config file support for server package  
-* Add user file support for user class  
-* Add admins with extra privileges  
+* [ ] Add admins with extra privileges  
 * Add datastructure for ratings system  
 * Add modular ID confirmation/security features 
 * Add App specific network classes and methods
@@ -38,6 +37,7 @@ Project to make a real life version of MeowMeowBeenz.
 2. [x] Create SQL Handler
 3. Create connection between server and user
 4. [x] Create connection between server and SQL server
+5. [x] Create system to log in and logout of accounts
 
 #### Friend Network
 1. Add classes for user and server package to make and send networks.
