@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.App;
+import static gui.Page.*;
 import static util.Const.*;
 
 /**
@@ -14,8 +15,10 @@ import static util.Const.*;
 public class Controller {
 
 	private Stage window;
+	private App app;
 	
 	public Controller(App application) {
+		this.app = application;
 		this.window = application.getStage();
 	}
 	
@@ -23,7 +26,12 @@ public class Controller {
 	public void display(Parent root) {
 		window.setScene(new Scene(root, WIDTH, HEIGHT));
 	}
-	public void loginPage() {window.setScene(new LoginPage(this));}
-	public void newLoginPage() {window.setScene(new NewLoginPage(this));}
+	public void loginPage() {window.setScene(getLoginPage(this));}
+	public void newLoginPage() {window.setScene(getNewLoginPage(this));}
+	public void homePage() {window.setScene(getHomePage(this));}
 	public void show() {window.show();}
+	
+	public App getApp() {
+		return app;
+	}
 }

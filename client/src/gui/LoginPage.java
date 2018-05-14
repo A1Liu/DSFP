@@ -10,73 +10,89 @@ import main.Cache;
 import util.Const;
 
 
-class LoginPage extends Page {
+class LoginPage extends GridPane {
 	
-	private static GridPane grid;
-	private static Text scenetitle;
-	private static Label userName;
-	private static TextField userTextField;
-	private static Label pw;
-	private static PasswordField pwBox;
-	private static Button btn;
-	private static HBox hbBtn;
-	private final static Text actiontarget;
+	private Controller control;
+	private Text scenetitle;
+	private Label userName;
+	private TextField userTextField;
+	private Label pw;
+	private PasswordField pwBox;
+	private Button btn;
+	private HBox hbBtn;
+	private Text errorText;
 	
-	static {{
-		grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+	{
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);
+        this.setPadding(new Insets(25, 25, 25, 25));
         
 
         scenetitle = new Text("Sign in");
 
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid.add(scenetitle, 0, 0, 2, 1);
+        this.add(scenetitle, 0, 0, 2, 1);
 
         userName = new Label("User Name:");
-        grid.add(userName, 0, 1);
+        this.add(userName, 0, 1);
 
         userTextField = new TextField();
         userTextField.setPromptText("Username");
-        grid.add(userTextField, 1, 1);
+        this.add(userTextField, 1, 1,3,1);
 
         pw = new Label("Password:");
-        grid.add(pw, 0, 2);
+        this.add(pw, 0, 2);
 
         pwBox = new PasswordField();
         pwBox.setPromptText("Password");
-        grid.add(pwBox, 1, 2);
+        this.add(pwBox, 1, 2,3,1);
         
         //Sign in button
         btn = new Button("Sign in");
         hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 4);
+        this.add(hbBtn, 3, 4);
         
-        actiontarget = new Text();
-        grid.add(actiontarget, 1, 6);
+        errorText = new Text();
+        errorText.setFont(new Font(10));
+        errorText.setVisible(false);
+        this.add(errorText, 0, 4,2,1);
+        
+
         
         btn.setOnAction(new EventHandler<ActionEvent>() {
         	 
             @Override
-            public void handle(ActionEvent e) {
-            	/*
-            	 * Get username and password with these two methods, then pass then to main
-            	 * userTextField.getText();
-            	 * pwBox.getText();
-            	 * 
-            	 * 
-            	 */
+            public void handle(ActionEvent a) {
+            	
+            	String username = userTextField.getText();
+            	String password = pwBox.getText();
+            	try {
+            		if (!control.getApp().getConnection().isConnected()) {
+            			control.getApp().getConnection().run();
+            			if (!control.getApp().getConnection().isConnected()) {
+            				errorText.setText("Can't connect to server.");
+            				errorText.setVisible(true);
+            				return;
+            			}
+            		}
+            		
+            		control.getApp().setUser(control.getApp().login(username, password));
+            		errorText.setVisible(false);
+            		control.homePage();
+            	} catch (Exception e) {
+            		errorText.setText("Incorrect login credentials.");
+            		errorText.setVisible(true);
+            	}
             }
         });
-	}}
+	}
 	
 
 	public LoginPage(Controller c) {
-		super(grid,c);
+		control = c;
 	}
 	
 	

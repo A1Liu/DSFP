@@ -21,7 +21,7 @@ public class User implements Serializable {
 		this(null,username,email,name,null);
 	}
 	
-	protected User(Long id, String username, String email, String name, Date birthday) {
+	public User(Long id, String username, String email, String name, Date birthday) {
 		this.setEmail(email);
 		this.setUsername(username);
 		this.setName(name);
@@ -33,7 +33,7 @@ public class User implements Serializable {
 		this(null, username, email, name, birthday);
 	}	
 	
-	public User(User other) {
+	public User(Long id, User other) {
 		if (other != null) {
 			username = other.getUsername();
 			email = other.getEmail();
@@ -45,7 +45,7 @@ public class User implements Serializable {
 			this.setName(null);
 			this.setBirthday(null);
 		}
-		id = null;
+		this.id = id;
 	}
 
 	public String getUsername() {

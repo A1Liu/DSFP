@@ -148,7 +148,7 @@ public class UserDAO implements dao.UserDAO {
             
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                	user = new UserObj(generatedKeys.getLong(1), user);
+                	user = new User(generatedKeys.getLong(1), user);
                 } else {
                     throw new DAOException("Creating user failed, no generated key obtained.");
                 }
@@ -223,7 +223,7 @@ public class UserDAO implements dao.UserDAO {
             if (affectedRows == 0) {
                 throw new DAOException("Deleting user failed, no rows affected.");
             } else {
-            	user = new UserObj(null,user);
+            	user = new User(null,user);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -284,7 +284,7 @@ public class UserDAO implements dao.UserDAO {
      * @throws SQLException If something fails at database level.
      */
     private static User map(ResultSet resultSet) throws SQLException {
-        User user = new UserObj(resultSet.getLong("id"),
+        User user = new User(resultSet.getLong("id"),
         		resultSet.getString("username"),
         		resultSet.getString("email"),
         		resultSet.getString("name"),
@@ -292,25 +292,4 @@ public class UserDAO implements dao.UserDAO {
         return user;
     }
 
-}
-
-/**
- * only the UserDAO class can create and return user objects with id values
- * @author aliu
- *
- */
-class UserObj extends User {
-
-	private static final long serialVersionUID = 1L;
-	
-	UserObj(Long id, String username, String email, String name, Date birthdate) {
-		super(id,username, email, name , birthdate);
-	}
-	
-	UserObj(Long id, User user) {
-		super(id, user.getUsername(), user.getEmail(), user.getName(), user.getBirthday());
-	}
-	
-	
-	
 }

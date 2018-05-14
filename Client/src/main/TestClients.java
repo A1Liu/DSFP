@@ -13,8 +13,8 @@ public class TestClients extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setScene(new Scene(new GridPane()));
-		primaryStage.show();
+		primaryStage.setTitle("MEOWMEOWBEENZ");
+		App application = new App(primaryStage);
 	}
 	
 	

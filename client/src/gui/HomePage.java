@@ -1,25 +1,12 @@
 package gui;
 
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.Parent;
 
-import static util.Const.HEIGHT;
-import static util.Const.WIDTH;
+public class HomePage extends Page {
 
-class HomePage extends Page {
-
-	private final static StackPane container;
-	private final static GridPane grid;
-	
-	static {
-		grid = new GridPane();
-		container = new StackPane();
-		container.getChildren().add(grid);
-	}
-	
-	public HomePage(Controller c) {
-		super(container, c);
-
+	public HomePage(Parent root, Controller control) {
+		super(root, control);
+		// TODO Auto-generated constructor stub
 	}
 
 }

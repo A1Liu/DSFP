@@ -2,6 +2,7 @@ package server;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -31,19 +32,28 @@ public abstract class RHandler extends BaseRequestHandler implements Runnable {
 	public final void run() {
 		try {
 			out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+			out.writeObject("Header");
+			out.flush();
 			in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			in.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
 			disconnect();
 			return;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
 			execute();
 		} catch (InterruptedException i) {
-			disconnect();
-			return;
+			
+		} catch (EOFException e) {
+			System.out.println("Connection lost.");
+			
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

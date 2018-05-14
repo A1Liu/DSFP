@@ -3,6 +3,7 @@ package gui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.App;
+import users.User;
 
 public class TestRunner extends Application {
 
@@ -13,7 +14,9 @@ public class TestRunner extends Application {
 	@Override
     public void start(Stage primaryStage) {
 		primaryStage.setTitle("MEOWMEOWBEENZ");
-		App a = new App(primaryStage);
+		App a = new App(primaryStage,new User("USERNAME","EMAIL","NAME"));
+		a.startup();
+		a.getController().homePage();
     }
 
 }

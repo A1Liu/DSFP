@@ -140,9 +140,16 @@ public class TerminalCommands extends Commands {
 		//admin commands: 100-199
 		
 		//Login and basics
-		//addCommand(100,null);//root: login as root user
-		//addCommand(101,null);//start: start server
-		//addCommand(102,null);//stop: stop server
+		addCommand(100,new TerminalCommand(this) {
+
+			@Override
+			public void execute(Object... elist) {
+				getObject().setRoot(true);
+			}
+			
+		});//root: login as root user
+		addCommand(101,new StartServer(this));//start: start server
+		addCommand(102,new StopServer(this));//stop: stop server
 		//addCommand(103,null);//new: new terminal instance
 		//addCommand(103,null);//
 		//addCommand(100,null);//
