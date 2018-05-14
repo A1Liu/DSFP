@@ -9,7 +9,11 @@ import javafx.scene.text.*;
 import main.Cache;
 import util.Const;
 
-
+/**
+ * 
+ * @author aliu
+ *
+ */
 class LoginPage extends GridPane {
 	
 	private Controller control;

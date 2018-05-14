@@ -9,7 +9,11 @@ import javafx.scene.text.*;
 import users.User;
 import util.Const;
 
-
+/**
+ * 
+ * @author aliu
+ *
+ */
 class NewLoginPage extends GridPane {
 	
 	private Text title;

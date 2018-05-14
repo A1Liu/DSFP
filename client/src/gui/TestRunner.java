@@ -5,6 +5,11 @@ import javafx.stage.Stage;
 import main.App;
 import users.User;
 
+/**
+ * 
+ * @author aliu
+ *
+ */
 public class TestRunner extends Application {
 
 	public static void main(String... args) {

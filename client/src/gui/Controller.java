@@ -8,7 +8,7 @@ import static gui.Page.*;
 import static util.Const.*;
 
 /**
- * handles GUI logic
+ * handles GUI logic, decides what is displayed, etc.
  * @author liu_albert
  *
  */
