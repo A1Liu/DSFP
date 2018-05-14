@@ -1,12 +1,12 @@
 package server.terminal.commands;
 
-import server.terminal.TCommands;
+import server.terminal.TerminalCommands;
 import server.terminal.Terminal;
-import server.terminal.TerminalC;
+import server.terminal.TerminalCommand;
 
-public class Tem extends TerminalC {
+public class Tem extends TerminalCommand {
 
-	public Tem(TCommands terminal, String[] strings) {
+	public Tem(TerminalCommands terminal, String[] strings) {
 		super(terminal, strings);
 		// TODO Auto-generated constructor stub
 	}

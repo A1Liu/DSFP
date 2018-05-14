@@ -57,6 +57,17 @@ public abstract class ParamC implements Command {
 	 */
 	public abstract void execute(Object... elist);
 	
+	public final boolean checkParams(Object...input) {
+		if (PARAM_REQS.length > input.length)
+			return false;
+		for (int x = 0; x < PARAM_REQS.length; x++) {
+			if (!paramCheck(PARAM_REQS[x],input[x])) {
+				return false;	
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * Checks the parameters that the user has inputted to see if they fit requirements of PARAM_REQS
 	 * @param strings the parameters the user inputted
@@ -103,6 +114,31 @@ public abstract class ParamC implements Command {
 	 * @param param
 	 * @return
 	 */
+	private static final boolean paramCheck(String paramReq, Object param) {
+		Object o;
+		switch(paramReq.toLowerCase()) {
+		case "double":
+			try {o = (Double) param;return true;} catch (Exception e) {return false;}
+		case "integer":
+		case "int":
+			try {o = (Integer) (param);return true;} catch (Exception e) {return false;}
+		case "boolean":
+			try {o = (Boolean) (param);return true;} catch (Exception e) {return false;}
+		case "float":
+			try {o = (Float) (param);return true;} catch (Exception e) {return false;}
+		case "long":
+			try {o =(Long) (param);return true;} catch (Exception e) {return false;}
+		default:
+			return true;
+		}
+	}
+	
+	/**
+	 * checks whether the parameter is a form of the class specified in paramReq. Only supports java's built in primitive types and strings
+	 * @param paramReq
+	 * @param param
+	 * @return
+	 */
 	private static final boolean paramCheck(String paramReq, String param) {
 		switch(paramReq.toLowerCase()) {
 		case "double":
@@ -123,5 +159,9 @@ public abstract class ParamC implements Command {
 	
 	protected void setOutput(Object output) {
 		this.output = output;
+	}
+	
+	public Object getOutput() {
+		return output;
 	}
 }

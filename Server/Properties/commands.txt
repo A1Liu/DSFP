@@ -1,6 +1,7 @@
-login:0;SessionID login. takes arguments <long>. returns user info.
-	user:1;user login in. Takes arguments <username/email> <password>. returns user info.
-	newUser:2;new user. Takes arguments <username> <email> <name> <password>. returns user info.
+login:0;
+	user:0;user login in. Takes arguments <username/email> <password>. returns user info.
+	sessionID:0;SessionID login. takes arguments <long>. returns user info.
+	new:3;new user. Takes arguments <username> <email> <name> <password>. returns user info.
 root;way to access server commands. Appends a null to beginning of input to access commands
 	login:100;login to server admin account.
 Null
@@ -14,7 +15,7 @@ Null
 			password:13;change password. takes arguments <oldPassword> <NewPassword>
 		rate:22;rate another user. takes arguments <username> <integer>. If currently viewing a user, then <username> field is optional
 		friend:23;friend another user. takes arguments <username>. If currently viewing a user, then <username> field is optional
-	logout:98;logout of account.
+	logout:1;logout of account.
 	Null
 		user:198;prepend to use user commands
 		logout:199;logout of user-spoofed account if logged in, and admin account
@@ -30,4 +31,4 @@ Null
 		start:101;start server
 		stop:102;stop server
 		new:103;new 
-quit:99
+quit:2

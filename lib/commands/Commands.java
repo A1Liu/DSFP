@@ -41,7 +41,8 @@ public class Commands {
 	 * takes an input and executes a command based off of it. Should traverse as far as it can down the command tree and then take the rest of the input as parameters
 	 * @param in the input string to take
 	 */
-	public Object input(String[] in) {
+	public final Object input(String[] in) {
+		try {
 		int counter = 0;
 		ComTreeNode current = comList.getTree().getRoot();
 		while(counter < in.length && current.containsChild(in[counter])) {
@@ -49,7 +50,7 @@ public class Commands {
 			counter++;
 		}
 		if (current == comList.getTree().getRoot()) {
-			System.out.println("That's not a valid command!");
+			throw new CommandException("That's not a valid command!");
 		} else if (current.getID() == null && current.getChildren().size() != 0) {
 			String comPath = "";
 			for (int x = 0; x < counter; x++) {
@@ -57,14 +58,18 @@ public class Commands {
 			}
 			comPath = comPath.trim();
 			if (counter < in.length) {
-				System.out.println("'" + in[counter] + "' is not a recognized subcommand of " + comPath);	
+				throw new CommandException("'" + in[counter] + "' is not a recognized subcommand of " + comPath);	
 			} else {
-				System.out.println("'" + comPath + "' is not a complete command. Please pass more parameters.");
+				throw new CommandException("'" + comPath + "' is not a complete command. Please pass more parameters.");
 			}
 		} else {
 			return comList.get(current.getID()).execute(Arrays.copyOfRange(in, counter, in.length));
 		}
-		return null;
+		} catch (Exception e) {
+			if (e instanceof CommandException)
+				return e;
+			else throw new CommandException(e.getMessage(),e);
+		}
 	}
 	
 	/**
@@ -91,6 +96,24 @@ public class Commands {
 	 */
 	public void addCommand(String[] path, Command command) {
 		comList.addCommand(path, command);
+	}
+	
+	/**
+	 * Returns a command. Use primarily when a command tree isn't being used.
+	 * @param label integer identifier of command
+	 * @return the command
+	 */
+	protected Command getCommand(Integer label) {
+		return comList.get(label);
+	}
+	
+	/**
+	 *  Maps a command to an integer label without checking whether it's accessible to the command tree. Use this when a terminal isn't being used.
+	 * @param label integer label of command
+	 * @param command command object
+	 */
+	protected void addCommand(Integer label, Command command) {
+		comList.addCommand(label, command);
 	}
 	
 	/**

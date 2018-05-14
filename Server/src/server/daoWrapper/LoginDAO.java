@@ -12,14 +12,22 @@ import users.User;
  */
 public class LoginDAO {
 
-	UserDAO userdao;
-	PassDAO passdao;
+	private UserDAO userdao;
+	private PassDAO passdao;
+	
 	
 	public LoginDAO(DAOFactory dao) {
 		userdao = dao.getUserDAO();
 		passdao = dao.getPassDAO();
 	}
 	
+	/**
+	 * Login to server with new account. Adds user and password to the database
+	 * @param user user to add
+	 * @param password user's password
+	 * @return Created user if successful. user.getID() returns the session id.
+	 * @throws IllegalArgumentException if username or email is already taken
+	 */
 	public synchronized User newAcct(User user, String password) throws IllegalArgumentException {
 		if (userdao.existEmail(user.getEmail()))  {
 			throw new IllegalArgumentException("Email already taken.");
@@ -32,10 +40,17 @@ public class LoginDAO {
 		return user;
 	}
 	
+	/**
+	 * Logs into server with username/email and password
+	 * @param name username or email
+	 * @param password password of the user
+	 * @return complete user object if successful. user.getID() returns the sessionid.
+	 * @throws IllegalArgumentException if the username or email or password are incorrect.
+	 */
 	public synchronized User login(String name, String password) throws IllegalArgumentException {
 		User user = userdao.find(name);
 		if (user == null)
-			throw new IllegalArgumentException(name.indexOf('@') == -1 ? "Incorrect Username!" : "Incorrect Password");
+			throw new IllegalArgumentException(name.indexOf('@') == -1 ? "Incorrect Username!" : "Incorrect Email!");
 		if (passdao.checkPass(user.getID(), password)) {
 			return user;
 		} else {

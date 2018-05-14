@@ -90,7 +90,7 @@ public abstract class DAOFactory implements dao.DAOFactory {
 	     * @return A connection to the database.
 	     * @throws SQLException If acquiring the connection fails.
 	     */
-	    abstract Connection getConnection() throws SQLException;
+	    public abstract Connection getConnection() throws SQLException;
 
 	}
 
@@ -109,6 +109,7 @@ public abstract class DAOFactory implements dao.DAOFactory {
 	    }
 
 	    @Override
+		public
 	    Connection getConnection() throws SQLException {
 	        return DriverManager.getConnection(url, username, password);
 	    }
@@ -126,6 +127,7 @@ public abstract class DAOFactory implements dao.DAOFactory {
 	    }
 
 	    @Override
+		public
 	    Connection getConnection() throws SQLException {
 	        return dataSource.getConnection();
 	    }
@@ -146,6 +148,7 @@ public abstract class DAOFactory implements dao.DAOFactory {
 	    }
 
 	    @Override
+		public
 	    Connection getConnection() throws SQLException {
 	        return dataSource.getConnection(username, password);
 	    }

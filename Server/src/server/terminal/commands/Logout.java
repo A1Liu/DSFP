@@ -2,11 +2,11 @@ package server.terminal.commands;
 
 import server.terminal.*;
 import server.terminal.Terminal;
-import server.terminal.TerminalC;
+import server.terminal.TerminalCommand;
 
-public class Logout extends TerminalC {
+public class Logout extends TerminalCommand {
 
-	public Logout(TCommands terminal) {
+	public Logout(TerminalCommands terminal) {
 		super(terminal);
 		// TODO Auto-generated constructor stub
 	}

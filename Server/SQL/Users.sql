@@ -9,9 +9,6 @@ CREATE TABLE javabase.users (
 	email VARCHAR(60) NOT NULL,
 	name VARCHAR(40) NULL,
 	birthdate DATE NULL,
-    rating DECIMAL(6,5) UNSIGNED NOT NULL DEFAULT 1,
-    votes DECIMAL(10,5) UNSIGNED NOT NULL DEFAULT 1,
-
 	PRIMARY KEY (id),
 	UNIQUE (username),
 	UNIQUE (email)

@@ -1,37 +1,65 @@
 package server;
 
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 
 import server.daoWrapper.LoginDAO;
 import server.terminal.Terminal;
 import sql.DAOFactory;
 
-public class Server extends sockets.server.Server {
+/**
+ * Server object. Acts as the 'hub' thread; Connects clients to database, manages the other threads, etc.
+ * @author aliu
+ *
+ */
+public class Server extends Thread {
 
 	private DAOFactory database;
 	private LoginDAO logindao;
-	Terminal terminal;
+	private Terminal terminal;
+	private ClientHandler clientHandler;
 	
 	public Server(int port) {
-		super(new ClientHandler(port));
+		clientHandler = new ClientHandler(this, port);
 		database = DAOFactory.getInstance("javabase.jdbc");
 		logindao = new LoginDAO(database);
 	}
 	
+	/**
+	 * starts the server!
+	 */
 	public synchronized void start() {
+		try {database.getConnection();} catch (SQLException e) {System.out.println("Couldn't connect to database!");}
 		this.run();
 	}
 
 	@Override
 	public void run() {
 		terminal = new Terminal(this, new InputStreamReader(System.in));
-		terminal.start();
-		
+		Thread terminalThread = new Thread(terminal);
+		terminalThread.start();
 	}
 	
-	public void stopServer() {
+	protected Server(ClientHandler threadHandler) {
+		this.clientHandler = threadHandler;
+	}
+    
+    public synchronized final void goOnline() {
+    	clientHandler.start();
+    }
+    
+    public synchronized final void goOffline() {
+    	clientHandler.endAll();
+    	try {
+    	clientHandler.offline();
+    	} catch (Exception e) {
+    		
+    	}
+    }
+	
+	public synchronized void stopServer() {
 		terminal.quit();
-		super.stopServer();
+		goOffline();
 	}
 	
 	public LoginDAO getLoginDAO() {

@@ -4,73 +4,38 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
+import server.BaseRequestHandler;
 import server.Server;
 import users.User;
 
-public class Terminal extends Thread {
-	
+/**
+ * Terminal class. Essentially a wrapper around the terminal commands, allowing for easy continuous use by calling its run method.
+ * @author aliu
+ *
+ */
+public class Terminal extends BaseRequestHandler implements Runnable {
+
 	private final BufferedReader cmdLine;
-	private final TCommands terminal;
-	private volatile boolean running;
-	private final Server server;
-	private User user;
-	private boolean root;
 	
 	public Terminal(Server server, Reader input) {
+		super(server);
 		cmdLine = new BufferedReader(input);
-		terminal = new TCommands(this);
-		this.server = server;
-		root = false;
+		setCommands(new TerminalCommands(this));
 	}
 	
 	public void run() {
-		running = true;
-		while (running) {
+		start();
+		while (isRunning()) {
 			try {
-				Object print = terminal.input(cmdLine.readLine());
+				Object print = getCommands().input(cmdLine.readLine());
 				if (print != null) {
 					System.out.println(print.toString());
 				}
 			} catch (IOException e) {
-				running = false;
+				quit();
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public boolean loggedIn() {
-		return !(user == null || user.getID() == null);
-	}
-	
-	public void setRoot(boolean root) {
-		this.root = root;
-	}
-	
-	public boolean isRoot() {
-		return root;
-	}
-	
-	public void quit() {
-		running = false;
-	}
-	
-	void startServer() {
-		server.goOnline();
-	}
-	
-	void stopServer() {
-		server.goOffline();
-	}
-	
-	public Server getServer() {
-		return server;
-	}
-
-	public void logout() {
-		user = null;
-	}
 }

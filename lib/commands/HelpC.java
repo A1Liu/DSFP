@@ -8,14 +8,21 @@ package commands;
 public class HelpC implements Command {
 
 	private ComTree commands;
+	private String output;
 	
 	public HelpC(ComTree commands) {
 		this.commands = commands;
 	}
 	
 	@Override
+	public Object execute(String...elist) {
+		execute((Object[]) elist);
+		return output;
+	}
+	
+	@Override
 	public void execute(Object... elist) {
-		
+		output = "";
 		String[] path = (String[]) elist;
 		boolean done = false;
 		boolean listSubs = false;
@@ -33,9 +40,9 @@ public class HelpC implements Command {
 					done = true;
 				} else {
 					if (current == commands.getRoot()) {
-						System.out.printf("NOTE: '%s' is not a valid command. For a list of valid commands and their explanations, type 'help'.%n",element);
+						output+=String.format("NOTE: '%s' is not a valid command. For a list of valid commands and their explanations, type 'help'.%n",element);
 					} else {
-						System.out.printf("NOTE: '%s' is not a valid subcommand of '%s'.%n",element,current.getName());
+						output+=String.format("NOTE: '%s' is not a valid subcommand of '%s'.%n",element,current.getName());
 					}
 				}
 			}
@@ -49,23 +56,23 @@ public class HelpC implements Command {
 			for (ComTreeNode node : current.getChildren()) {
 				String name = node.getName();
 				String help = node.getHelp() == null ? "'" + node.getName() + "' command." : node.getHelp();
-				System.out.printf("  %8s %s%n",name+":",help);
+				output+=String.format("  %8s %s%n",name+":",help);
 			}
 		} else if (!listSubs) {//if the parameters were given but the user didn't ask for subcommands.
 			String name = current.getName();
 			String help = current.getHelp() == null ? "'" + current.getName() + "' command." : current.getHelp();
-			System.out.printf("%s %s%n",name+":",help);
-			System.out.println("Type '...' at the end of the last command to get a list of available subcommands, along with help for each.");
+			output+=String.format("%s %s%n",name+":",help);
+			output+=String.format("Type '...' at the end of the last command to get a list of available subcommands, along with help for each.%n");
 		} else {//if the parameters were given with a '...' at the end, which means that subcommands should also be outputted
 			if (current.getChildren().size() == 0) {
-				System.out.printf("'%s' doesn't have any subcommands.");
+				output+=String.format("'%s' doesn't have any subcommands.",current.getName());
 			}
 			
-			System.out.printf("Subcommands of'%s': %n",current.getName());
+			output+=String.format("Subcommands of'%s': %n",current.getName());
 			for (ComTreeNode node : current.getChildren()) {
 				String name = node.getName();
 				String help = node.getHelp() == null ? "'" + node.getName() + "' command." : node.getHelp();
-				System.out.printf("  %8s %s%n",name+":",help);
+				output+=String.format("  %8s %s%n",name+":",help);
 			}
 		}
 	}
