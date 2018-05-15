@@ -44,6 +44,14 @@ Project to make a real life version of MeowMeowBeenz.
    3. Users start with 10 ratings of 1, weight of 3, which get replaced by the first 10 ratings they get.
 3. Next, implement structure above but change weight of ratings to increase quadratically as rating of source increases. Also, weight should increase for 4's and 5's if standard deviation of ratings is lower, and weight should decrease for 1's and 2's.
 
+### Dev Cycle
+1. Implement block of commands
+  a. Create SQL Tables and associated DAO's
+  b. Create TerminalCommand block
+2. Implement GUI that reaches each part of TerminalCommand block
+3. Implement ActionEvent buttons and communication to server.
+
+
 ## MySQL Info
 IP: localhost  
 Port Number: 3306  
