@@ -1,9 +1,11 @@
-package server;
+package server.client;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+
+import server.Server;
 
 
 /**
@@ -19,7 +21,7 @@ public class ClientHandler extends Thread {
 	private volatile boolean running;
 	private ArrayList<RequestHandler> connections;
 	
-	protected ClientHandler(Server server, int port) {
+	public ClientHandler(Server server, int port) {
 		this.server = server;
 		this.port = port;
 		running = false;

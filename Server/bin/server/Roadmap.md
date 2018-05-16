@@ -1,12 +1,12 @@
 # Roadmap
 
 # Synchronization of methods
-Access to the ratings DB CANNOT happen simultaneously
+Access to the ratings db CANNOT happen simultaneously
 Access to UserDB and friend/follow DB is fine though, doesn't need to be synced, except in the case of 2 clients on same account.
 
 # Processing requests
 
-## Possible Requests
+### Possible Requests
 - Actions (c sends object/string, s sends confirmation string)
   - New Account (object, string)
   - Sign in (string, string)
@@ -22,7 +22,7 @@ Access to UserDB and friend/follow DB is fine though, doesn't need to be synced,
   - search for users (string, objs)
   - Get other user's public info (string, obj)
 
-## New users
+### New users
 1. New user clients request to reserve a username
 2. server accepts or denies
 3. if accept, move onto sending rest of information

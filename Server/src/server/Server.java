@@ -3,6 +3,7 @@ package server;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 
+import server.client.ClientHandler;
 import server.daoWrapper.LoginDAO;
 import server.terminal.Terminal;
 import sql.DAOFactory;

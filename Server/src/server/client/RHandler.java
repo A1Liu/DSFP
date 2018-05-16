@@ -1,4 +1,4 @@
-package server;
+package server.client;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import connection.Packet;
+import server.BaseRequestHandler;
+import server.Server;
 
 /**
  * This class represents a request handler... or at least, part of it. I broke up the request handler into two classes to make it easier to read.

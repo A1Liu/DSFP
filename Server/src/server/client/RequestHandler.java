@@ -1,9 +1,10 @@
-package server;
+package server.client;
 
 import java.io.IOException;
 import java.net.Socket;
 import connection.Packet;
 import connection.serverPackets.ServerPacket;
+import server.Server;
 import server.terminal.TerminalCommand;
 
 /**
