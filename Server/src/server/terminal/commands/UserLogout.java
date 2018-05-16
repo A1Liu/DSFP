@@ -4,9 +4,9 @@ import server.terminal.*;
 import server.terminal.Terminal;
 import server.terminal.TerminalCommand;
 
-public class Logout extends TerminalCommand {
+public class UserLogout extends TerminalCommand {
 
-	public Logout(TerminalCommands terminal) {
+	public UserLogout(TerminalCommands terminal) {
 		super(terminal);
 		// TODO Auto-generated constructor stub
 	}
@@ -14,8 +14,9 @@ public class Logout extends TerminalCommand {
 	@Override
 	public void execute(Object... elist) {
 		if (getObject().loggedIn()) {
+			String username = getObject().getUser().getUsername();
 			getObject().logout();
-			setOutput("Logged out.");
+			setOutput("User '" + username + "' logged out.");
 		} else
 			setOutput("Not logged in!");
 	}

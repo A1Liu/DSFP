@@ -3,6 +3,7 @@ package server.daoWrapper;
 import dao.DAOFactory;
 import dao.PassDAO;
 import dao.UserDAO;
+import sql.SessionDAO;
 import users.User;
 
 /**
@@ -14,6 +15,7 @@ public class LoginDAO {
 
 	private UserDAO userdao;
 	private PassDAO passdao;
+	private SessionDAO sessiondao;
 	
 	
 	public LoginDAO(DAOFactory dao) {
@@ -40,6 +42,10 @@ public class LoginDAO {
 		return user;
 	}
 	
+	public User login(Long SessionID) {
+		return null;
+	}
+	
 	/**
 	 * Logs into server with username/email and password
 	 * @param name username or email
@@ -47,7 +53,7 @@ public class LoginDAO {
 	 * @return complete user object if successful. user.getID() returns the sessionid.
 	 * @throws IllegalArgumentException if the username or email or password are incorrect.
 	 */
-	public synchronized User login(String name, String password) throws IllegalArgumentException {
+	public User login(String name, String password) throws IllegalArgumentException {
 		User user = userdao.find(name);
 		if (user == null)
 			throw new IllegalArgumentException(name.indexOf('@') == -1 ? "Incorrect Username!" : "Incorrect Email!");
@@ -57,6 +63,10 @@ public class LoginDAO {
 			throw new IllegalArgumentException("Incorrect Password!");
 		}
 		
+	}
+	
+	public UserDAO getUserDAO() {
+		return userdao;
 	}
 	
 }

@@ -1,6 +1,7 @@
-package server.terminal.commands;
+package server.terminal.commands.login;
 
 import server.terminal.TerminalCommands;
+import server.terminal.commands.selfRequests.Refresh;
 import server.terminal.Terminal;
 import server.terminal.TerminalCommand;
 import users.User;
@@ -15,9 +16,10 @@ public class LoginNewUser extends TerminalCommand {
 	public void execute(Object... elist) {
 		if (!elist[0].toString().contains("@") && elist[1].toString().contains("@") && !elist[2].toString().contains("@")) {
 			User user = getObject().getServer().getLoginDAO().newAcct(new User((String) elist[0],(String) elist[1],(String) elist[2]), (String) elist[3]);
-			user.setID((long) -1);
+			getObject().setSessionID(user.getID());
 			getObject().setUser(user);
 			setOutput(user);
+			new Refresh(this.getObject().getCommands()).execute();
 		} else setOutput("Incorrect input formatting!");
 		
 	}

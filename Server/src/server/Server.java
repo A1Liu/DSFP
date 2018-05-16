@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import server.daoWrapper.LoginDAO;
 import server.terminal.Terminal;
 import sql.DAOFactory;
+import sql.UserDAO;
 
 /**
  * Server object. Acts as the 'hub' thread; Connects clients to database, manages the other threads, etc.
@@ -16,6 +17,7 @@ public class Server extends Thread {
 
 	private DAOFactory database;
 	private LoginDAO logindao;
+	private UserDAO userdao;
 	private Terminal terminal;
 	private ClientHandler clientHandler;
 	
@@ -65,6 +67,14 @@ public class Server extends Thread {
 	
 	public LoginDAO getLoginDAO() {
 		return logindao;
+	}
+
+	public UserDAO getUserdao() {
+		return userdao;
+	}
+
+	public void setUserdao(UserDAO userdao) {
+		this.userdao = userdao;
 	}
 	
 }

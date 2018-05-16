@@ -2,8 +2,7 @@ login:0;
 	user:0;user login in. Takes arguments <username/email> <password>. returns user info.
 	sessionID:0;SessionID login. takes arguments <long>. returns user info.
 	new:3;new user. Takes arguments <username> <email> <name> <password>. returns user info.
-root;way to access server commands. Appends a null to beginning of input to access commands
-	login:100;login to server admin account.
+	root:100;way to access server commands. Appends a null to beginning of input to access commands
 Null
 	help:90
 	refresh:10;refresh user information for this user
@@ -18,7 +17,7 @@ Null
 	logout:1;logout of account.
 	Null
 		user:198;prepend to use user commands
-		logout:199;logout of user-spoofed account if logged in, and admin account
+		logout:199;logout of user-spoofed account if logged in, and admin account.
 		server;admin commands affecting server-wide stuff
 			get;get information
 				active:111;get current active users

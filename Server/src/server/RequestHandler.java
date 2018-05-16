@@ -1,6 +1,6 @@
 package server;
 
-import java.io.EOFException;
+import java.io.IOException;
 import java.net.Socket;
 import connection.Packet;
 import connection.serverPackets.ServerPacket;
@@ -22,8 +22,7 @@ public class RequestHandler extends RHandler {
 
 	@Override
 	public void execute() throws InterruptedException, Exception {
-		this.start();
-		
+		this.startReqHandler();
 		while(isRunning()) {
 			Object input = getInputStream().readObject();
 			if (input instanceof Packet) {
@@ -35,31 +34,42 @@ public class RequestHandler extends RHandler {
 					} else {
 						//send error message: not authorized to use that command
 					}
-				} else {//not trying to use admin command
-					TerminalCommand command = (TerminalCommand) getCommands().getCommand(packet.getTag());
-					if (command.checkParams(packet.getData())) {
-						Object output;
-						try {
-							command.execute(packet.getData());
-							output = command.getOutput();
-						} catch (Exception e) {
-							output = e;
-						}
-						System.out.println("Command Executed");
-						getOutputStream().writeObject(new ServerPacket(packet.getTag(),output));
-						getOutputStream().flush();
-						System.out.println("Output Sent!");
-					} else {
-						getOutputStream().writeObject("Error");
-						getOutputStream().flush();
-						System.out.println("Error");
-					}
+				} else {//not trying to use admin command. Add more if statements to check for stuff like "are they logged in, are they allowed to use that command, etc."
+					executeCommand(packet.getTag(),packet.getData());
 				}
 			} else {//Not talking to a client that we recognize
 				disconnect();
 				quit();
 			}
 		}
+	}
+	
+	/**
+	 * This method assumes that permissions have been met, and simply executes the command.
+	 * @param tag
+	 * @param data
+	 * @throws IOException
+	 */
+	private void executeCommand(int tag, Object... data) throws IOException {
+		if (tag == -1) {//-1 is the tag for error messages from the server
+			
+		}
+		TerminalCommand command = (TerminalCommand) getCommands().getCommand(tag);
+		if (command.checkParams(data)) {
+			try {
+				command.execute(data);
+				sendOutput(tag,command.getOutput());
+			} catch (Exception e) {
+				sendOutput(-1,e.getMessage());
+			}
+		} else {
+			sendOutput(-1,"Client Request was incorrectly formatted.");
+		}
+	}
+	
+	private void sendOutput(int tag, Object... o) throws IOException {
+		getOutputStream().writeObject(new ServerPacket(tag,o));
+		getOutputStream().flush();
 	}
 
 }

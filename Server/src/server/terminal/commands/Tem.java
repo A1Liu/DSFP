@@ -6,7 +6,7 @@ import server.terminal.TerminalCommand;
 
 public class Tem extends TerminalCommand {
 
-	public Tem(TerminalCommands terminal, String[] strings) {
+	public Tem(TerminalCommands terminal, String... strings) {
 		super(terminal, strings);
 		// TODO Auto-generated constructor stub
 	}

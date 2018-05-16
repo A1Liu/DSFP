@@ -49,7 +49,8 @@ public class ClientHandler extends Thread {
 				connections.add(requestHandler);
 				System.out.println("Connection established!");
 			} catch (IOException e) {
-				System.out.println("Failed to connect. Retrying...");
+				if (running)
+					System.out.println("Failed to connect. Retrying...");
 			}
 		}
 	}
@@ -69,7 +70,8 @@ public class ClientHandler extends Thread {
 	 */
 	public void endAll() {
 		for (RequestHandler request : connections) {
-			try{request.forceQuit();}catch (InterruptedException i) {}
+			request.quit();
+			//try{request.forceQuit();}catch (InterruptedException i) {}
 		}
 		connections = new ArrayList<RequestHandler>();
 	}

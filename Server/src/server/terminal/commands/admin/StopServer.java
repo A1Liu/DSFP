@@ -1,4 +1,4 @@
-package server.terminal.commands;
+package server.terminal.commands.admin;
 
 import server.terminal.TerminalCommands;
 import server.terminal.TerminalCommand;
@@ -13,6 +13,7 @@ public class StopServer extends TerminalCommand {
 	@Override
 	public void execute(Object... elist) {
 		getObject().getServer().goOffline();	
+		setOutput("Server Stopped.");
 	}
 }
 

@@ -1,20 +1,20 @@
 Codes from Client:
-0 - login request (with username and password)
+0 -- login request (with username and password)
 	Packet includes username and password
 	Server sends back error message or session id and user information
 0 - login request (with session ID)
 	Packet includes session id
 	Server sends back error message or new session id and user information
-1 - logout
+1 -- logout
 	packet is empty
 	server sends back packet with string message
-3 - new user request
+3 -- new user request
 	Packet includes username, password, email, birthday
 	Server sends back error message or session id and user information
 
 
 
-10 - account information refresh
+10 -- account information refresh
 	server sends back user object
 12 - change of email request
 	packet contains email

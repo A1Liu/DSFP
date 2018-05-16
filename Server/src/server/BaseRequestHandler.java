@@ -19,6 +19,8 @@ public abstract class BaseRequestHandler {
 	private final Server server;
 	private User user;
 	private boolean root;
+	private Long sessionID;
+	private Long userID;
 	
 	public BaseRequestHandler(Server server) {
 		terminal = new TerminalCommands(this);
@@ -30,7 +32,7 @@ public abstract class BaseRequestHandler {
 		this.terminal = commands;
 	}
 	
-	protected TerminalCommands getCommands() {
+	public TerminalCommands getCommands() {
 		return terminal;
 	}
 	
@@ -59,9 +61,17 @@ public abstract class BaseRequestHandler {
 	}
 	
 	/**
+	 * getter user
+	 * @return
+	 */
+	public User getUser() {
+		return user;
+	}
+	
+	/**
 	 * start the requestHandler
 	 */
-	public void start() {
+	public void startReqHandler() {
 		running = true;
 	}
 	
@@ -107,5 +117,21 @@ public abstract class BaseRequestHandler {
 	 */
 	public void logout() {
 		user = null;
+	}
+
+	public Long getSessionID() {
+		return sessionID;
+	}
+
+	public void setSessionID(Long sessionID) {
+		this.sessionID = sessionID;
+	}
+
+	public Long getUserID() {
+		return userID;
+	}
+
+	public void setUserID(Long userID) {
+		this.userID = userID;
 	}
 }

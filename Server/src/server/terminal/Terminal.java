@@ -24,7 +24,7 @@ public class Terminal extends BaseRequestHandler implements Runnable {
 	}
 	
 	public void run() {
-		start();
+		startReqHandler();
 		while (isRunning()) {
 			try {
 				Object print = getCommands().input(cmdLine.readLine());

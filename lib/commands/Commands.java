@@ -67,7 +67,7 @@ public class Commands {
 		}
 		} catch (Exception e) {
 			if (e instanceof CommandException)
-				return e;
+				throw e;
 			else throw new CommandException(e.getMessage(),e);
 		}
 	}

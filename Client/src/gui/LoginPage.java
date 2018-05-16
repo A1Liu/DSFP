@@ -95,6 +95,7 @@ class LoginPage extends GridPane {
             	} catch (Exception e) {
             		errorText.setText("Incorrect login credentials.");
             		errorText.setVisible(true);
+            		e.printStackTrace();
             	}
             }
         });

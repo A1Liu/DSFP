@@ -1,4 +1,4 @@
-package server.terminal.commands;
+package server.terminal.commands.admin;
 
 import server.terminal.TerminalCommands;
 import server.terminal.TerminalCommand;
@@ -12,6 +12,7 @@ public class StartServer extends TerminalCommand {
 
 	@Override
 	public void execute(Object... elist) {
-		getObject().getServer().goOnline();	
+		getObject().getServer().goOnline();
+		setOutput("Server Started!");
 	}
 }

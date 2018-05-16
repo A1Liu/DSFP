@@ -4,6 +4,14 @@ import commands.Command;
 import commands.Commands;
 import server.BaseRequestHandler;
 import server.terminal.commands.*;
+import server.terminal.commands.admin.AdminLogin;
+import server.terminal.commands.admin.AdminLogout;
+import server.terminal.commands.admin.StartServer;
+import server.terminal.commands.admin.StopServer;
+import server.terminal.commands.login.LoginExistUser;
+import server.terminal.commands.login.LoginNewUser;
+import server.terminal.commands.selfRequests.Refresh;
+
 import static util.DataUtil.prepend;
 import static util.IOUtil.readLines;
 
@@ -108,6 +116,9 @@ public class TerminalCommands extends Commands {
 	 */
 	@Override
 	public void addCommand(Integer label, Command command) {
+		if (command == null)
+			throw new IllegalArgumentException("Command cannot be null!");
+		
 		if (command instanceof TerminalCommand) {
 			super.addCommand(label, command);
 		} else throw new IllegalArgumentException("TCommands only takes subclasses of TerminalC as commands!");
@@ -121,12 +132,12 @@ public class TerminalCommands extends Commands {
 		//basics
 		//addCommand(0,null);//login with sessionid
 		addCommand(0,new LoginExistUser(this));//login with username and password
-		addCommand(1,new Logout(this));//log out
+		addCommand(1,new UserLogout(this));//log out
 		addCommand(2, new TerminalCommand(this){@Override public void execute(Object... elist) {getObject().quit();}});
 		addCommand(3,new LoginNewUser(this));//new user
 		
 		//interact with own account
-		//addCommand(10,null);//refresh user information
+		addCommand(10,new Refresh(this));//refresh user information
 		//addCommand(11,null);//change username
 		//addCommand(12,null);//change email
 		//addCommand(13,null);//change password
@@ -140,14 +151,7 @@ public class TerminalCommands extends Commands {
 		//admin commands: 100-199
 		
 		//Login and basics
-		addCommand(100,new TerminalCommand(this) {
-
-			@Override
-			public void execute(Object... elist) {
-				getObject().setRoot(true);
-			}
-			
-		});//root: login as root user
+		addCommand(100,new AdminLogin(this));//root: login as root user
 		addCommand(101,new StartServer(this));//start: start server
 		addCommand(102,new StopServer(this));//stop: stop server
 		//addCommand(103,null);//new: new terminal instance
@@ -160,7 +164,7 @@ public class TerminalCommands extends Commands {
 		//addCommand(101,null);//
 		//addCommand(90,null);
 		//addCommand(90,null);
-		//addCommand(90,null);
+		addCommand(199,new AdminLogout(this));
 	}
 	
 }
