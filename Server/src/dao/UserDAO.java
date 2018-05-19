@@ -83,4 +83,12 @@ public interface UserDAO {
      * @throws DAOException If something fails at database level.
      */
     public boolean existEmail(String email) throws DAOException;
+    
+    /**
+     * Returns a list of partial matches to a given search key. Searches the list of usernames.
+     * @param searchText a search text to use to search for a user by username
+     * @return a list of possibilities for the search key
+     * @throws DAOException if something fails at database level.
+     */
+    public List<String> search(String searchText) throws DAOException;
 }

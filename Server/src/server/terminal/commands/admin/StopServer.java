@@ -7,7 +7,6 @@ public class StopServer extends TerminalCommand {
 
 	public StopServer(TerminalCommands terminal) {
 		super(terminal);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

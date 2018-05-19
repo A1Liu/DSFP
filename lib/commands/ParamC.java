@@ -45,8 +45,10 @@ public abstract class ParamC implements Command {
 			}
 			execute(olist.toArray());
 		} else {
-			System.out.println("User input does not match required parameters for this command.");
+			throw new CommandException("User input does not match required parameters for this command.");
 		}
+		Object output = this.output;
+		this.output = null;
 		return output;
 	}
 	

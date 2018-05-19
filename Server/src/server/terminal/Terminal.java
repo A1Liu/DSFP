@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
+import commands.CommandException;
 import server.BaseRequestHandler;
 import server.Server;
 import users.User;
@@ -34,7 +35,10 @@ public class Terminal extends BaseRequestHandler implements Runnable {
 			} catch (IOException e) {
 				quit();
 				e.printStackTrace();
+			} catch (CommandException e) {
+				System.out.println(e.toString());
 			}
+			System.out.println(this.getUser());
 		}
 	}
 	

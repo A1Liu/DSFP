@@ -43,7 +43,7 @@ public abstract class RHandler extends BaseRequestHandler implements Runnable {
 			disconnect();
 			return;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		
@@ -55,7 +55,7 @@ public abstract class RHandler extends BaseRequestHandler implements Runnable {
 			System.out.println("Connection lost.");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		

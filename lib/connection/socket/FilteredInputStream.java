@@ -8,7 +8,7 @@ public class FilteredInputStream<T> extends ObjectInputStream {
 
 	protected FilteredInputStream(InputStream i) throws IOException, SecurityException {
 		super(i);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	public final T readObjectOverride() throws ClassNotFoundException, IOException {

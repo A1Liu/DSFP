@@ -1,61 +1,71 @@
 package commands;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *<pre>
- * Takes formatted command graph, and creates a graph of commands
  * 
- * Format:
+ * Takes inputs and traverses command graph using them.
  * 
- * 	Command
- * 		SubCommand:2; Words after the semicolon are considered help text, and can be viewed by the user using the 'help' command.
- * 		SubCommand2:4; The integer after the colon specifies a key to be used when creating command objects using setCommand().
- * 		SubCommand3:4; The integer isn't necessary, but it helps make assigning commands to endpoints in the tree easier.
- * 			SubSubCommand:-3; the integer can't be negative. This will throw a CommandConfiguration exception
- * 			SubSubCommand:2; Writing the same command name for 2 commands that are siblings in the tree results in the combining of both. The help text and integer ID of the last one are used
- * 			SubSubCommand:1; But the command below won't overrwrite the help text, because it doesn't have helpText.
- * 			SubSubCommand
- * 			SubSubCommand; However, if you include a semicolon, it will overrwrite the help text, like the one below
- *			SubSubCommand;
- * 			SubSubCommand:3; Even though the -3 is overriden by 2 in the above commands, -3 is checked first, so an exception will be thrown before the interpreter reaches 2
- * 	help; adding the help command here overrides the default help command
- * 	Null; typing null anywhere in the tree creates a null node. This can't be accessed by the user, so use these to make hidden commands accessible only by code
- *</pre> 
  * @author aliu
  *
  */
 public class Commands {
 	
 	private CommandList comList;
+	private String comPath;
+	private ComTreeNode currentRoot;
 	
-	public Commands() {
-		comList = new CommandList();
+	public Commands(CommandList comList) {
+		this.comList = comList;
+		comPath = "";
+		currentRoot = comList.getTree().getRoot();
 	}
 	
-	public Object input(String in) {
-		return input(in.split("\\s+"));
+	public Commands() {
+		this(new CommandList());
+	}
+	
+	/**
+	 * Takes input string and parses it into a String array, then hands it to another input method to traverse the tree.
+	 * @param in input string
+	 * @return Object that is output from the relevant command
+	 */
+	public Object inputSimple(String in) {
+		return input(in.trim().split("\\s+"));
+	}
+	
+	/**
+	 * Takes input string and parses it into a String array, then hands it to another input method to traverse the tree.
+	 * @param in input string
+	 * @return Object that is output from the relevant command
+	 */
+	public final Object input(String in) {
+		comPath = "";
+		return input(convertString(in));
 	}
 	
 	/**
 	 * takes an input and executes a command based off of it. Should traverse as far as it can down the command tree and then take the rest of the input as parameters
 	 * @param in the input string to take
 	 */
-	public final Object input(String[] in) {
+	public final Object input(String[] in) {//Need to account for 'null' branch. Also need to create new help commands that also account for null.
+		return input(currentRoot,in);
+	}
+	
+	final Object input(ComTreeNode root, String[] in) {
 		try {
 		int counter = 0;
-		ComTreeNode current = comList.getTree().getRoot();
+		ComTreeNode current = root;
+		root.getChildren();
 		while(counter < in.length && current.containsChild(in[counter])) {
 			current = current.getChild(in[counter]);
+			comPath +=current.getName() + " ";
 			counter++;
 		}
-		if (current == comList.getTree().getRoot()) {
+		if (current == currentRoot) {
 			throw new CommandException("That's not a valid command!");
 		} else if (current.getID() == null && current.getChildren().size() != 0) {
-			String comPath = "";
-			for (int x = 0; x < counter; x++) {
-				comPath += in[x] + " ";
-			}
 			comPath = comPath.trim();
 			if (counter < in.length) {
 				throw new CommandException("'" + in[counter] + "' is not a recognized subcommand of " + comPath);	
@@ -70,6 +80,60 @@ public class Commands {
 				throw e;
 			else throw new CommandException(e.getMessage(),e);
 		}
+	}
+	
+	/**
+	 * Converts a command string into a usable String array
+	 * @param in
+	 * @return
+	 */
+	public final static String[] convertString(String in) {
+		in = in.trim();	int past = 0;	int current = 0;	boolean inQuotes = false;	char quote = ' ';
+		ArrayList<String> input = new ArrayList<String>();
+		while (past < in.length()) {
+			if (current < in.length()) {
+				if (inQuotes) {
+					if (in.charAt(current) == quote) {
+						input.add(in.substring(past, current));
+						past = current + 1;
+						inQuotes = false;
+					}
+				} else {
+					if ((in.charAt(current) == '"' || in.charAt(current) == '\'')) {
+						if (past == current) {
+							inQuotes = true;
+							quote = in.charAt(current);
+							past = current+1;
+						} else {
+							input.add(in.substring(past, current));
+							past = current+1;
+						}
+					} else if (in.charAt(current) == ' ') {
+						if (current == past) {
+							past = current+1;
+						} else {
+							input.add(in.substring(past, current));
+							past = current + 1;
+						}
+					}
+				}				
+			} else {
+				input.add(in.substring(past, current));
+				past = current;
+			}
+			current++;
+		}
+		return input.toArray(new String[0]);
+	}
+	
+	ComTreeNode getNode(String...in) {
+		int counter = 0;
+		ComTreeNode current = comList.getTree().getRoot();
+		while(counter < in.length && current.containsChild(in[counter])) {
+			current = current.getChild(in[counter]);
+			counter++;
+		}
+		return current;
 	}
 	
 	/**
@@ -98,6 +162,14 @@ public class Commands {
 		comList.addCommand(path, command);
 	}
 	
+	public MoveC getMove(String... path) {
+		return new MoveC(this, path);
+	}
+	
+	public SkipC getSkipC(String... path) {
+		return new SkipC(this, path);
+	}
+	
 	/**
 	 * Returns a command. Use primarily when a command tree isn't being used.
 	 * @param label integer identifier of command
@@ -114,6 +186,14 @@ public class Commands {
 	 */
 	protected void addCommand(Integer label, Command command) {
 		comList.addCommand(label, command);
+	}
+	
+	CommandList getCommandList() {
+		return comList;
+	}
+	
+	void setCurrentRoot(ComTreeNode root) {
+		currentRoot = root;
 	}
 	
 	/**

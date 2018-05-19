@@ -7,7 +7,7 @@ public class StartServer extends TerminalCommand {
 
 	public StartServer(TerminalCommands terminal) {
 		super(terminal);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	@Override

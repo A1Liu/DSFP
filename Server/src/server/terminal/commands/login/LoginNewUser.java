@@ -19,6 +19,7 @@ public class LoginNewUser extends TerminalCommand {
 			getObject().setSessionID(user.getID());
 			getObject().setUser(user);
 			setOutput(user);
+			getObject().getCommands().getMove((String) null).execute();
 			new Refresh(this.getObject().getCommands()).execute();
 		} else setOutput("Incorrect input formatting!");
 		

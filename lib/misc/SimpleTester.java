@@ -25,7 +25,7 @@ public abstract class SimpleTester implements Runnable {
 				String input = reader.readLine();
 				System.out.println(execute(input).toString());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}

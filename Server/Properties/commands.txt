@@ -4,14 +4,14 @@ login:0;
 	new:3;new user. Takes arguments <username> <email> <name> <password>. returns user info.
 	root:100;way to access server commands. Appends a null to beginning of input to access commands
 Null
-	help:90
 	refresh:10;refresh user information for this user
 	search:20;search for a user
 	user:21;ask for refresh of other user. Sets 'currently viewing'. takes arguments <username>
 		config;configure things about the account
-			email:12;change email. takes arguments <email>
 			username:11;change username. Takes arguments <username>
-			password:13;change password. takes arguments <oldPassword> <NewPassword>
+			email:12;change email. takes arguments <email>
+			name:13; change name. Takes arguments <name>
+			password:14;change password. takes arguments <oldPassword> <NewPassword>
 		rate:22;rate another user. takes arguments <username> <integer>. If currently viewing a user, then <username> field is optional
 		friend:23;friend another user. takes arguments <username>. If currently viewing a user, then <username> field is optional
 	logout:1;logout of account.

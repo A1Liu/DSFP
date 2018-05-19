@@ -48,6 +48,8 @@ public class UserDAO implements dao.UserDAO {
         "SELECT id FROM Users WHERE email = ?";
     private static final String SQL_EXIST_USERNAME =
             "SELECT id FROM Users WHERE username = ?";
+    private static final String SQL_SEARCH_USERNAME = 
+    		"SELECT username FROM Users WHERE username LIKE ?;";
 
     // Vars ---------------------------------------------------------------------------------------
 
@@ -291,5 +293,13 @@ public class UserDAO implements dao.UserDAO {
         		resultSet.getDate("birthdate"));
         return user;
     }
+
+	@Override
+	public List<String> search(String searchText) throws DAOException {//TODO: Search method in UserDAO
+		Object[] values = {
+	            ("%"+searchText+"%")// in sql, the % operator 
+	        };
+		return null;
+	}
 
 }

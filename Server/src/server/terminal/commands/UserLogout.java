@@ -8,7 +8,6 @@ public class UserLogout extends TerminalCommand {
 
 	public UserLogout(TerminalCommands terminal) {
 		super(terminal);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -16,6 +15,7 @@ public class UserLogout extends TerminalCommand {
 		if (getObject().loggedIn()) {
 			String username = getObject().getUser().getUsername();
 			getObject().logout();
+			getObject().getCommands().getMove().execute();;
 			setOutput("User '" + username + "' logged out.");
 		} else
 			setOutput("Not logged in!");

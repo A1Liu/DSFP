@@ -14,7 +14,7 @@ public class Logout extends ClientRequest {
 
 	protected Logout() {
 		super(1);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	

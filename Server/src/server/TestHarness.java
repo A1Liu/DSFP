@@ -4,12 +4,12 @@ import misc.SimpleTester;
 
 public class TestHarness {
 
-	/*/public static void main(String[] args) {
+	/**/public static void main(String[] args) {
 		Server server = new Server(1100);
 		server.start();
 		//server.goOnline();
 		//server.stopServer();
-	}/**/
+	}/*/
 	
 	public static void main(String[] args) {
 		new Tester().run();

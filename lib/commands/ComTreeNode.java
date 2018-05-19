@@ -53,8 +53,12 @@ class ComTreeNode {
 	 * @param id int id of node
 	 */
 	void addChild(String e, Integer id, String helpText) {
-		if (!this.children.contains(new ComTreeNode(e,id)))
-			this.children.add(new ComTreeNode(e,id,helpText));
+		this.addChild(new ComTreeNode(e,id,helpText));
+	}
+	
+	void addChild(ComTreeNode node) {
+		if (!this.children.contains(node))
+		this.children.add(node);
 	}
 	
 	/**

@@ -3,6 +3,11 @@ package users;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * TODO: add Check methods to check for bad inputs
+ * @author aliu
+ *
+ */
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +32,7 @@ public class User implements Serializable {
 		this.setName(name);
 		this.setBirthday(birthday);
 		this.id = id;
+		setup();
 	}	
 	
 	public User(String username, String email, String name, Date birthday) {
@@ -46,6 +52,28 @@ public class User implements Serializable {
 			this.setBirthday(null);
 		}
 		this.id = id;
+		setup();
+	}
+	
+	private void setup() {
+		if (username != null && !checkValidUsername(username))
+			throw new IllegalArgumentException("Username was wonky as heck.");
+		if (name != null && !checkValidName(name))
+			throw new IllegalArgumentException("Name contains illegal special characters.");
+		if (email != null && !checkValidEmail(email))
+			throw new IllegalArgumentException("Email isn't formatted correctly.");
+		
+	}
+
+	public final static boolean checkValidUsername(String username) {
+		return username.split("[^_A-Za-z0-9 ]").length == 1;
+	}
+	public final static boolean checkValidEmail(String email) {
+		return email.contains("@") && !email.contains(" ");
+	}
+	
+	public final static boolean checkValidName(String name) {
+		return !(name.split("[^\\-A-Za-z ]|(?<![a-zA-Z])[-]|[-](?![A-Za-z])").length > 1 || name.endsWith("-"));
 	}
 
 	public String getUsername() {
@@ -53,6 +81,8 @@ public class User implements Serializable {
 	}
 	
 	public void setUsername(String username) {
+		if (username != null && !checkValidUsername(username))
+			throw new IllegalArgumentException("'" + username + "' is a wonky username. Too wonky. Try again.");
 		this.username = username;
 	}
 	
@@ -61,6 +91,8 @@ public class User implements Serializable {
 	}
 	
 	public void setEmail(String email) {
+		if (email != null && !checkValidEmail(email))
+			throw new IllegalArgumentException("'" + email + "' isn't a correctly formatted email.");
 		this.email = email;
 	}
 	
@@ -68,8 +100,10 @@ public class User implements Serializable {
 		return name;
 	}
 	
-	public void setName(String first) {
-		this.name = first;
+	public void setName(String name) {
+		if (name != null && !checkValidName(name))
+			throw new IllegalArgumentException("'" + name + "' contains illegal special characters.");
+		this.name = name;
 	}
 
 	

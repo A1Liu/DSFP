@@ -7,12 +7,12 @@ public class AdminLogin extends TerminalCommand {
 
 	public AdminLogin(TerminalCommands terminal, String... strings) {
 		super(terminal, strings);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	@Override
 	public void execute(Object... elist) {
-		getObject().setRoot(true);
+		getObject().getCommands().getMove(null,null).execute();
 		setOutput("Logged in as server admin.");
 	}
 

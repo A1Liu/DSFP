@@ -8,12 +8,11 @@ public class Tem extends TerminalCommand {
 
 	public Tem(TerminalCommands terminal, String... strings) {
 		super(terminal, strings);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	@Override
 	public void execute(Object... elist) {
-		// TODO Auto-generated method stub
 		
 	}
 

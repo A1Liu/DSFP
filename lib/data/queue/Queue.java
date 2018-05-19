@@ -7,6 +7,9 @@ import java.util.NoSuchElementException;
 
 /**
  * This class represents an implementation of the queue interface, which is a first-in-first-out (FIFO) data storage system.
+ * 
+ * TODO: Finish rest of methods
+ * 
  * @author Alyer
  *
  * @param <T> The data type of the elements stored in the queue
@@ -88,13 +91,11 @@ public class Queue<T> implements java.util.Queue<T> {
 
 	@Override
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -109,13 +110,11 @@ public class Queue<T> implements java.util.Queue<T> {
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

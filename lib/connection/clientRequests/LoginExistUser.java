@@ -11,12 +11,12 @@ public class LoginExistUser extends ClientRequest {
 
 	public LoginExistUser(String username, String password) {
 		super(0, username, password);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	public LoginExistUser(Long sessionID) {
 		super(0, sessionID);
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 }

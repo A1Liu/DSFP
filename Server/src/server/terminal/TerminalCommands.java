@@ -4,13 +4,9 @@ import commands.Command;
 import commands.Commands;
 import server.BaseRequestHandler;
 import server.terminal.commands.*;
-import server.terminal.commands.admin.AdminLogin;
-import server.terminal.commands.admin.AdminLogout;
-import server.terminal.commands.admin.StartServer;
-import server.terminal.commands.admin.StopServer;
-import server.terminal.commands.login.LoginExistUser;
-import server.terminal.commands.login.LoginNewUser;
-import server.terminal.commands.selfRequests.Refresh;
+import server.terminal.commands.admin.*;
+import server.terminal.commands.login.*;
+import server.terminal.commands.selfRequests.*;
 
 import static util.DataUtil.prepend;
 import static util.IOUtil.readLines;
@@ -89,18 +85,19 @@ public class TerminalCommands extends Commands {
 			return this.input(input);
 		}
 	}
-	
-	@Override
-	public Object input(String input) {
-		try {
-		if (terminal.isRoot()) {
-			return rootInput(input.split("\\s+"));
-		} else {
-			return userInput(input.split("\\s+"));
-		} } catch (Exception e) {
-			return e.getMessage();
-		}
-	}
+
+//	public Object cmdLine(String input) {
+//		try {
+//		if (terminal.isRoot()) {
+//			return rootInput(convertString(input)
+//					);
+//		} else {
+//			return userInput(convertString(input));
+//		} } catch (Exception e) {
+//			
+//			return e.getMessage();
+//		}
+//	}
 	
 	/**
 	 * Gets a command object. Used by general clients.
@@ -133,14 +130,15 @@ public class TerminalCommands extends Commands {
 		//addCommand(0,null);//login with sessionid
 		addCommand(0,new LoginExistUser(this));//login with username and password
 		addCommand(1,new UserLogout(this));//log out
-		addCommand(2, new TerminalCommand(this){@Override public void execute(Object... elist) {getObject().quit();}});
+		//addCommand(2, new TerminalCommand(this){@Override public void execute(Object... elist) {getObject().quit();}});
 		addCommand(3,new LoginNewUser(this));//new user
 		
 		//interact with own account
 		addCommand(10,new Refresh(this));//refresh user information
-		//addCommand(11,null);//change username
-		//addCommand(12,null);//change email
-		//addCommand(13,null);//change password
+		addCommand(11,new ChangeUsername(this));//change username
+		addCommand(12,new ChangeEmail(this));//change email
+		addCommand(13, new ChangeName(this)); //change name
+		//addCommand(14,null);//change password
 		
 		//interact with other users
 		//addCommand(20,null);//search
