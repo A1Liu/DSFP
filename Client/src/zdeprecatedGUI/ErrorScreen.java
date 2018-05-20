@@ -1,4 +1,4 @@
-package gui;
+package zdeprecatedGUI;
 
 
 import javafx.geometry.Insets;

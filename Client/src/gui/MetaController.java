@@ -1,7 +1,9 @@
-package gui2;
+package gui;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,15 +15,19 @@ import javafx.stage.Stage;
  * @author aliu
  *
  */
-public abstract class MetaController {
+public abstract class MetaController extends Controller {
 
 	private FXMLLoader fxmlLoader;
 	private Stage window;
 	
+	public MetaController(Stage primaryStage, FXMLLoader loader) {
+		this.window = primaryStage;
+		fxmlLoader = loader;
+	}
+	
 	public MetaController(Stage primaryStage) {
 		this.window = primaryStage;
 		fxmlLoader = new FXMLLoader();
-		
 	}
 	
 	/**
@@ -52,9 +58,10 @@ public abstract class MetaController {
 	 * @param location location of page's fxml file
 	 * @return the controller for that page
 	 */
-	Controller getPage(String location) {
+	protected Controller getPage(String location) {
 		try {
-			fxmlLoader.setLocation(new File(location).toURI().toURL());
+			fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(getURL(location));
 			setScene(fxmlLoader.load());
 			Controller controller = (Controller) fxmlLoader.getController();
 			fxmlLoader.setLocation(null);
@@ -63,5 +70,22 @@ public abstract class MetaController {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static URL getURL(String url) {
+		try {
+			return new File(url).toURI().toURL();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public FXMLLoader getLoader() {
+		return fxmlLoader;
+	}
+	
+	void setLoader(FXMLLoader loader) {
+		fxmlLoader = loader;
 	}
 }

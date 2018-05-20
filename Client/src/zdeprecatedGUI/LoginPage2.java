@@ -1,4 +1,4 @@
-package gui;
+package zdeprecatedGUI;
 
 import java.io.IOException;
 

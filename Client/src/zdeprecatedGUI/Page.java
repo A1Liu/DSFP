@@ -1,4 +1,4 @@
-package gui;
+package zdeprecatedGUI;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +20,6 @@ class Page extends Scene {
 		super(new StackPane(), WIDTH, HEIGHT);
 		((StackPane) this.getRoot()).getChildren().add(root);
 		this.setController(control);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Controller getController() {

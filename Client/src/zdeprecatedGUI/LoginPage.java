@@ -1,4 +1,4 @@
-package gui;
+package zdeprecatedGUI;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;

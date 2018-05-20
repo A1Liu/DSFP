@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="600.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui2.Login">
+<BorderPane maxHeight="600.0" maxWidth="350.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.172" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Login">
    <center>
       <GridPane alignment="BOTTOM_LEFT" hgap="10.0" vgap="10.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -41,14 +41,19 @@
             </Text>
             <Label mouseTransparent="true" prefHeight="18.0" prefWidth="73.0" text="Username:" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
             <Label mouseTransparent="true" text="Password:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
-            <PasswordField promptText="Password" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <PasswordField fx:id="passText" promptText="Password" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#signIn" prefHeight="32.0" prefWidth="94.0" text="Sign in" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Label text="Don't have an account?" textFill="#074cf5" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+            <Label onMouseClicked="#newAccount" text="Don't have an account?" textFill="#074cf5" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                <font>
                   <Font name="Tahoma" size="13.0" />
                </font>
             </Label>
-            <TextField promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <TextField fx:id="userText" promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <Label fx:id="errorText" alignment="TOP_LEFT" prefHeight="127.0" prefWidth="172.0" text="ERROR" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </Label>
          </children>
       </GridPane>
    </center>

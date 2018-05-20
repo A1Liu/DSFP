@@ -1,4 +1,4 @@
-package gui;
+package zdeprecatedGUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

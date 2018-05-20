@@ -1,4 +1,4 @@
-package gui;
+package zdeprecatedGUI;
 
 import javafx.scene.layout.GridPane;
 
@@ -14,7 +14,6 @@ class LoadingPage extends Page {
 	
 	protected LoadingPage(Controller control) {
 		super(grid, control);
-		// TODO Auto-generated constructor stub
 	}
 
 }
