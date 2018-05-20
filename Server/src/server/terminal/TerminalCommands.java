@@ -127,10 +127,9 @@ public class TerminalCommands extends Commands {
 	private void setup() {
 		
 		//basics
-		//addCommand(0,null);//login with sessionid
 		addCommand(0,new LoginExistUser(this));//login with username and password
 		addCommand(1,new UserLogout(this));//log out
-		//addCommand(2, new TerminalCommand(this){@Override public void execute(Object... elist) {getObject().quit();}});
+		addCommand(2, new TerminalCommand(this){@Override public void execute(Object... elist) {getObject().quit();}});
 		addCommand(3,new LoginNewUser(this));//new user
 		
 		//interact with own account
@@ -139,6 +138,7 @@ public class TerminalCommands extends Commands {
 		addCommand(12,new ChangeEmail(this));//change email
 		addCommand(13, new ChangeName(this)); //change name
 		//addCommand(14,null);//change password
+		addCommand(19, new ChangeInfo(this));
 		
 		//interact with other users
 		//addCommand(20,null);//search

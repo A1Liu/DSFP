@@ -33,10 +33,17 @@ public class RequestHandler extends RHandler {
 					if (isAdmin) {
 						
 					} else {
+						sendOutput(-1, "Client doesn't have sufficient permissions to use that command.");
 						//send error message: not authorized to use that command
 					}
 				} else {//not trying to use admin command. Add more if statements to check for stuff like "are they logged in, are they allowed to use that command, etc."
-					executeCommand(packet.getTag(),packet.getData());
+					if (packet.getTag() < 10) {
+						executeCommand(packet.getTag(),packet.getData());
+					} else if (this.getUser() != null) {
+						executeCommand(packet.getTag(),packet.getData());
+					} else {
+						sendOutput(-1, "Client doesn't have sufficient permissions to use that command.");
+					}
 				}
 			} else {//Not talking to a client that we recognize
 				disconnect();

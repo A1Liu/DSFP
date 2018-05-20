@@ -48,6 +48,7 @@ public class Connection extends Thread {
 	
 	public synchronized void sendPacket(ClientRequest request) {
 		 // Create input and output streams to read from and write to the server
+		System.out.println("albert");
 				try {
 	
 					System.out.println("Something to send");

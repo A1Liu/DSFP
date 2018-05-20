@@ -16,8 +16,9 @@ public class LoginNewUser extends TerminalCommand {
 	public void execute(Object... elist) {
 		if (!elist[0].toString().contains("@") && elist[1].toString().contains("@") && !elist[2].toString().contains("@")) {
 			User user = getObject().getServer().getLoginDAO().newAcct(new User((String) elist[0],(String) elist[1],(String) elist[2]), (String) elist[3]);
-			getObject().setSessionID(user.getID());
+			getObject().setUserID(user.getID());
 			getObject().setUser(user);
+			user.setID(null);
 			setOutput(user);
 			getObject().getCommands().getMove((String) null).execute();
 			new Refresh(this.getObject().getCommands()).execute();

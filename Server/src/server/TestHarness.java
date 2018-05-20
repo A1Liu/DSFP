@@ -7,7 +7,7 @@ public class TestHarness {
 	/**/public static void main(String[] args) {
 		Server server = new Server(1100);
 		server.start();
-		//server.goOnline();
+		server.goOnline();
 		//server.stopServer();
 	}/*/
 	

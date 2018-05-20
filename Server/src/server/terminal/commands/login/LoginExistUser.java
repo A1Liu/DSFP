@@ -14,8 +14,9 @@ public class LoginExistUser extends TerminalCommand {
 	@Override
 	public void execute(Object... elist) {
 		User user = getObject().getServer().getLoginDAO().login((String) elist[0], (String) elist[1]);
-		getObject().setSessionID(user.getID());
+		getObject().setUserID(user.getID());
 		getObject().setUser(user);
+		user.setID(null);
 		setOutput(user);
 		getObject().getCommands().getMove((String) null).execute();
 		new Refresh(this.getObject().getCommands()).execute();

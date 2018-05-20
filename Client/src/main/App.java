@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import connection.clientRequests.LoginExistUser;
-import connection.clientRequests.LoginNewUser;
+import connection.clientRequests.*;
 import connection.clientRequests.Logout;
 import connection.serverPackets.ServerPacket;
 import gui.MetaController;
@@ -55,6 +54,16 @@ public class App extends MetaController {
 		this.getPage("gui/homePage.fxml").setApp(this);
 	}
 	
+	public boolean tryConnect() {
+		if (!connection.isConnected()) {
+			connection.run();
+			if (!connection.isConnected()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * Login as a new user
 	 * @param user
@@ -89,6 +98,17 @@ public class App extends MetaController {
 		}
 	}
 	
+	public User changeInfo(User user) {
+		connection.sendPacket(new ChangeInfo(user));
+		ServerPacket packet = connection.receivePacket();
+		if (packet.getTag() != -1) {
+			this.user = (User) packet.getData()[0];
+			return user;
+		} else {
+			throw new ClientException(packet.getData()[0].toString());
+		}
+	}
+	
 	/** getter for connection
 	 * @return connection object*/
 	public Connection getConnection() {
@@ -106,7 +126,7 @@ public class App extends MetaController {
 		//connection.sendPacket(); TODO: logout
 		connection.sendPacket(new Logout());
 		ServerPacket packet = connection.receivePacket();
-		if (packet.getTag() != -1) {
+		if (packet != null && packet.getTag() != -1) {
 			user = null;
 			this.getLoginPage();
 		} else {
@@ -118,7 +138,7 @@ public class App extends MetaController {
 	/** check if logged in 
 	 * @return true if logged in*/
 	public boolean loggedIn() {
-		return user == null;}
+		return user != null;}
 
 	@Override
 	public void initialize() {

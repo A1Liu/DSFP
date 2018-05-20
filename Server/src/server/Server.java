@@ -26,6 +26,8 @@ public class Server extends Thread {
 		clientHandler = new ClientHandler(this, port);
 		database = DAOFactory.getInstance("javabase.jdbc");
 		logindao = new LoginDAO(database);
+		userdao = database.getUserDAO();
+		
 	}
 	
 	/**

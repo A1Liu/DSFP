@@ -166,7 +166,7 @@ public class UserDAO implements dao.UserDAO {
         if (user.getID() == null) {
             throw new IllegalArgumentException("User is not created yet, the user ID is null.");
         }
-
+        
         Object[] values = {
         	user.getUsername(),
             user.getEmail(),

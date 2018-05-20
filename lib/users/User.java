@@ -16,6 +16,7 @@ public class User implements Serializable {
 	private String email;
 	private String name;
 	private Date birthday;
+	private Long rating;
 	
 	public User() {
 		this(null,null,null,null,null);
@@ -37,6 +38,10 @@ public class User implements Serializable {
 	public User(String username, String email, String name, Date birthday) {
 		this(null, username, email, name, birthday);
 	}	
+	
+	public User(User other) {
+		this(null, other);
+	}
 	
 	public User(Long id, User other) {
 		if (other != null) {
@@ -133,6 +138,14 @@ public class User implements Serializable {
              ? getID().equals( ( (User) other).getID() )
              : (other == this);
     }
+    
+    public Long getRating() {
+		return rating;
+	}
+
+	public void setRating(Long rating) {
+		this.rating = rating;
+	}
 
     /**
      * The user ID is unique for each User. So User with same ID should return same hashcode.
@@ -154,6 +167,8 @@ public class User implements Serializable {
         return String.format("User[id=%d,username=%s,email=%s,name=%s,birthdate=%s]", 
         					getID(), username, email, name, birthday);
     }
+
+	
 	
 	
 	

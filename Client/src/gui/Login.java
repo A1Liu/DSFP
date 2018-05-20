@@ -28,7 +28,6 @@ public class Login extends Controller {
 	
 	@FXML
 	private void signIn() {
-		//TODO: logic
     	String username = userText.getText();
     	String password = passText.getText();
     	try {
