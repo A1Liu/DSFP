@@ -76,9 +76,12 @@ public class PassDAO implements dao.PassDAO {//use MD5 (?) for password sql stat
 	}
 	
 	@Override
-	public void changePass(Long id, String newPass) throws IllegalArgumentException, DAOException {		
+	public void changePass(Long id, String newPass) throws IllegalArgumentException, DAOException {	
+		
+		int salt = this.getSalt(id);
+		
 		Object[] values = {
-			newPass,
+			(salt+newPass),
 			id
 		};
 		

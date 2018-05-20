@@ -17,7 +17,8 @@ public class LoginExistUser extends TerminalCommand {
 		getObject().setUserID(user.getID());
 		getObject().setUser(user);
 		user.setID(null);
-		setOutput(user);
+		setOutput(user.toString());
+		user.setID(getObject().getUserID());
 		getObject().getCommands().getMove((String) null).execute();
 		new Refresh(this.getObject().getCommands()).execute();
 	}

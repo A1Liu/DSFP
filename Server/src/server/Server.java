@@ -7,6 +7,7 @@ import server.client.ClientHandler;
 import server.daoWrapper.LoginDAO;
 import server.terminal.Terminal;
 import sql.DAOFactory;
+import sql.PassDAO;
 import sql.UserDAO;
 
 /**
@@ -19,6 +20,7 @@ public class Server extends Thread {
 	private DAOFactory database;
 	private LoginDAO logindao;
 	private UserDAO userdao;
+	private PassDAO passdao;
 	private Terminal terminal;
 	private ClientHandler clientHandler;
 	
@@ -27,6 +29,7 @@ public class Server extends Thread {
 		database = DAOFactory.getInstance("javabase.jdbc");
 		logindao = new LoginDAO(database);
 		userdao = database.getUserDAO();
+		passdao = database.getPassDAO();
 		
 	}
 	
@@ -78,6 +81,14 @@ public class Server extends Thread {
 
 	public void setUserdao(UserDAO userdao) {
 		this.userdao = userdao;
+	}
+
+	public PassDAO getPassdao() {
+		return passdao;
+	}
+
+	public void setPassdao(PassDAO passdao) {
+		this.passdao = passdao;
 	}
 	
 }

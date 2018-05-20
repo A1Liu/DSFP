@@ -137,8 +137,8 @@ public class TerminalCommands extends Commands {
 		addCommand(11,new ChangeUsername(this));//change username
 		addCommand(12,new ChangeEmail(this));//change email
 		addCommand(13, new ChangeName(this)); //change name
-		//addCommand(14,null);//change password
-		addCommand(19, new ChangeInfo(this));
+		addCommand(14,new ChangePass(this));//change password
+		addCommand(19, new ChangeInfo(this));//change information. used by non-terminal clients only.
 		
 		//interact with other users
 		//addCommand(20,null);//search
