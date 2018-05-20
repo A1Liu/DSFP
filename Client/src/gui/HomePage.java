@@ -26,7 +26,7 @@ public class HomePage extends MetaController {
 		this.user = app.getUser();
 		this.app = app;
 		this.setLoader(new FXMLLoader());
-		this.getProfile();
+		this.profile();
 	}
 	
 	@FXML
@@ -57,7 +57,10 @@ public class HomePage extends MetaController {
 	
 	@FXML
 	private void ratings() {
-		System.out.println("ratings");
+		if (current != 2) {
+			current = 2;
+			this.getSearch();
+		}
 	}
 	
 	public void getProfile() {
@@ -70,6 +73,10 @@ public class HomePage extends MetaController {
 	
 	public void getSearch() {
 		this.getPage("gui/search.fxml").setApp(app);
+	}
+	
+	public void getRatings() {//TODO: ratings page
+		//this.getPage("gui/ratings.fxml").setApp(app);
 	}
 	
 	public Controller getPage(String location) {

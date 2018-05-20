@@ -23,6 +23,7 @@ public class NewLogin extends Controller {
 	@FXML private TextField name;
 	@FXML private PasswordField password;
 	@FXML private PasswordField confirmPassword;
+	@FXML private Label errorText;
 	
 	public NewLogin() {
 		
@@ -35,42 +36,37 @@ public class NewLogin extends Controller {
 	
 	@FXML
 	private void newLogin() {
-		//TODO: logic
 		
-		
-		
-		
-		
-		/*String username = userNameText.getText();
-		String email = emailText.getText();
-		String name = nameText.getText();
-    	String password = pwBox.getText();
-    	String password2 = pw2Box.getText();
+		String username = this.username.getText();
+		String email = this.email.getText();
+		String name = this.name.getText();
+    	String password = this.password.getText();
+    	String confirmPassword = this.confirmPassword.getText();
     	
-    	if (!password.equals(password2)) {
+    	if (!password.equals(confirmPassword)) {
     		errorText.setText("Passwords don't match!");
     		errorText.setVisible(true);
     		return;
     	}
     	
     	try {
-    		if (!control.getApp().getConnection().isConnected()) {
-    			control.getApp().getConnection().run();
-    			if (!control.getApp().getConnection().isConnected()) {
+    		if (!getApp().getConnection().isConnected()) {
+    			getApp().getConnection().run();
+    			if (!getApp().getConnection().isConnected()) {
     				errorText.setText("Can't connect to server.");
     				errorText.setVisible(true);
     				return;
     			}
     		}
     		
-    		control.getApp().setUser(control.getApp().login(new User(username, email, name), password));
+    		getApp().login(new User(username, email, name), password);
     		errorText.setVisible(false);
-    		control.homePage();
+    		getApp().getHomePage();
     	} catch (Exception e) {
-    		errorText.setText("Username/Email is already taken.");
+    		errorText.setText(e.toString());//"Username/Email is already taken."
     		errorText.setVisible(true);
     	}
-    });*/
+
 	}
 	
 	@FXML

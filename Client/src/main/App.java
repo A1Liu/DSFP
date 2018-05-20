@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 
 import connection.clientRequests.LoginExistUser;
 import connection.clientRequests.LoginNewUser;
+import connection.clientRequests.Logout;
 import connection.serverPackets.ServerPacket;
 import gui.MetaController;
 import javafx.stage.Stage;
@@ -102,8 +103,18 @@ public class App extends MetaController {
 		this.user = u;}
 	/** log out of account */
 	public void logout() {
-		user = null;
-		this.getLoginPage();}
+		//connection.sendPacket(); TODO: logout
+		connection.sendPacket(new Logout());
+		ServerPacket packet = connection.receivePacket();
+		if (packet.getTag() != -1) {
+			user = null;
+			this.getLoginPage();
+		} else {
+			user = null;
+			this.getLoginPage();
+			throw new ClientException(packet.getData()[0].toString());
+		}
+	}
 	/** check if logged in 
 	 * @return true if logged in*/
 	public boolean loggedIn() {

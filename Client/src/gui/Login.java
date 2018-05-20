@@ -29,32 +29,26 @@ public class Login extends Controller {
 	@FXML
 	private void signIn() {
 		//TODO: logic
-		System.out.println(userText.getText());
-		System.out.println(passText.getText());
-		errorText.setVisible(true);
-		
-		//Get username
-		//Get password
-//    	String username = userText.getText();
-//    	String password = passText.getText();
-//    	try {
-//    		if (!getApp().getConnection().isConnected()) {
-//    			getApp().getConnection().run();
-//    			if (!getApp().getConnection().isConnected()) {
-//    				errorText.setText("Can't connect to server.");
-//    				errorText.setVisible(true);
-//    				return;
-//    			}
-//    		}
-//    		
-//    		getApp().setUser(getApp().login(username, password));
-//    		errorText.setVisible(false);
-//    		getApp().homePage();
-//    	} catch (Exception e) {
-//    		errorText.setText("Incorrect login credentials.");
-//    		errorText.setVisible(true);
-//    		e.printStackTrace();
-//    	}
+    	String username = userText.getText();
+    	String password = passText.getText();
+    	try {
+    		if (!getApp().getConnection().isConnected()) {
+    			getApp().getConnection().run();
+    			if (!getApp().getConnection().isConnected()) {
+    				errorText.setText("Can't connect to server.");
+    				errorText.setVisible(true);
+    				return;
+    			}
+    		}
+    		
+    		getApp().setUser(getApp().login(username, password));
+    		errorText.setVisible(false);
+    		getApp().getHomePage();
+    	} catch (Exception e) {
+    		errorText.setText(e.toString());//"Incorrect login credentials."
+    		errorText.setVisible(true);
+    		e.printStackTrace();
+    	}
 //    
 	}
 	

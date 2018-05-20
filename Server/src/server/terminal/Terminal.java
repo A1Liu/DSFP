@@ -38,7 +38,6 @@ public class Terminal extends BaseRequestHandler implements Runnable {
 			} catch (CommandException e) {
 				System.out.println(e.toString());
 			}
-			System.out.println(this.getUser());
 		}
 	}
 	

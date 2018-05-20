@@ -23,11 +23,11 @@ public class TestRunner extends Application {
 
 	@Override
     public void start(Stage primaryStage) throws IOException {
-		App app = new App(primaryStage,null);
+		App app = new App(primaryStage);//,new User("alyert","a@liu","albert"));
 		
 		//app.getNewLoginPage();
-		app.getHomePage();
-		app.getStage().show();
+//		app.getHomePage();
+//		app.getStage().show();
 //		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 //		Scene scene = new Scene(root,335,600);
 //		primaryStage.setScene(new LoginPage(null));

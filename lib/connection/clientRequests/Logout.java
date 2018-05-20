@@ -12,7 +12,7 @@ public class Logout extends ClientRequest {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected Logout() {
+	public Logout() {
 		super(1);
 		// 
 	}
