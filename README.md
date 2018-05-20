@@ -58,7 +58,7 @@ Port Number: 3306
 Java Java Java Java Java Java
 
 ## Reference Links
-These are links that I found that helped me make this app. Well some of them were useless. But most of them were great.  
+These are links that I found that helped me make this app.  
 * [I didn't use this but I might in the future](https://github.com/speedment/speedment/wiki/Tutorial:-Build-a-Social-Network)
 * [Establishing a connection to the database](https://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database)  
 * [Data access objects explanation](https://stackoverflow.com/questions/19154202/data-access-object-dao-in-java)
@@ -71,3 +71,4 @@ These are links that I found that helped me make this app. Well some of them wer
 * [Passing Variables between pages](https://stackoverflow.com/questions/14511016/how-can-i-use-a-variable-from-another-controller-in-javafx)
 * [JavaFX Tutorials](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG)
 * [Serializable Objects and Deep Copies](http://www.cs.unc.edu/~dewan/734/current/lectures/3-Objectcomm.pdf)
+* [Scene Builder app that made GUI building super easy](http://gluonhq.com/products/scene-builder/)
