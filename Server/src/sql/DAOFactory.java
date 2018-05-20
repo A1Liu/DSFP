@@ -84,6 +84,11 @@ public abstract class DAOFactory implements dao.DAOFactory {
 	    	return new SessionDAO(this);
 	    }
 	    
+	    @Override
+	    public RatingDAO getRatingDAO() {
+	    	return new RatingDAO(this);
+	    }
+	    
 	    /**
 	     * Returns a connection to the database. Package private so that it can be used inside the DAO
 	     * package only.

@@ -37,6 +37,7 @@ public class App {
 	public App(Stage primaryStage, User user) {
 		this.user = user;
 		primaryStage.setTitle("MEOWMEOWBEENZ");
+		primaryStage.setResizable(false);
 		window = primaryStage;
 		gui = new Controller(this);
 		connection = new Connection();

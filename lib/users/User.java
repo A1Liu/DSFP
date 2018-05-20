@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * TODO: add Check methods to check for bad inputs
  * @author aliu
  *
  */

@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 /**
  * This class represents an implementation of the queue interface, which is a first-in-first-out (FIFO) data storage system.
  * 
- * TODO: Finish rest of methods
  * 
  * @author Alyer
  *

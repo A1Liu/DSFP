@@ -1,4 +1,4 @@
-package gui;
+package gui2;
 
 import java.io.IOException;
 
@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.App;
 import users.User;
 
 /**
@@ -23,8 +22,14 @@ public class TestRunner extends Application {
 
 	@Override
     public void start(Stage primaryStage) throws IOException {
-		App app = new App(primaryStage);//, new User("alyert","alyert.kid@gmail.com","albert")
-		primaryStage.show();
+		App app = new App(primaryStage,null);
+		
+		app.getLoginPage();
+		app.getStage().show();
+//		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+//		Scene scene = new Scene(root,335,600);
+//		primaryStage.setScene(new LoginPage(null));
+//		primaryStage.show();
     }
 
 }

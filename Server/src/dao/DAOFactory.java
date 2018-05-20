@@ -32,9 +32,9 @@ public interface DAOFactory {
 	//FriendDAO getFriendDAO();
 	
 	/**
-	 * RatingDAO for handing MEOWMEOWBEENZ-specific rating data
+	 * RatingDAO for handing MEOWMEOWBEENZ-specific rating data. Handles ratings table and ratings edge table
 	 * @return a RatingDAO object
 	 */
-	//RatingDAO getRatingDAO();
+	RatingDAO getRatingDAO();
 	
 }
