@@ -70,14 +70,14 @@ public class User implements Serializable {
 	}
 
 	public final static boolean checkValidUsername(String username) {
-		return username.split("[^_A-Za-z0-9 ]").length == 1 && username.trim().length() != 0;
+		return username.split("[^_A-Za-z0-9]|.(?=[^_A-Za-z0-9])").length == 1 && username.trim().length() != 0;
 	}
 	public final static boolean checkValidEmail(String email) {
 		return email.contains("@") && !email.contains(" ");
 	}
 	
 	public final static boolean checkValidName(String name) {
-		return !(name.split("[^\\-A-Za-z ]|(?<![a-zA-Z])[-]|[-](?![A-Za-z])").length > 1 || name.endsWith("-") || name.trim().length() == 0);
+		return !(!name.split("[^\\-A-Za-z ]|(?<![a-zA-Z])[-]|[-](?![A-Za-z])")[0].equals(name)|| name.endsWith("-") || name.trim().length() == 0);
 	}
 
 	public String getUsername() {
