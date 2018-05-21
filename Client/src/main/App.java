@@ -19,6 +19,7 @@ public class App extends MetaController {
 
 	private Connection connection;
 	private User user;
+	private boolean isHome;
 	private HomePage homepage;
 	
 	public App () {
@@ -35,6 +36,7 @@ public class App extends MetaController {
 		this.user = user;
 		connection = new Connection();
 		this.setApp(this);
+		isHome = false;
 	}
 	
 	public void startup() {
@@ -44,14 +46,23 @@ public class App extends MetaController {
 	}
 	/** go to login page */
 	public void getLoginPage() {
+		isHome = false;
 		this.getPage("gui/login.fxml").setApp(this);}
 	
 	/** go to new user page */
 	public void getNewLoginPage() {
+		isHome = false; 
 		this.getPage("gui/newLogin.fxml").setApp(this);}
-	public void getHomePage() {
-		homepage = (HomePage) this.getPage("gui/homePage.fxml");
-		homepage.setApp(this);
+	public HomePage getHomePage() {
+		if (!isHome) {
+			homepage = (HomePage) this.getPage("gui/homePage.fxml");
+			homepage.setApp(this);
+			isHome = true;
+			return homepage;
+		} else {
+			return homepage;
+		}
+		
 	}
 	
 	/**

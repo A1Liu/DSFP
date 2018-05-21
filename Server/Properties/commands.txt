@@ -5,7 +5,7 @@ login:0;
 	root:100;way to access server commands. Appends a null to beginning of input to access commands
 Null
 	refresh:10;refresh user information for this user
-	search:20;search for a user
+	search:20;search for a user, by username. Takes arguments <username>
 	user:21;ask for refresh of other user. Sets 'currently viewing'. takes arguments <username>
 		config;configure things about the account
 			username:11;change username. Takes arguments <username>

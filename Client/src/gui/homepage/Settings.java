@@ -36,13 +36,18 @@ public class Settings extends Controller {
 			System.out.println(user);
 			if(this.getApp().tryConnect()) {
 			this.getApp().changeInfo(user);
-			errorText.setTextFill(Color.AZURE);
+			errorText.setTextFill(Color.CORNFLOWERBLUE);
 			errorText.setText("Changed username.");
 			errorText.setVisible(true);
 			} else throw new GraphicsException("Couldn't connect to server.");
 		} catch (Exception e) {
 			errorText.setTextFill(Color.RED);
-			errorText.setText(e.getMessage());
+			if (e.getMessage().contains("Duplicate")) {
+				errorText.setText("Username already taken!");
+			} else {
+				errorText.setText(e.getMessage());
+				e.printStackTrace();
+			}
 			errorText.setVisible(true);
 		}
 	}
@@ -55,12 +60,17 @@ public class Settings extends Controller {
 			user.setEmail(email);
 			this.getApp().tryConnect();
 			this.getApp().changeInfo(user);
-			errorText.setTextFill(Color.AZURE);
+			errorText.setTextFill(Color.CORNFLOWERBLUE);
 			errorText.setText("Changed email.");
 			errorText.setVisible(true);
 		} catch (Exception e) {
 			errorText.setTextFill(Color.RED);
-			errorText.setText(e.getMessage());
+			if (e.getMessage().contains("Duplicate")) {
+				errorText.setText("Email already being used by another account!");
+			} else {
+				errorText.setText(e.getMessage());
+				e.printStackTrace();
+			}
 			errorText.setVisible(true);
 		}
 	}
@@ -72,7 +82,7 @@ public class Settings extends Controller {
 			user.setName(name);
 			this.getApp().tryConnect();
 			this.getApp().changeInfo(user);
-			errorText.setTextFill(Color.AZURE);
+			errorText.setTextFill(Color.CORNFLOWERBLUE);
 			errorText.setText("Changed name.");
 			errorText.setVisible(true);
 		} catch (Exception e) {
@@ -87,12 +97,19 @@ public class Settings extends Controller {
 			String oldPass = this.oldPassField.getText();
 			String newPass = this.newPassField.getText();
 			this.getApp().tryConnect();
-			errorText.setText(this.getApp().changePass(oldPass, newPass));
-			errorText.setTextFill(Color.AZURE);
+			String text = this.getApp().changePass(oldPass, newPass);
+			errorText.setText(text);
+			if (text.contains("Fail")) {
+				errorText.setTextFill(Color.RED);
+			} else {
+				errorText.setTextFill(Color.CORNFLOWERBLUE);
+			}
+			errorText.setTextFill(Color.CORNFLOWERBLUE);
 			errorText.setVisible(true);
 		} catch (Exception e) {
 			errorText.setTextFill(Color.RED);
 			errorText.setText(e.getMessage());
+			e.printStackTrace();
 			errorText.setVisible(true);
 		}
 	}

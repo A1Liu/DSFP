@@ -44,7 +44,7 @@ public class Login extends Controller {
     		errorText.setVisible(false);
     		getApp().getHomePage();
     	} catch (Exception e) {
-    		errorText.setText(e.toString());//"Incorrect login credentials."
+    		errorText.setText(e.getMessage());//"Incorrect login credentials."
     		errorText.setVisible(true);
     		e.printStackTrace();
     	}

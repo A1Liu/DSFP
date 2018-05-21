@@ -9,7 +9,6 @@ public class ChangePass extends ClientRequest {
 
 	public ChangePass(String oldPass, String newPass) {
 		super(14, oldPass, newPass);
-		// TODO Auto-generated constructor stub
 	}
 
 }

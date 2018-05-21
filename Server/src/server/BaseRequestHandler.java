@@ -15,6 +15,7 @@ public abstract class BaseRequestHandler {
 	private volatile boolean running;
 	private final Server server;
 	private User user;
+	private User viewing;
 	private boolean root;
 	private Long sessionID;
 	private Long userID;
@@ -23,6 +24,7 @@ public abstract class BaseRequestHandler {
 		terminal = new TerminalCommands(this);
 		this.server = server;
 		root = false;
+		viewing = null;
 	}
 	
 	protected void setCommands(TerminalCommands commands) {
@@ -130,5 +132,13 @@ public abstract class BaseRequestHandler {
 
 	public void setUserID(Long userID) {
 		this.userID = userID;
+	}
+
+	public User getViewing() {
+		return viewing;
+	}
+
+	public void setViewing(User viewing) {
+		this.viewing = viewing;
 	}
 }

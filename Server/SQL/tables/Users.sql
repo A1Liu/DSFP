@@ -1,8 +1,11 @@
-/*\. code/java/dsfp/server/SQL/Users.sql*/
+/*
+\. /Users/aliu/code/java/dsfp/Server/SQL/tables/Users.sql
+*/
 USE javabase;
-/*DROP TABLE javabase.passwords;
-DROP TABLE javabase.sessions;
-DROP TABLE javabase.users;*/
+
+/*/DROP TABLE javabase.sessions;/**/
+/*/DROP TABLE javabase.passwords;
+DROP TABLE javabase.users;/**/
 
 CREATE TABLE javabase.users (
 	id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -24,7 +27,7 @@ CREATE TABLE javabase.passwords (
 	PRIMARY KEY (id)
   );
 
-CREATE TABLE javabase.sessions (
+/*/CREATE TABLE javabase.sessions (
 	sessionNum BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	userID BIGINT UNSIGNED NOT NULL,
 	sessionID BIGINT UNSIGNED NOT NULL,
