@@ -14,9 +14,7 @@ public class Refresh extends TerminalCommand {
 	public void execute(Object... elist) {
 		User user = getObject().getServer().getLoginDAO().getUserDAO().find(getObject().getUser().getUsername());
 		getObject().setUser(user);
-		user.setID(null);
-		setOutput(user.toString());
-		user.setID(getObject().getUserID());
+		setOutput(new User(user));
 	}
 
 }

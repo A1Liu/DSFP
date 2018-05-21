@@ -18,9 +18,7 @@ public class LoginNewUser extends TerminalCommand {
 			User user = getObject().getServer().getLoginDAO().newAcct(new User((String) elist[0],(String) elist[1],(String) elist[2]), (String) elist[3]);
 			getObject().setUserID(user.getID());
 			getObject().setUser(user);
-			user.setID(null);
-			setOutput(user.toString());
-			user.setID(getObject().getUserID());
+			setOutput(new User(user));
 			getObject().getCommands().getMove((String) null).execute();
 			new Refresh(this.getObject().getCommands()).execute();
 		} else setOutput("Incorrect input formatting!");

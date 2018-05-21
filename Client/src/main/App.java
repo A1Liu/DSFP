@@ -109,6 +109,16 @@ public class App extends MetaController {
 		}
 	}
 	
+	public String changePass(String oldPass, String newPass) {
+		connection.sendPacket(new ChangePass(oldPass,newPass));
+		ServerPacket packet = connection.receivePacket();
+		if (packet.getTag() != -1) {
+			return packet.getData()[0].toString();
+		} else {
+			throw new ClientException(packet.getData()[0].toString());
+		}
+	}
+	
 	/** getter for connection
 	 * @return connection object*/
 	public Connection getConnection() {

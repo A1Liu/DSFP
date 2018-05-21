@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import users.User;
 
 public class Settings extends Controller {
@@ -35,8 +36,11 @@ public class Settings extends Controller {
 			System.out.println(user);
 			System.out.println(this.getApp().tryConnect());
 			this.getApp().changeInfo(user);
-			errorText.setVisible(false);
+			errorText.setTextFill(Color.AZURE);
+			errorText.setText("Changed username.");
+			errorText.setVisible(true);
 		} catch (Exception e) {
+			errorText.setTextFill(Color.RED);
 			errorText.setText(e.getMessage());
 			errorText.setVisible(true);
 		}
@@ -50,8 +54,11 @@ public class Settings extends Controller {
 			user.setEmail(email);
 			this.getApp().tryConnect();
 			this.getApp().changeInfo(user);
-			errorText.setVisible(false);
+			errorText.setTextFill(Color.AZURE);
+			errorText.setText("Changed email.");
+			errorText.setVisible(true);
 		} catch (Exception e) {
+			errorText.setTextFill(Color.RED);
 			errorText.setText(e.getMessage());
 			errorText.setVisible(true);
 		}
@@ -64,14 +71,28 @@ public class Settings extends Controller {
 			user.setName(name);
 			this.getApp().tryConnect();
 			this.getApp().changeInfo(user);
-			errorText.setVisible(false);
+			errorText.setTextFill(Color.AZURE);
+			errorText.setText("Changed name.");
+			errorText.setVisible(true);
 		} catch (Exception e) {
+			errorText.setTextFill(Color.RED);
 			errorText.setText(e.getMessage());
 			errorText.setVisible(true);
 		}
 	}
 	@FXML
 	private void changePassword() {
-		
+		try {
+			String oldPass = this.oldPassField.getText();
+			String newPass = this.newPassField.getText();
+			this.getApp().tryConnect();
+			errorText.setText(this.getApp().changePass(oldPass, newPass));
+			errorText.setTextFill(Color.AZURE);
+			errorText.setVisible(true);
+		} catch (Exception e) {
+			errorText.setTextFill(Color.RED);
+			errorText.setText(e.getMessage());
+			errorText.setVisible(true);
+		}
 	}
 }
