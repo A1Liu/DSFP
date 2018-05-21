@@ -1,13 +1,10 @@
 package zdeprecatedGUI;
 
-import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import users.User;
-import util.Const;
 
 /**
  * 

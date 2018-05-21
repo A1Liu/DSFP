@@ -1,7 +1,6 @@
 package server.terminal.commands;
 
 import server.terminal.*;
-import server.terminal.Terminal;
 import server.terminal.TerminalCommand;
 
 public class UserLogout extends TerminalCommand {

@@ -1,7 +1,7 @@
 package gui.homepage;
 
-import connection.clientRequests.*;
 import gui.Controller;
+import gui.GraphicsException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -34,11 +34,12 @@ public class Settings extends Controller {
 			User user = new User(null, this.getApp().getUser());
 			user.setUsername(username);
 			System.out.println(user);
-			System.out.println(this.getApp().tryConnect());
+			if(this.getApp().tryConnect()) {
 			this.getApp().changeInfo(user);
 			errorText.setTextFill(Color.AZURE);
 			errorText.setText("Changed username.");
 			errorText.setVisible(true);
+			} else throw new GraphicsException("Couldn't connect to server.");
 		} catch (Exception e) {
 			errorText.setTextFill(Color.RED);
 			errorText.setText(e.getMessage());

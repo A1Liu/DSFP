@@ -3,12 +3,8 @@ package zdeprecatedGUI;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.App;
-import users.User;
 
 /**
  * 
@@ -23,6 +19,7 @@ public class TestRunner extends Application {
 
 	@Override
     public void start(Stage primaryStage) throws IOException {
+		@SuppressWarnings("unused")
 		App app = new App(primaryStage);//, new User("alyert","alyert.kid@gmail.com","albert")
 		primaryStage.show();
     }

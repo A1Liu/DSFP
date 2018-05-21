@@ -9,10 +9,10 @@ import users.User;
  */
 public class SessionDAO implements dao.SessionDAO {
 
-	private DAOFactory dao;
+	private DAOFactory daofactory;
 	
-	SessionDAO(DAOFactory dao) {
-		this.dao = dao;
+	SessionDAO(DAOFactory daofactory) {
+		this.daofactory = daofactory;
 	}
 	
 	@Override
@@ -49,6 +49,14 @@ public class SessionDAO implements dao.SessionDAO {
 	public void deleteUser(User user) {
 		
 		
+	}
+
+	public DAOFactory getDaofactory() {
+		return daofactory;
+	}
+
+	public void setDaofactory(DAOFactory daofactory) {
+		this.daofactory = daofactory;
 	}
 
 }

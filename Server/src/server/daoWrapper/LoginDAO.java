@@ -3,7 +3,6 @@ package server.daoWrapper;
 import dao.DAOFactory;
 import dao.PassDAO;
 import dao.UserDAO;
-import sql.SessionDAO;
 import users.User;
 
 /**
@@ -15,7 +14,6 @@ public class LoginDAO {
 
 	private UserDAO userdao;
 	private PassDAO passdao;
-	private SessionDAO sessiondao;
 	
 	
 	public LoginDAO(DAOFactory dao) {

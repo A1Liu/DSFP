@@ -117,7 +117,7 @@ public abstract class ParamC implements Command {
 	 * @return
 	 */
 	private static final boolean paramCheck(String paramReq, Object param) {
-		Object o;
+		Object o = null;
 		switch(paramReq.toLowerCase()) {
 		case "double":
 			try {o = (Double) param;return true;} catch (Exception e) {return false;}
@@ -131,7 +131,7 @@ public abstract class ParamC implements Command {
 		case "long":
 			try {o =(Long) (param);return true;} catch (Exception e) {return false;}
 		default:
-			return true;
+			return o==null;
 		}
 	}
 	

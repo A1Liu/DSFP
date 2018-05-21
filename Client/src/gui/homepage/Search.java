@@ -46,7 +46,7 @@ class SearchItem extends AnchorPane {
 	private App app;
 	
 	SearchItem(String username, String name, double rating, App app) {
-		this.app = app;
+		this.setApp(app);
 		
 		this.setMaxSize(290.0, 50.0);
 		this.setPrefSize(290.0, 50.0);
@@ -85,9 +85,18 @@ class SearchItem extends AnchorPane {
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("hello");
+				getApp().getHomePage();
 				//TODO: click on a user in search results
 			}
 		});
+	}
+
+	public App getApp() {
+		return app;
+	}
+
+	public void setApp(App app) {
+		this.app = app;
 	}
 	
 	

@@ -1,7 +1,6 @@
 package server.terminal.commands;
 
 import server.terminal.TerminalCommands;
-import server.terminal.Terminal;
 import server.terminal.TerminalCommand;
 
 public class Tem extends TerminalCommand {

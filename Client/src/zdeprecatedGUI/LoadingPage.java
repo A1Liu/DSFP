@@ -2,7 +2,6 @@ package zdeprecatedGUI;
 
 import javafx.scene.layout.GridPane;
 
-import static util.Const.*;
 
 class LoadingPage extends Page {
 

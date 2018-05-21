@@ -40,7 +40,6 @@ final class HelpC implements Command {
 	}
 	
 	private ComTreeNode getNode(ComTreeNode root, String[] in) {
-		boolean done = false;
 		ComTreeNode current = root;
 		for (int x = 0; x < in.length; x++) {
 			String element = in[x];

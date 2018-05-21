@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import server.ClientException;
 import server.Connection;
 import users.User;
-import zdeprecatedGUI.*;
 
 /**
  * Contains the app logic for a single instance of the application.

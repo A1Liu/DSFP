@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import dao.DAOException;
@@ -40,16 +39,16 @@ public class UserDAO implements dao.UserDAO {
     		"UPDATE Users SET email = ? WHERE id = ?";
     private static final String SQL_UPDATE_USERNAME = 
     		"UPDATE Users SET username = ? WHERE id = ?";
-    private static final String SQL_UPDATE_NAME = 
-    		"UPDATE Users SET name = ? WHERE id = ?";
+//    private static final String SQL_UPDATE_NAME = 
+//    		"UPDATE Users SET name = ? WHERE id = ?";
     private static final String SQL_DELETE =
         "DELETE FROM Users WHERE id = ?";
     private static final String SQL_EXIST_EMAIL =
         "SELECT id FROM Users WHERE email = ?";
     private static final String SQL_EXIST_USERNAME =
             "SELECT id FROM Users WHERE username = ?";
-    private static final String SQL_SEARCH_USERNAME = 
-    		"SELECT username FROM Users WHERE username LIKE ?;";
+//    private static final String SQL_SEARCH_USERNAME = 
+//    		"SELECT username FROM Users WHERE username LIKE ?;";
 
     // Vars ---------------------------------------------------------------------------------------
 
@@ -296,9 +295,12 @@ public class UserDAO implements dao.UserDAO {
 
 	@Override
 	public List<String> search(String searchText) throws DAOException {//TODO: Search method in UserDAO
-		Object[] values = {
+		/*Object[] values = {
 	            ("%"+searchText+"%")// in sql, the % operator 
-	        };
+	        };*/
+		
+		
+		
 		return null;
 	}
 

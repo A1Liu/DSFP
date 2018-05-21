@@ -20,7 +20,7 @@ class Tester extends SimpleTester {
 
 	@Override
 	public Object execute(String name) {
-		String regex = "[^\\-A-Za-z ]|(?<![a-zA-Z])[-]|[-](?![A-Za-z])";
+//		String regex = "[^\\-A-Za-z ]|(?<![a-zA-Z])[-]|[-](?![A-Za-z])";
 		return name.split("[^\\-A-Za-z ]|(?<![a-zA-Z])[-]|[-](?![A-Za-z])").length > 1 || name.endsWith("-");
 	}
 	

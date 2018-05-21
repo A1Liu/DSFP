@@ -7,7 +7,6 @@ import java.io.Reader;
 import commands.CommandException;
 import server.BaseRequestHandler;
 import server.Server;
-import users.User;
 
 /**
  * Terminal class. Essentially a wrapper around the terminal commands, allowing for easy continuous use by calling its run method.

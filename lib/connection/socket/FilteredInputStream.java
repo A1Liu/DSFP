@@ -11,6 +11,7 @@ public class FilteredInputStream<T> extends ObjectInputStream {
 		// 
 	}
 	
+	@SuppressWarnings("unchecked")
 	public final T readObjectOverride() throws ClassNotFoundException, IOException {
 		Object info = super.readObject();
 		try {

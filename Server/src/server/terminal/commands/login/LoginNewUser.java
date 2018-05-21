@@ -2,7 +2,6 @@ package server.terminal.commands.login;
 
 import server.terminal.TerminalCommands;
 import server.terminal.commands.selfRequests.Refresh;
-import server.terminal.Terminal;
 import server.terminal.TerminalCommand;
 import users.User;
 

@@ -73,18 +73,18 @@ public class TerminalCommands extends Commands {
 		}
 	}
 	
-	/**
-	 * Input handler for root-access user
-	 * @param input input array
-	 * @return output of command
-	 */
-	private Object rootInput(String[] input) {
-		if (terminal.isRoot()) {
-			return this.input(prepend(prepend(input,null),null));
-		} else {
-			return this.input(input);
-		}
-	}
+//	/**
+//	 * Input handler for root-access user
+//	 * @param input input array
+//	 * @return output of command
+//	 */
+//	private Object rootInput(String[] input) {
+//		if (terminal.isRoot()) {
+//			return this.input(prepend(prepend(input,null),null));
+//		} else {
+//			return this.input(input);
+//		}
+//	}
 
 //	public Object cmdLine(String input) {
 //		try {

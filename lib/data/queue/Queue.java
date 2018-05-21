@@ -64,10 +64,9 @@ public class Queue<T> implements java.util.Queue<T> {
 		return a;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <E> E[] toArray(E[] a) {
-		T t;
-		
 		Object[] array;
 		try {
 		array = (Object[]) a;

@@ -10,6 +10,7 @@ public class FilteredOutputStream<T> extends ObjectOutputStream {
 		super(i);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void writeObjectOverride(Object t) throws IOException {
 		try {
 			T cast = (T) t;

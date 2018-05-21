@@ -1,12 +1,9 @@
 package main;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-
 import connection.clientRequests.*;
 import connection.clientRequests.Logout;
 import connection.serverPackets.ServerPacket;
+import gui.HomePage;
 import gui.MetaController;
 import javafx.stage.Stage;
 import server.ClientException;
@@ -22,6 +19,7 @@ public class App extends MetaController {
 
 	private Connection connection;
 	private User user;
+	private HomePage homepage;
 	
 	public App () {
 		this(new Stage());
@@ -36,6 +34,7 @@ public class App extends MetaController {
 		super(primaryStage);
 		this.user = user;
 		connection = new Connection();
+		this.setApp(this);
 	}
 	
 	public void startup() {
@@ -51,9 +50,14 @@ public class App extends MetaController {
 	public void getNewLoginPage() {
 		this.getPage("gui/newLogin.fxml").setApp(this);}
 	public void getHomePage() {
-		this.getPage("gui/homePage.fxml").setApp(this);
+		homepage = (HomePage) this.getPage("gui/homePage.fxml");
+		homepage.setApp(this);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean tryConnect() {
 		if (!connection.isConnected()) {
 			connection.run();
@@ -153,5 +157,13 @@ public class App extends MetaController {
 	@Override
 	public void initialize() {
 		
+	}
+
+	public HomePage getHomepage() {
+		return homepage;
+	}
+
+	public void setHomepage(HomePage homepage) {
+		this.homepage = homepage;
 	}
 }
